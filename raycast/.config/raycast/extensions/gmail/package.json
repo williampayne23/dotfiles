@@ -1,0 +1,44 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "gmail",
+  "title": "Gmail",
+  "description": "A Minimal Gmail Client",
+  "icon": "command_icon.png",
+  "author": "williampayne23",
+  "categories": [
+    "Communication",
+    "Web"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "Show My Emails",
+      "description": "List all emails in your inbox",
+      "mode": "view",
+      "icon": "command_icon.png"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.48.9",
+    "@raycast/utils": "^1.5.2",
+    "js-base64": "^3.7.5",
+    "node-fetch": "^3.3.1",
+    "node-html-markdown": "^1.3.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "1.0.5",
+    "@types/node": "18.8.3",
+    "@types/react": "18.0.9",
+    "eslint": "^7.32.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "ray publish"
+  }
+}

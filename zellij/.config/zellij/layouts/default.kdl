@@ -1,0 +1,46 @@
+layout {
+
+    pane split_direction="vertical" {
+        pane
+    }
+
+    pane size=1 borderless=true {
+        plugin location="file:/Users/willpayne/.config/zellij/plugins/zjstatus.wasm" {
+            format_left  "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
+            format_right "{command_test}" 
+            format_space ""
+            command_test_command   "echo blue#[fg=red]red"
+            command_test_format    "#[fg=blue] {stdout} "
+            command_test_interval  "10"
+
+            border_enabled  "true"
+            border_char     "─"
+            border_format   "#[fg=#6C7086]{char}"
+            border_position "top"
+
+            hide_frame_for_single_pane "true"
+
+            mode_normal        "#[fg=#92A9EA,bold]{name}"
+            mode_locked        "#[fg=#fb4934,bold]{name}"
+            mode_resize        "#[fg=#fabd2f,bold]{name}"
+            mode_pane          "#[fg=#d3869b,bold]{name}"
+            mode_tab           "#[fg=#83a598,bold]{name}"
+            mode_scroll        "#[fg=#8ec07c,bold]{name}"
+            mode_session       "#[fg=#fe8019,bold]{name}"
+            mode_move          "#[fg=#a89984,bold]{name}"
+
+            tab_normal   "#[fg=#6C7086] {name} "
+            tab_active   "#[fg=#9399B2,bold,italic] {name} "
+
+            command_nvim_bar_left_command   "cat /tmp/tmux-501/default-$0-vimbridge"
+            command_nvim_bar_left_format    "#[fg=blue] {stdout} "
+            command_nvim_bar_left_interval  "10"
+
+
+            datetime        "#[fg=#6C7086,bold] {format} "
+            datetime_format "%A, %d %b %Y %H:%M"
+            datetime_timezone "Europe/Berlin"
+        }
+    }
+
+}
