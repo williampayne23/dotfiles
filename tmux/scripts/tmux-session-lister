@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+RELOAD_COMMAND="source $CURRENT_DIR/session_switcher_options"
+DELETE_COMMAND="execute(~/.config/tmux/tmux-sessionist/scripts/kill_session.sh '{}')\
++reload-sync:$RELOAD_COMMAND"
+
+out=$(eval $RELOAD_COMMAND | fzf-tmux --bind "≈:$DELETE_COMMAND" --print-query -p --reverse)
+
+q=$(echo -e "$out" | sed -n '1 p')
+choice=$(echo -e "$out" | sed -n '2 p')
+
+if [ -z $choice ]; then
+    source ~/.config/tmux/tmux-sessionist/scripts/new_session.sh $q
+else
+    tmux switch-client -t $choice
+fi
+

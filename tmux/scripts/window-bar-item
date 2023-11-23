@@ -1,0 +1,27 @@
+#!/bin/bash
+
+session=$(tmux display-message -p '#S')
+last_window=$(tmux list-windows -F "#I" | tail -1)
+out=""
+vimbridge_path=$(tmux display-message -p "#{socket_path}-#{session_id}-vimbridge")
+vimbridge_color=$(cat $vimbridge_path |sed 's/#[^#]*#\[fg=\(#......\).*/\1/')
+
+if [[ $vimbridge_color == "" ]]; then
+  vimbridge_color="#9AA6DE"
+fi
+
+if [[ $1 == "1" ]]; then
+  out=$session
+fi
+
+if [[ $3 != "" ]]; then
+  out="$out#[fg=$vimbridge_color,bg=#313445]"
+fi
+
+
+out="$out $1 $2"
+if [[ $1 == "$last_window" ]]; then
+    out="$out #[fg=#313445]$(echo $session | sed s/./-/g)"
+fi
+
+echo "$out"

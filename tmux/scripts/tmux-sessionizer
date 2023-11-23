@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [[ $# -eq 2 ]]; then
+    selected=$2
+else
+    selected=$(find ~/.config ~/Documents/Code ~/Documents/Games ~ -mindepth 1 -maxdepth 1 -type d | cat - <(echo "/Users/willpayne/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Wills\ Workspace")| fzf-tmux -p 75% )
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    #exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+tmux send-keys -t $selected_name:0 "$1" Enter 
+
+tmux switch-client -t $selected_name
