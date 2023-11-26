@@ -4,6 +4,34 @@ function Test()
     vim.notify(session)
 end
 
+function Scratch()
+    -- Define the size of the floating window
+    local width = 100
+    local height = 20
+
+    -- Create the scratch buffer displayed in the floating window
+    local buf = vim.api.nvim_create_buf(false, true)
+
+    -- Get the current UI
+    local win_width = vim.api.nvim_win_get_width(0)
+    local win_height = vim.api.nvim_win_get_height(0)
+    -- local ui = vim.api.nvim_list_uis()[0]
+
+    -- Create the floating window
+    local opts = {
+        relative='editor',
+        width=width,
+        height=height,
+        col=(win_width/2) - (width/2),
+        row=(win_height/2) - (height/2),
+        anchor='NW',
+        style='minimal',
+        border='rounded',
+        title="Scratch"
+    }
+    local win = vim.api.nvim_open_win(buf, true, opts)
+end
+
 
 
 local function get_or_create_buffer(filename)

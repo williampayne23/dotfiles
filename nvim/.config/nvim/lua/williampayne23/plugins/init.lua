@@ -1,5 +1,9 @@
 return {
-    'christoomey/vim-tmux-navigator',
+    { 'christoomey/vim-tmux-navigator',
+        -- For whatever reason keybinds don't work if we load normally so we load on "VeryLazy" to force the plugin to load after vim
+        -- is properly started and that fixes it
+        event = "VeryLazy",
+    },
     'ThePrimeagen/vim-be-good',
     {
         "folke/persistence.nvim",

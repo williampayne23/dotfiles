@@ -6,6 +6,16 @@ vim.api.nvim_create_autocmd("User", {
     once = true,
     callback = function()
         vim.cmd "set mouse=a"
+        vim.notify(vim.v.argv[1])
+end,
+})
+
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "GUIEnter",
+    once = true,
+    callback = function()
+        vim.notify(vim.v.argv[0])
 end,
 })
 
