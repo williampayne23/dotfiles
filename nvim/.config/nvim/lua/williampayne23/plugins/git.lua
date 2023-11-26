@@ -12,7 +12,14 @@ return {
             neogit.setup {
                 kind = "replace",
             }
+            vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>")
         end
 
+    },
+    {
+        "https://github.com/lewis6991/gitsigns.nvim",
+        config = function()
+            require('gitsigns').setup()
+        end
     }
 }
