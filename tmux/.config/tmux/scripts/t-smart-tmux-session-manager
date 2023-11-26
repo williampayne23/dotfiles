@@ -89,36 +89,9 @@ get_fzf_find_binding() {
 
 FIND_BIND=$(get_fzf_find_binding)
 
-get_sessions_by_mru() {
-	tmux list-sessions -F '#{session_last_attached} #{session_name}' | sort --numeric-sort --reverse | awk '{print $2}'
-}
-
-get_zoxide_results() {
-	zoxide query -l | sed -e "$HOME_REPLACER"
-}
-
-get_fzf_results() {
-	if [ "$TMUX_RUNNING" -eq 0 ]; then
-		fzf_default_results="$(tmux show -gqv '@t-fzf-default-results')"
-		case $fzf_default_results in
-		sessions)
-			get_sessions_by_mru
-			;;
-		zoxide)
-			get_zoxide_results
-			;;
-		*)
-			get_sessions_by_mru && get_zoxide_results # default shows both
-			;;
-		esac
-	else
-		get_zoxide_results # only show zoxide results when outside tmux
-	fi
-}
-
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-RELOAD_COMMAND="source $CURRENT_DIR/session_switcher_options"
+RELOAD_COMMAND="source $CURRENT_DIR/session-manager-list-generator"
 
 get_fzf_results() {
     eval $RELOAD_COMMAND

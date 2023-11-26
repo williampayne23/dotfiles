@@ -26,7 +26,7 @@ get_fzf_results() {
 			get_zoxide_results
 			;;
 		*)
-			get_sessions_by_mru && get_zoxide_results # default shows both
+			get_sessions_by_mru && echo "" && get_zoxide_results # default shows both
 			;;
 		esac
 	else
