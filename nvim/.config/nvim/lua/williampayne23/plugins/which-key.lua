@@ -2,6 +2,8 @@ return {
     {
         "folke/which-key.nvim",
         config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 100
             local wk = require("which-key")
             wk.setup {
                 window = {
@@ -20,14 +22,14 @@ return {
                 },
             }
             -- wk.register({
-            --     f = {
-            --         name = "file",                                             -- optional group name
-            --         f = { "<cmd>Telescope find_files<cr>", "Find File" },      -- create a binding with label
-            --         r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" }, -- additional options for creating the keymap
-            --         n = { "New File" },                                        -- just a label. don't create any mapping
-            --         e = "Edit File"                                            -- same as above
-            --     }
-            -- }, { prefix = "<leader>" })
-        end
-    },
-}
+                --     f = {
+                    --         name = "file",                                             -- optional group name
+                    --         f = { "<cmd>Telescope find_files<cr>", "Find File" },      -- create a binding with label
+                    --         r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" }, -- additional options for creating the keymap
+                    --         n = { "New File" },                                        -- just a label. don't create any mapping
+                    --         e = "Edit File"                                            -- same as above
+                    --     }
+                    -- }, { prefix = "<leader>" })
+                end
+            },
+        }

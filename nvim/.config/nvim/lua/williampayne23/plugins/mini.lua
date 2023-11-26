@@ -22,6 +22,19 @@ return {
             require('mini.surround').setup({
                 -- configuration here, or leave empty to use defaults
             })
+
+            local wk = require "which-key"
+            wk.register({
+                ["aF"] = [[a function]],
+                ["iF"] = [[a function]],
+                ["af"] = [[a function call]],
+                ["if"] = [[a function call]],
+                ["aa"] = [[next argument]],
+                ["ia"] = [[next argument]],
+                ["a|"] = [[surrounding |]],
+                ["i|"] = [[surrounding |]],
+
+            }, {mode="o", prefix = ""})
         end
     }
 }

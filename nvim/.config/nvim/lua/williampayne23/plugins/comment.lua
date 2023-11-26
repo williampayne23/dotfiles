@@ -12,7 +12,7 @@ return {
                 pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
             })
             local api = require("Comment.api")
-            vim.keymap.set('n', '<leader>/', api.toggle.linewise.current)
+            vim.keymap.set('n', '<leader>/', api.toggle.linewise.current, {desc = "toggle comment"})
 
             local esc = vim.api.nvim_replace_termcodes(
                 '<ESC>', true, false, true
@@ -21,7 +21,7 @@ return {
             vim.keymap.set('x', '<leader>/', function()
                 vim.api.nvim_feedkeys(esc, 'nx', false)
                 api.toggle.linewise(vim.fn.visualmode())
-            end)
+            end, {desc = "toggle comment"})
         end
     }
 }

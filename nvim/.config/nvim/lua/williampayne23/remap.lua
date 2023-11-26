@@ -1,7 +1,7 @@
 vim.keymap.set("i", "<A-3>", "#")
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc = "move down"})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "move up"})
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -9,46 +9,44 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "<leader>p", "\"_dP", {desc = "keep reg and paste"})
 
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+y")
+vim.keymap.set("n", "<leader>y", "\"+y", {desc = "yank to clipboard"})
+vim.keymap.set("v", "<leader>y", "\"+y", {desc = "yank to clipboard"})
 
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", "\"_d", {desc = "delete to null"})
+vim.keymap.set("v", "<leader>d", "\"_d", {desc = "delete to null"})
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !. ~/.config/tmux/scripts/tmux-sessionizer \"nvim .\"<CR>")
 
-vim.keymap.set("n", "<leader>s", "<cmd>lua Scratch()<CR>")
+vim.keymap.set("n", "<leader>s", "<cmd>lua Scratch()<CR>", {desc = "scratch"})
 
-vim.keymap.set("n", "<leader>q", "<cmd>q<CR>")
+vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", {desc = "close window"})
 
 -- Exit terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format()
-end)
+end, {desc = "format"})
 
 
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", {desc = "quickfix next"})
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", {desc = "quickfix prev"})
 
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = "replace word in file"})
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc="make executable" })
 
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>", {desc = "make it rain"});
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
-end)
+end, {desc="source file"})
 
-vim.keymap.set("n", "<C-w>|", "<cmd>vsplit<CR>")
-vim.keymap.set("n", "<C-w>-", "<cmd>split<CR>")
+vim.keymap.set("n", "<C-w>|", "<cmd>vsplit<CR>", {desc = "Vertical split"})
+vim.keymap.set("n", "<C-w>-", "<cmd>split<CR>", {desc = "Horizontal split"})
 
 
 -- To keep cursor in the center of the screen. Not sure if I like it though because it can flicker
@@ -65,6 +63,6 @@ vim.keymap.set("n", "<C-w>-", "<cmd>split<CR>")
 -- })
 --
 
-vim.keymap.set("n", "|", ":%!")
-vim.keymap.set("v", "|", ":%!")
+vim.keymap.set("n", "|", ":%!", {desc = "pipe"})
+vim.keymap.set("v", "|", ":%!", {desc = "pipe"})
 
