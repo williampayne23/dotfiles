@@ -155,3 +155,9 @@ function z() {
 
 export TERM=xterm-256color
 alias cat=bat
+function scratch() {
+    nvim +noswapfile +"set buftype=nofile" +"set bufhidden=hide" +"file scratch"
+}
+eval "$(zoxide init zsh)"
+export FZF_TMUX_OPTS="-p 55%,10%"
+export T_FZF_BORDER_LABEL=' Your Custom Label '

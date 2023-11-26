@@ -1,6 +1,6 @@
 #!/bin/bash
 
-session=$(tmux display-message -p '#S')
+session=$(tmux display-message -p '#S' | awk '{print toupper($0)}' )
 last_window=$(tmux list-windows -F "#I" | tail -1)
 out=""
 vimbridge_path=$(tmux display-message -p "#{socket_path}-#{session_id}-vimbridge")
@@ -11,7 +11,7 @@ if [[ $vimbridge_color == "" ]]; then
 fi
 
 if [[ $1 == "1" ]]; then
-  out=$session
+    out=${session}
 fi
 
 if [[ $3 != "" ]]; then

@@ -6,6 +6,9 @@ source "$CURRENT_DIR/helpers.sh"
 
 # global vars passed to the script as arguments
 TARGET_SESSION_ID="$1"
+if [[ "$TARGET_SESSION_ID" == "" ]]; then
+    exit
+fi
 
 switch_to_next_session() {
 	tmux switch-client -n
