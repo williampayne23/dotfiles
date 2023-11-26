@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../raycast/extentions/show-text/src/index.tsx"],
-  "sourcesContent": ["import { Action, ActionPanel, closeMainWindow, Detail, LaunchProps } from \"@raycast/api\";\n\nexport default function Command(props: LaunchProps<{ arguments: {\n  text: string;\n}}>) {\n  return <Detail \n            markdown={props.arguments.text} \n            actions={\n            <ActionPanel>\n                <Action \n                title=\"Done\"\n                onAction={closeMainWindow}\n                shortcut={{ modifiers: [\"cmd\"], key: \"escape\" }}\n                />\n            </ActionPanel>\n            }\n            />;\n}\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA0E,wBAA1EC,EAAA,6BAEe,SAARH,EAAyBI,EAE3B,CACH,SAAO,OAAC,UACE,SAAUA,EAAM,UAAU,KAC1B,WACA,OAAC,eACG,mBAAC,UACD,MAAM,OACN,SAAU,kBACV,SAAU,CAAE,UAAW,CAAC,KAAK,EAAG,IAAK,QAAS,EAC9C,EACJ,EAEA,CACZ",
-  "names": ["src_exports", "__export", "Command", "__toCommonJS", "import_api", "import_jsx_runtime", "props"]
-}
