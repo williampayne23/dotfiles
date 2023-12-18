@@ -3,6 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
             'nvim-treesitter/nvim-treesitter-context',
+            'JoosepAlviste/nvim-ts-context-commentstring'
         },
         build = ":TSUpdate",
         config = function(_, _)
@@ -26,10 +27,9 @@ return {
                     -- Instead of true it can also be a list of languages
                     additional_vim_regex_highlighting = false,
                 },
-                context_commentstring = {
-                    enable = true,
-                },
             }
+            vim.g.skip_ts_context_commentstring_module = true
+            require 'ts_context_commentstring'.setup({})
             require 'treesitter-context'.setup {
                 enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
                 max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
@@ -47,12 +47,6 @@ return {
         end
     },
     "nvim-treesitter/playground",
-    {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        config = function()
-            require("ts_context_commentstring").setup({});
-        end
-    },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
     }
