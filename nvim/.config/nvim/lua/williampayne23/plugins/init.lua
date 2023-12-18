@@ -23,7 +23,6 @@ return {
     -- is properly started and that fixes it
     event = "VeryLazy",
     config = function()
-        vim.g.tmux_navigator_no_mappings = 1
         vim.keymap.set("n", "<M-h", "<cmd>TmuxNavigateLeft<CR>")
         vim.keymap.set("n", "˙", "<cmd>TmuxNavigateLeft<CR>")
         vim.keymap.set("n", "∆", "<cmd>TmuxNavigateDown<CR>")

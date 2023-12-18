@@ -7,8 +7,10 @@ return {
             }
         })
         vim.keymap.set("i", "<Right>", function()
+
             local cursorCol = vim.fn.col(".");
-            if cursorCol == vim.fn.col("$") then
+            if require("copilot.suggestion").is_visible() then
+            -- if cursorCol == vim.fn.col("$") then
                 require("copilot.suggestion").accept()
             else
                 vim.cmd(string.format(":call cursor(%d, %d)", vim.fn.line("."), cursorCol + 1))
