@@ -3,6 +3,11 @@
 # Wasn't working so changed it then added some features I want
 
 
+FZF_TMUX_OPTS="-p 53%,58% \
+--color=bg+:#303446,bg:#303446,spinner:#f2d5cf,hl:#e78284,gutter:-1 \
+--color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+--color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6"
+
 # determine if the tmux server is running
 if tmux list-sessions &>/dev/null; then
 	TMUX_RUNNING=0
@@ -98,12 +103,13 @@ get_fzf_results() {
 }
 
 fzf_border_label_default=' t - smart tmux session manager '
-BORDER_LABEL=${T_FZF_BORDER_LABEL:-$fzf_border_label_default}
+BORDER_LABEL="Choose session"
 
-HEADER=" ^s sessions ^x zoxide ^f find ⎇ bs delete session"
+HEADER=" ^s sessions ^x zoxide ^f find ⎇ bs delete session ^d new session"
 SESSION_BIND="ctrl-s:change-prompt(sessions> )+reload(tmux list-sessions -F '#S')"
 ZOXIDE_BIND="ctrl-x:change-prompt(zoxide> )+reload(zoxide query -l | sed -e \"$HOME_REPLACER\")"
 DELETE_BIND="alt-bs:execute(~/.config/tmux/tmux-sessionist/scripts/kill_session.sh '{}')+reload-sync($RELOAD_COMMAND)"
+NEW_SESSION_BIND="ctrl-d:become(~/.config/tmux/tmux-sessionist/scripts/new_session.sh '{q}')"
 
 TAB_BIND="tab:down,btab:up"
 
@@ -139,6 +145,7 @@ else # argument not provided
 				--bind "$TAB_BIND" \
 				--bind "$ZOXIDE_BIND" \
                 --bind "$DELETE_BIND" \
+                --bind "$NEW_SESSION_BIND" \
 				--border-label "$BORDER_LABEL" \
 				--header "$HEADER" \
 				--no-sort \

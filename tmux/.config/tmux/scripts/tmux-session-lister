@@ -3,7 +3,7 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
-RELOAD_COMMAND="source $CURRENT_DIR/session_switcher_options"
+RELOAD_COMMAND="source $CURRENT_DIR/session-manager-list-generator"
 DELETE_COMMAND="execute(~/.config/tmux/tmux-sessionist/scripts/kill_session.sh '{}')\
 +reload-sync:$RELOAD_COMMAND"
 
