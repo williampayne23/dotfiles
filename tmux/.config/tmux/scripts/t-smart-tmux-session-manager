@@ -2,7 +2,6 @@
 # Took from https://github.com/joshmedeski/t-smart-tmux-session-manager
 # Wasn't working so changed it then added some features I want
 
-
 FZF_TMUX_OPTS="-p 53%,58% \
 --color=bg+:#303446,bg:#303446,spinner:#f2d5cf,hl:#e78284,gutter:-1 \
 --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
@@ -108,7 +107,7 @@ BORDER_LABEL="Choose session"
 HEADER=" ^s sessions ^x zoxide ^f find ⎇ bs delete session ^d new session"
 SESSION_BIND="ctrl-s:change-prompt(sessions> )+reload(tmux list-sessions -F '#S')"
 ZOXIDE_BIND="ctrl-x:change-prompt(zoxide> )+reload(zoxide query -l | sed -e \"$HOME_REPLACER\")"
-DELETE_BIND="alt-bs:execute(~/.config/tmux/tmux-sessionist/scripts/kill_session.sh '{}')+reload-sync($RELOAD_COMMAND)"
+DELETE_BIND="alt-bs:execute(~/.config/tmux/tmux-sessionist/scripts/kill_session.sh '{}')+reload($RELOAD_COMMAND)"
 NEW_SESSION_BIND="ctrl-d:become(~/.config/tmux/tmux-sessionist/scripts/new_session.sh '{q}')"
 
 TAB_BIND="tab:down,btab:up"
@@ -146,12 +145,12 @@ else # argument not provided
 				--bind "$ZOXIDE_BIND" \
                 --bind "$DELETE_BIND" \
                 --bind "$NEW_SESSION_BIND" \
-				--border-label "$BORDER_LABEL" \
 				--header "$HEADER" \
 				--no-sort \
 				--prompt "$PROMPT" \
                 --print-query \
 				$FZF_TMUX_OPTS
+                            # --border-label "$BORDER_LABEL" \
 		)
 		;;
 	detached)
@@ -163,11 +162,11 @@ else # argument not provided
 				--bind "$ZOXIDE_BIND" \
                 --bind "$DELETE_BIND" \
 				--border \
-				--border-label "$BORDER_LABEL" \
 				--header "$HEADER" \
 				--no-sort \
 				--prompt "$PROMPT" \
                 --print-query
+                            # --border-label "$BORDER_LABEL" \
 		)
 		;;
 	serverless)
@@ -178,11 +177,11 @@ else # argument not provided
 				--bind "$ZOXIDE_BIND" \
                 --bind "$DELETE_BIND" \
 				--border \
-				--border-label "$BORDER_LABEL" \
 				--header " ^x zoxide ^f find" \
 				--no-sort \
 				--prompt "$PROMPT" \
                 --print-query
+                            # --border-label "$BORDER_LABEL" \
 		)
 		;;
 	esac

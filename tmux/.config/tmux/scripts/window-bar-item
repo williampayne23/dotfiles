@@ -4,7 +4,11 @@ session=$(tmux display-message -p '#S' | awk '{print toupper($0)}' )
 last_window=$(tmux list-windows -F "#I" | tail -1)
 out=""
 vimbridge_path=$(tmux display-message -p "#{socket_path}-#{session_id}-vimbridge")
-vimbridge_color=$(cat $vimbridge_path |sed 's/#[^#]*#\[fg=\(#......\).*/\1/')
+
+
+if [ -f $vimbridge_path ]; then
+    vimbridge_color=$(cat $vimbridge_path |sed 's/#[^#]*#\[fg=\(#......\).*/\1/')
+fi
 
 if [[ $vimbridge_color == "" ]]; then
   vimbridge_color="#9AA6DE"
