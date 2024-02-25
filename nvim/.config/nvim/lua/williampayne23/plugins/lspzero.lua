@@ -88,9 +88,9 @@ return {
                 opts["desc"] = "Open diagonistic float"
                 vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
                 opts["desc"] = "Next diagnostic"
-                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
                 opts["desc"] = "Previous diagnostic"
-                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
                 opts["desc"] = "Show code actions"
                 vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.code_action() end, opts)
                 opts["desc"] = "Show references"
