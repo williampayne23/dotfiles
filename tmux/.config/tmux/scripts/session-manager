@@ -98,7 +98,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 RELOAD_COMMAND="source $CURRENT_DIR/session-manager-list-generator"
 
 get_fzf_results() {
-    eval $RELOAD_COMMAND
+    source $CURRENT_DIR/session-manager-list-generator
 }
 
 fzf_border_label_default=' t - smart tmux session manager '
@@ -136,7 +136,6 @@ else # argument not provided
 --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
 --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6"
 		fi
-
 		RESULT=$(
 			(get_fzf_results) | fzf-tmux \
 				--bind "$FIND_BIND" \
@@ -152,6 +151,7 @@ else # argument not provided
 				$FZF_TMUX_OPTS
                             # --border-label "$BORDER_LABEL" \
 		)
+        tmux display-message $RESULT
 		;;
 	detached)
 		RESULT=$(

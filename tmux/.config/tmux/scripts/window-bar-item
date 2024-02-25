@@ -18,7 +18,7 @@ if [[ $1 == "1" ]]; then
     out=${session}
 fi
 
-if [[ $3 != "" ]]; then
+if [[ $3 == "active" ]]; then
   out="$out#[fg=$vimbridge_color,bg=#313445]"
 fi
 
