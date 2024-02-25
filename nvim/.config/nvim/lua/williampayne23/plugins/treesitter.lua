@@ -3,7 +3,9 @@ return {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
             'nvim-treesitter/nvim-treesitter-context',
-            'JoosepAlviste/nvim-ts-context-commentstring'
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            'Wansmer/sibling-swap.nvim',
         },
         build = ":TSUpdate",
         event = { "BufReadPre", "BufNewFile" },
@@ -132,11 +134,11 @@ return {
                             ["<leader>nc"] = { query = "@class.outer", desc = "a class" },
                         },
                         swap_previous = {
-                            ["<leader>pa"] = { query = "@parameter.inner", desc = "a parameter/argument" },
-                            ["<leader>pi"] = { query = "@conditional.inner", desc = "a conditional" },
-                            ["<leader>pf"] = { query = "@call.outer", desc = "a function call" },
-                            ["<leader>pF"] = { query = "@function.outer", desc = "a method/function definition" },
-                            ["<leader>pc"] = { query = "@class.outer", desc = "a class" },
+                            ["<leader>Na"] = { query = "@parameter.inner", desc = "a parameter/argument" },
+                            ["<leader>Ni"] = { query = "@conditional.inner", desc = "a conditional" },
+                            ["<leader>Nf"] = { query = "@call.outer", desc = "a function call" },
+                            ["<leader>NF"] = { query = "@function.outer", desc = "a method/function definition" },
+                            ["<leader>Nc"] = { query = "@class.outer", desc = "a class" },
                         },
                     },
                     move = {
@@ -176,9 +178,74 @@ return {
 
             -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
             vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-            vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
+            vim.keymap.set({ "x", "n", "o" }, "F", ts_repeat_move.builtin_F)
             vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
             vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+
+            local wk = require("which-key")
+            wk.register({
+                n = {
+                    name = "swap next",
+                },
+                N = {
+                    name = "swap previous",
+                }
+            }, {prefix = "<leader>"})
         end
+    },
+    {
+        "Wansmer/sibling-swap.nvim",
+        lazy = true,
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require('sibling-swap').setup({
+                allowed_separators = {
+                    ',',
+                    ';',
+                    'and',
+                    'or',
+                    '&&',
+                    '&',
+                    '||',
+                    '|',
+                    '==',
+                    '===',
+                    '!=',
+                    '!==',
+                    '-',
+                    '+',
+                    ['<'] = '>',
+                    ['<='] = '>=',
+                    ['>'] = '<',
+                    ['>='] = '<=',
+                },
+                use_default_keymaps = false
+                -- keymaps = {
+                --
+                --     ['<leader>ns'] = 'swap_with_right',
+                --     ['<leader>Ns'] = 'swap_with_left',
+                --     ['<space>nS'] = 'swap_with_right_with_opp',
+                --     ['<space>NS,'] = 'swap_with_left_with_opp',
+                -- },
+            })
+
+            function gWrapper(opfunc) 
+                vim.go.operatorfunc = opfunc
+                return "g@l"
+            end
+            _G.swap_with_left = function()
+                vim.go.operatorfunc = "v:lua.require'sibling-swap'.swap_with_left"
+                return "g@l"
+            end
+
+            _G.swap_with_right = function()
+                vim.go.operatorfunc = "v:lua.require'sibling-swap'.swap_with_right"
+                return "g@l"
+            end
+
+            vim.keymap.set("n", "<space>ns", swap_with_right, { expr = true, desc = "a list/comparison/property" })
+            vim.keymap.set("n", "<space>Ns", swap_with_left, { expr = true, desc = "a list/comparison/property" })
+        end,
     }
+
 }

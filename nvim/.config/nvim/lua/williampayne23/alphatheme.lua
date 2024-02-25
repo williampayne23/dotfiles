@@ -62,7 +62,7 @@ function M.setup()
             M.dashboard.button("n", "  Create file", "<Cmd>enew<CR>"),
             M.dashboard.button("e", "  Explore project", "<Cmd>NvimTreeOpen<CR>"),
             M.dashboard.button("f", "  Find file", "<Cmd>Telescope find_files<CR>"),
-            M.dashboard.button("s", "  Find text", "<Cmd>Telescope live_grep <CR>"),
+            M.dashboard.button("s", "󰍉  Find text", "<Cmd>Telescope live_grep <CR>"),
             M.dashboard.button("q", "  Quit", "<Cmd>qa<CR>"),
         },
         opts = {
