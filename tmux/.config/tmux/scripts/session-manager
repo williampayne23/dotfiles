@@ -151,7 +151,6 @@ else # argument not provided
 				$FZF_TMUX_OPTS
                             # --border-label "$BORDER_LABEL" \
 		)
-        tmux display-message $RESULT
 		;;
 	detached)
 		RESULT=$(
