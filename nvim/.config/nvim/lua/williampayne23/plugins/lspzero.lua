@@ -130,6 +130,7 @@ return {
                     { name = 'path' },
                     { name = 'nvim_lsp' },
                     { name = 'nvim_lua' },
+                    { name = 'buffer' },
                 },
                 window = {
                     completion = cmp.config.window.bordered({
