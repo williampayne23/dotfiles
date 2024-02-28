@@ -140,3 +140,6 @@ function scratch() {
 eval "$(zoxide init zsh)"
 export FZF_TMUX_OPTS="-p 55%,10%"
 source	~/.zsh_local 
+
+#atuin
+eval "$(atuin init zsh)"
