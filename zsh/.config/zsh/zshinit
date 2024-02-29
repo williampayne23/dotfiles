@@ -1,0 +1,62 @@
+# Antigen
+source ~/.config/zsh/antigen.zsh
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle fzf
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle jeffreytse/zsh-vi-mode
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle conda
+antigen bundle esc/conda-zsh-completion
+
+antigen theme robbyrussell
+
+antigen apply
+
+
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_OPTS='--border --info=inline'
+export FZF_TMUX_OPTS="-p 55%,10%"
+
+_fzf_compgen_cd() {
+    fd --hidden --follow --exclude ".git" --exclude "Library" --exclude "node_modules" . "$1"
+}
+
+#ZELLIJ WHICH I MAY OR MAY NOT USE
+ZELLIJ_AUTO_ATTACH=true
+# ZELLIJ_AUTO_EXIT=true
+function ze() {
+    if [[ -z "$ZELLIJ" ]]; then
+        if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+            zellij attach -c Main
+        else
+            zellij
+        fi
+
+        if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+            exit
+        fi
+    fi
+}
+
+export TERM=xterm-256color
+alias cat=bat
+function scratch() {
+    nvim +noswapfile +"set buftype=nofile" +"set bufhidden=hide" +"file scratch"
+}
+
+#Zoxide
+eval "$(zoxide init zsh)"
+
+#atuin
+eval "$(atuin init zsh)"
+
+#Zsh is in vim mode
+bindkey -v
