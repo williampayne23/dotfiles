@@ -60,3 +60,6 @@ eval "$(atuin init zsh)"
 
 #Zsh is in vim mode
 bindkey -v
+
+# No autcomplete beep
+unsetopt LIST_BEEP
