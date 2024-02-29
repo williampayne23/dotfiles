@@ -1,0 +1,24 @@
+{
+  "bat": {
+    "load": "extra",
+    "install": "cargo install bat",
+    "after": "bat cache --build",
+    "dependencies": [
+      "rust"
+    ]
+  },
+  "zoxide": {
+    "load": "extra",
+    "install": "cargo install zoxide",
+    "dependencies": [
+      "rust"
+    ]
+  },
+  "atuin": {
+    "load": "extra",
+    "install": "cargo install atuin",
+    "dependencies": [
+      "rust"
+    ]
+  }
+}

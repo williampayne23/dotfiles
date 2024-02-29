@@ -1,0 +1,8 @@
+{
+  "zellij": {
+    "command": "cargo install zellij",
+    "dependencies": [
+      "rust"
+    ]
+  }
+}
