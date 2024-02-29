@@ -143,3 +143,6 @@ source	~/.zsh_local
 
 #atuin
 eval "$(atuin init zsh)"
+
+#Zsh is in vim mode
+bindkey -v
