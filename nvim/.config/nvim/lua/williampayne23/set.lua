@@ -1,12 +1,11 @@
 -- For some reason setting mouse normally doesn't work
 -- I assume it's a plugin that's overriding it
--- so this is a workaround
+-- so this is a workaround (it's real I checked)
 vim.api.nvim_create_autocmd("User", {
     pattern = "LazyVimStarted",
     once = true,
     callback = function()
         vim.cmd "set mouse=a"
-        vim.notify(vim.v.argv[1])
     end,
 })
 
