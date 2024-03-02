@@ -20,6 +20,7 @@ vim.keymap.set("v", "<leader>d", "\"_d", {desc = "delete to null"})
 vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>s", "<cmd>lua Scratch()<CR>", {desc = "scratch"})
+vim.keymap.set("v", "<leader>f", "<cmd>lua FlipAround()<CR>", {desc = "Flip around ,"})
 
 vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", {desc = "close window"})
 
