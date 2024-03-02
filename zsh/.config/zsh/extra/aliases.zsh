@@ -1,7 +1,5 @@
-function scratch() {
-    nvim +noswapfile +"set buftype=nofile" +"set bufhidden=hide" +"file scratch"
-}
-
 alias cat=bat
+alias cat!=\\cat
 alias c=clear
 alias cd=z
+alias cd!=\\cd
