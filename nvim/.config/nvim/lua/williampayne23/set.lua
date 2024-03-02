@@ -11,11 +11,13 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 
-vim.api.nvim_create_autocmd("User", {
-    pattern = "GUIEnter",
+vim.api.nvim_create_autocmd("BufLeave", {
+    pattern = "NeogitStatus",
     once = true,
     callback = function()
-        vim.notify(vim.v.argv[0])
+        if (vim.v.argv[3] == "+Neogit") then
+            vim.cmd("quitall")
+        end
     end,
 })
 
