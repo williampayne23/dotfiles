@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("User", {
     callback = function()
         vim.cmd "set mouse=a"
         vim.notify(vim.v.argv[1])
-end,
+    end,
 })
 
 
@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("User", {
     once = true,
     callback = function()
         vim.notify(vim.v.argv[0])
-end,
+    end,
 })
 
 vim.opt.number = true
