@@ -41,6 +41,21 @@ local function get_visual_selection()
   return table.concat(lines, "\n")
 end
 
+function split(str, split)
+    local t = {}
+    local section = ""
+    for char in str:gmatch(".") do 
+        if char == split then
+            table.insert(t, section)
+            section = ""
+        else
+            section = section .. char
+        end
+    end
+    table.insert(t, section)
+    return t
+end
+
 function FlipAround()
     local char = vim.fn.nr2char(vim.fn.getchar())
     local selection = get_visual_selection()
@@ -48,12 +63,11 @@ function FlipAround()
         return
     end
 
-    local t = {}
-    for str in string.gmatch(selection, "([^"..char.."]+)") do
-        table.insert(t, str)
-    end
+    -- Make this better I could instead split by contiguous occurrences of the char which lets me flip around ==
+    local t = split(selection, char)
 
     local left = t[1]
+    print(t[2])
     local right = table.concat(t, char, 2)
     -- If the first element starts with tabs strip it (vim magic seems to include them when we paste)
     local tab = string.match(left, "^%s+")
@@ -74,10 +88,21 @@ function FlipAround()
         left = space .. left
     end
     local flipped = right .. char .. left
-    vim.api.nvim_feedkeys('gvc','m',false)
-    vim.api.nvim_feedkeys(flipped, 'm', false)
+    vim.api.nvim_feedkeys('gv','m',false)
+    local _, cerow, cecol, _ = unpack(vim.fn.getpos("."))
+    -- Get the line we are on
+    local lines = vim.fn.getline(cerow, cerow)
+    local line = lines[1]
+    -- If the end cursor position is greater than the length of the line add a new line
+    -- This is to prevent pulling in the next line
+    if cecol > string.len(line) then
+        vim.api.nvim_feedkeys('h','m',false)
+    end
+    vim.api.nvim_feedkeys("c"..flipped, 'm', false)
     local keys = vim.api.nvim_replace_termcodes('<ESC>',true,false,true)
     vim.api.nvim_feedkeys(keys, 'm', false)
+    -- put cursor back
+    vim.api.nvim_feedkeys('`<','m',false)
 end
 
 function Scratch()
