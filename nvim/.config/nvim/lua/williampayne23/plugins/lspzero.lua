@@ -1,85 +1,73 @@
-local handler = function(virtText, lnum, endLnum, width, truncate)
-    local newVirtText = {}
-    local suffix = (' 󰁂 %d '):format(endLnum - lnum)
-    local sufWidth = vim.fn.strdisplaywidth(suffix)
-    local targetWidth = width - sufWidth
-    local curWidth = 0
-    for _, chunk in ipairs(virtText) do
-        local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-        if targetWidth > curWidth + chunkWidth then
-            table.insert(newVirtText, chunk)
-        else
-            chunkText = truncate(chunkText, targetWidth - curWidth)
-            local hlGroup = chunk[2]
-            table.insert(newVirtText, { chunkText, hlGroup })
-            chunkWidth = vim.fn.strdisplaywidth(chunkText)
-            -- str width returned from truncate() may less than 2nd argument, need padding
-            if curWidth + chunkWidth < targetWidth then
-                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-            end
-            break
-        end
-        curWidth = curWidth + chunkWidth
-    end
-    table.insert(newVirtText, { suffix, 'MoreMsg' })
-    return newVirtText
-end
+
 
 return {
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
-    {
-        'kevinhwang91/nvim-ufo',
-        dependencies = {
-            'kevinhwang91/promise-async'
-        },
-        config = function()
-            vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-            vim.o.foldlevelstart = 99
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.foldingRange = {
-                dynamicRegistration = false,
-                lineFoldingOnly = true
-            }
-            local language_servers = require("lspconfig").util.available_servers()     -- or list servers manually like {'gopls', 'clangd'}
-            for _, ls in ipairs(language_servers) do
-                require('lspconfig')[ls].setup({
-                    capabilities = capabilities
-                    -- you can add other fields for setting up lsp server in this table
-                })
-            end
-            require('ufo').setup({
-                fold_virt_text_handler = handler
-            })
-            vim.keymap.set('n', 'K', function()
-                local winid = require('ufo').peekFoldedLinesUnderCursor()
-                if not winid then
-                    -- choose one of coc.nvim and nvim lsp
-                    -- vim.fn.CocActionAsync('definitionHover')     -- coc.nvim
-                    vim.lsp.buf.hover()
-                end
-            end)
-        end
-    },
-    {
-        "folke/neodev.nvim",
-        config = function()
-            -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-            require("neodev").setup({
-                -- add any options here, or leave empty to use the default settings
-                plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim", "Comment.nvim" },
-            })
-        end,
-        priority = 1000,
-    },
     {
         'VonHeikemen/lsp-zero.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+            -- Autocompletion
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'saadparwaiz1/cmp_luasnip',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua',
+
+            -- Snippets
+            'L3MON4D3/LuaSnip',
+
+            'rcarriga/nvim-dap-ui',
+            'mfussenegger/nvim-dap',
+            'folke/neodev.nvim',
+            -- 'jose-elias-alvarez/null-ls.nvim',
+        },
         branch = 'v3.x',
         config = function()
-            local lsp_zero = require('lsp-zero')
+            -- Ensure that the required plugins are installed
+            local status, neodev = pcall(require, 'neodev')
+            if not status then
+                vim.cmd.echom('error')
+                return
+            end
+            local lsp
+            status, lsp = pcall(require, 'lsp-zero')
+            if not status then
+                vim.cmd.echom('error')
+                return
+            end
+            neodev.setup({
+                -- add any options here, or leave empty to use the default settings
+                override = function(root_dir, library)
+                    if root_dir:find("dotfiles", 1, true) == 1 then
+                        library.enabled = true
+                        library.plugins = true
+                    end
+                end,
+                library = { plugins = { 'nvim-dap-ui' }, types = true },
+            })
 
-            lsp_zero.on_attach(function(_, bufnr)
+
+            lsp.set_preferences({
+                suggest_lsp_servers = false,
+                setup_servers_on_start = true,
+                set_lsp_keymaps = true,
+                configure_diagnostics = true,
+                cmp_capabilities = true,
+                manage_nvim_cmp = true,
+                call_servers = 'local',
+                sign_icons = {
+                    error = '✘',
+                    warn = '▲',
+                    hint = '⚑',
+                    info = '',
+                },
+            })
+
+            -- Keymaps
+            lsp.on_attach(function(_, bufnr)
                 local opts = { buffer = bufnr, remap = false }
                 opts["desc"] = "Go to definition"
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -108,21 +96,25 @@ return {
                 }, {prefix = "<leader>"})
             end)
 
+            -- Mason yummy borders
             require('mason').setup({ ui = { border = "rounded" } })
+            -- Mason LSP
             require('mason-lspconfig').setup({
                 ensure_installed = { 'tsserver', 'rust_analyzer' },
                 automatic_installation = true,
                 handlers = {
-                    lsp_zero.default_setup,
+                    lsp.default_setup,
                     lua_ls = function()
-                        local lua_opts = lsp_zero.nvim_lua_ls()
+                        local lua_opts = lsp.nvim_lua_ls()
                         require('lspconfig').lua_ls.setup(lua_opts)
                     end,
                 },
             })
 
+            -- LSP Info nice borders
             require('lspconfig.ui.windows').default_options.border = 'single'
 
+            -- CMP autocompletion
             local cmp = require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             cmp.setup({
@@ -140,7 +132,7 @@ return {
                         winhighlight = "normal:normal,floatborder:borderbg,cursorline:pmenusel,search:none",
                     })
                 },
-                formatting = lsp_zero.cmp_format(),
+                formatting = lsp.cmp_format(),
                 mapping = cmp.mapping.preset.insert({
                     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
@@ -177,10 +169,4 @@ return {
             })
         end
     },
-    { 'neovim/nvim-lspconfig' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-cmdline' },
-    { 'L3MON4D3/LuaSnip' },
 }
