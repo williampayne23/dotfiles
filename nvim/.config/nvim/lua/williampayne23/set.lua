@@ -10,13 +10,17 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 
-vim.api.nvim_create_autocmd("BufLeave", {
+vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "NeogitStatus",
-    once = true,
     callback = function()
-        if (vim.v.argv[3] == "+Neogit") then
-            vim.cmd("quitall")
-        end
+        vim.api.nvim_create_autocmd("BufEnter", {
+            pattern = "quit_nvim",
+            callback = function()
+                if (vim.v.argv[3] == "+Neogit") then
+                    vim.cmd("quitall")
+                end
+            end,
+        })
     end,
 })
 
