@@ -87,6 +87,10 @@ return {
                 vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, opts)
                 opts["desc"] = "Help"
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+                opts["desc"] = "Format"
+                vim.keymap.set({'n'}, '<leader>F', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                opts["desc"] = "find references"
+                vim.keymap.set({'n', 'x'}, '<leader>pr', '<cmd>Telescope lsp_references<cr>', opts)
                 local wk = require("which-key")
                 wk.register({
                     v = {
