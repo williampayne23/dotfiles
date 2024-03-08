@@ -1,5 +1,3 @@
-
-
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -22,7 +20,7 @@ return {
             'rcarriga/nvim-dap-ui',
             'mfussenegger/nvim-dap',
             'folke/neodev.nvim',
-            -- 'jose-elias-alvarez/null-ls.nvim',
+            'jose-elias-alvarez/null-ls.nvim',
         },
         branch = 'v3.x',
         config = function()
@@ -99,6 +97,25 @@ return {
                     }
                 }, {prefix = "<leader>"})
             end)
+
+            lsp.setup()
+
+            local null_ls = require('null-ls')
+            local null_opts = lsp.build_options('null-ls', {})
+
+            null_ls.setup({
+                on_attach = function(client, bufnr)
+                    null_opts.on_attach(client, bufnr)
+                end,
+                sources = {
+                    -- Replace these with the tools you have installed
+                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.diagnostics.eslint,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.diagnostics.ruff,
+                    null_ls.builtins.diagnostics.mypy
+                }
+            })
 
             -- Mason yummy borders
             require('mason').setup({ ui = { border = "rounded" } })
