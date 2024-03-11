@@ -1,4 +1,5 @@
 return {
+    'ixru/nvim-markdown',
     'leissa/vim-acme',
     { 'lvimuser/lsp-inlayhints.nvim',
     config = function()
