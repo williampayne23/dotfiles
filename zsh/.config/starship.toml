@@ -1,3 +1,5 @@
+add_newline = false
+
 [aws]
 symbol = "  "
 
@@ -139,6 +141,7 @@ Unknown = " "
 Windows = "󰍲 "
 
 [package]
+disabled = true
 symbol = "󰏗 "
 
 [perl]
@@ -167,6 +170,9 @@ symbol = " "
 
 [swift]
 symbol = " "
+
+[username]
+disabled = true
 
 [zig]
 symbol = " "
