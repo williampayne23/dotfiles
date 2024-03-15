@@ -1,4 +1,12 @@
 add_newline = false
+format = "$all$fill$time$line_break$character"
+
+[fill]
+symbol = " "
+
+[time]
+disabled = false
+format = '[$time]($style) '
 
 [aws]
 symbol = "  "
