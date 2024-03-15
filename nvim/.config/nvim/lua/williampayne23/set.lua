@@ -33,7 +33,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.wrap = true
+-- vim.opt.wrap = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -53,12 +53,15 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"
-vim.opt.textwidth = 120
+vim.opt.textwidth = 0
+vim.opt.wrap = true
+vim.opt.wrapmargin = 0
 vim.api.nvim_create_autocmd("User", {
     pattern = "BufRead,BufNewFile",
     once = false,
     callback = function()
-        vim.opt.textwidth = 120
+        vim.opt.textwidth = 0
+        vim.opt.wrapmargin = 0
     end,
 })
 
