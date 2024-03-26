@@ -20,6 +20,7 @@ return {
         "https://github.com/lewis6991/gitsigns.nvim",
         config = function()
             require('gitsigns').setup()
+            vim.keymap.set("n", "<leader>b", "<cmd>Gitsigns blame_line<CR>")
         end
     }
 }
