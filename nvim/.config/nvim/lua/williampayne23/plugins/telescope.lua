@@ -16,6 +16,18 @@ return {
                     f = "find files"
                 }
             }, {prefix = "<leader>"})
+        require('telescope').setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-Q>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist
+                        },
+                        n = {
+                            ["<C-Q>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist
+                        },
+                    },
+                }
+        }
 	  end
   },
 }
