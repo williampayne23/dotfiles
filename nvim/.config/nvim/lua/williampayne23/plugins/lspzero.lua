@@ -38,30 +38,6 @@ return {
             end
             lsp = lsp.preset("recommended")
 
-            lsp.configure('pylsp', {
-                settings = {
-                    pylsp = {
-                        plugins = {
-                            jedi_completion = {enabled = false},
-                            jedi_hover = {enabled = true},
-                            jedi_references = {enabled = false},
-                            jedi_signature_help = {enabled = false},
-                            jedi_symbols = {enabled = false},
-                            pycodestyle = {enabled = false},
-                            flake8 = { enabled = false },
-                            mypy = {enabled = false},
-                            isort = {enabled = false},
-                            yapf = {enabled = false},
-                            pylint = {enabled = false},
-                            pydocstyle = {enabled = false},
-                            mccabe = {enabled = false},
-                            preload = {enabled = false},
-                            rope_completion = {enabled = true}
-                        }
-                    }
-                }
-            })
-
             neodev.setup({
                 -- add any options here, or leave empty to use the default settings
                 override = function(root_dir, library)
@@ -112,19 +88,19 @@ return {
                 opts["desc"] = "Help"
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
                 opts["desc"] = "Format"
-                vim.keymap.set({'n'}, '<leader>F', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                vim.keymap.set({ 'n' }, '<leader>F', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
                 opts["desc"] = "find references"
-                vim.keymap.set({'n', 'x'}, '<leader>pr', '<cmd>Telescope lsp_references<cr>', opts)
+                vim.keymap.set({ 'n', 'x' }, '<leader>pr', '<cmd>Telescope lsp_references<cr>', opts)
                 local wk = require("which-key")
                 wk.register({
                     v = {
                         name = "lsp",
                         r = "Rename"
                     }
-                }, {prefix = "<leader>"})
+                }, { prefix = "<leader>" })
             end)
 
-            -- lsp.setup()
+            lsp.setup()
 
             local null_ls = require('null-ls')
             local null_opts = lsp.build_options('null-ls', {})
@@ -144,7 +120,7 @@ return {
             require('mason').setup({ ui = { border = "rounded" } })
             -- Mason LSP
             require('mason-lspconfig').setup({
-                ensure_installed = { 'tsserver', 'rust_analyzer', 'pylsp', 'lua_ls' },
+                ensure_installed = { 'tsserver', 'rust_analyzer', 'lua_ls' },
                 automatic_installation = true,
                 handlers = {
                     lsp.default_setup,
@@ -152,17 +128,9 @@ return {
                         local lua_opts = lsp.nvim_lua_ls()
                         require('lspconfig').lua_ls.setup(lua_opts)
                     end,
-                    jedi_language_server = function()
-                        local jedi_opts = {
-                            settings = {
-                                autostart = false,
-                            }
-                        }
-                        require('lspconfig').jedi_language_server.setup(jedi_opts)
-                    end,
                 },
             })
-            lsp.setup()
+
 
             -- LSP Info nice borders
             require('lspconfig.ui.windows').default_options.border = 'single'
