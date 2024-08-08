@@ -1,20 +1,19 @@
 return {
     {
         "NeogitOrg/neogit",
+        commit = "bc0c609",
         dependencies = {
             "nvim-lua/plenary.nvim",         -- required
+            "sindrets/diffview.nvim",        -- optional - Diff integration
+            -- Only one of these is needed, not both.
             "nvim-telescope/telescope.nvim", -- optional
-            "sindrets/diffview.nvim",        -- optional
-            "ibhagwan/fzf-lua",              -- optional
         },
         config = function()
-            local neogit = require("neogit")
-            neogit.setup {
-                kind = "replace",
-            }
+            require('neogit').setup({
+                kind = "replace"
+            })
             vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>")
         end
-
     },
     {
         "https://github.com/lewis6991/gitsigns.nvim",

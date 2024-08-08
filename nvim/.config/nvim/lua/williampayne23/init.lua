@@ -1,5 +1,5 @@
 -- if os.getenv("ZELLIJ") == "0" then
---     vim.g.tpipeline_refreshcmd = "kitty @ set-tab-title Master test"
+-- CursorLineNrCursorLineNr CursorLineNr   vim.g.tpipeline_refreshcmd = "kitty @ set-tab-title Master test"
 -- end
 
 require("williampayne23.lazy")
