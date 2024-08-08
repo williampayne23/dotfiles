@@ -39,7 +39,7 @@ local function get_visual_selection()
   return table.concat(lines, "\n")
 end
 
-function split(str, split)
+local function split(str, split)
     local t = {}
     local section = ""
     for char in str:gmatch(".") do 

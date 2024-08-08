@@ -10,12 +10,15 @@ require("catppuccin").setup({
             TreesitterContextBottom = { underline = colors.flamingo },
             TreesitterContextSeperator = { bg = colors.flamingo },
             NormalFloat = { bg = colors.none },
+            NvimTreeNormal = { bg = colors.none },
+            FloatBorder = { bg = colors.none, fg = colors.blue },
             StatusLine = { bg = colors.none },
             -- lualine_b_normal = { bg = colors.none },
             CursorColumn = { bg = colors.none },
-            FloatBorder = { fg = colors.blue },
+            WhichKeyBorder = { fg = colors.blue },
             BorderBG = { fg = colors.blue },
             CursorLineNr = { fg = colors.blue },
+            NvimTreeStatusLineNC = { fg = colors.blue },
         }
     end,
 	integrations = {
