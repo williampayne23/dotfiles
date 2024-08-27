@@ -1,0 +1,8 @@
+source $HOME/.cargo/env
+
+source ~/.config/zsh/zshinit.zsh
+
+export PATH=/home/ubuntu/bin:$PATH
+
+# Added by aisitools
+export INSPECT_TELEMETRY=aisitools.telemetry.send_telemetry
