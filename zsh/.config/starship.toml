@@ -1,5 +1,5 @@
 add_newline = false
-format = "$all$fill$time$line_break$character"
+format = "${custom.hostname}$all$fill$time$line_break$character"
 
 [fill]
 symbol = " "
@@ -72,10 +72,16 @@ symbol = " "
 symbol = " "
 
 [hostname]
-ssh_symbol = " "
-ssh_only = false
-detect_env_vars = ['!TMUX', 'SSH_CONNECTION']
-disabled = false
+# ssh_symbol = " "
+# ssh_only = false
+# detect_env_vars = ['SSH_CONNECTION']
+disabled = true
+
+[custom.hostname]
+symbol = " "
+command = 'hostname | sed "s/^ec2-//; s/^will-//"' # shows output of command
+format = '[$symbol$output]($style) '
+when = true
 
 [java]
 symbol = " "
