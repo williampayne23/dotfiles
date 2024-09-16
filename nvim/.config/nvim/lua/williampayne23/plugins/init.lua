@@ -19,19 +19,24 @@ return {
         })
     end
 },
-{
-    'christoomey/vim-tmux-navigator',
-    -- For whatever reason keybinds don't work if we load normally so we load on "VeryLazy" to force the plugin to load after vim
-    -- is properly started and that fixes it
-    event = "VeryLazy",
-    config = function()
-        vim.keymap.set("n", "<M-h", "<cmd>TmuxNavigateLeft<CR>")
-        vim.keymap.set("n", "˙", "<cmd>TmuxNavigateLeft<CR>")
-        vim.keymap.set("n", "∆", "<cmd>TmuxNavigateDown<CR>")
-        vim.keymap.set("n", "˚", "<cmd>TmuxNavigateUp<CR>")
-        vim.keymap.set("n", "¬", "<cmd>TmuxNavigateRight<CR>")
-    end
-},
+    {
+        "christoomey/vim-tmux-navigator",
+        lazy = false,
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+        keys = {
+            { "˙", "<cmd>TmuxNavigateLeft<cr>" },
+            { "∆", "<cmd>TmuxNavigateDown<cr>" },
+            { "˚", "<cmd>TmuxNavigateUp<cr>" },
+            { "¬", "<cmd>TmuxNavigateRight<cr>" },
+            { "«", "<cmd>TmuxNavigatePrevious<cr>" },
+        },
+    },
 'ThePrimeagen/vim-be-good',
 {
     "folke/persistence.nvim",
