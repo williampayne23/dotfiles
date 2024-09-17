@@ -1,11 +1,19 @@
 -- For some reason setting mouse normally doesn't work
 -- I assume it's a plugin that's overriding it
 -- so this is a workaround (it's real I checked)
-vim.api.nvim_create_autocmd("User", {
-    pattern = "LazyVimStarted",
+vim.api.nvim_create_autocmd("user", {
+    pattern = "lazyvimstarted",
     once = true,
     callback = function()
         vim.cmd "set mouse=a"
+    end,
+})
+
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = "*.tmux.conf",
+    callback = function()
+        vim.cmd "set syntax=tmux"
     end,
 })
 
