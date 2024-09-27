@@ -4,8 +4,4 @@
     "install": "curl https://sh.rustup.rs -sSf | sh",
     "after": "source $HOME/.cargo/env"
   },
-  "conda": {
-    "load": "lazy",
-    "install": "source ~/.config/installer/scripts/miniconda.sh",
-  }
 }
