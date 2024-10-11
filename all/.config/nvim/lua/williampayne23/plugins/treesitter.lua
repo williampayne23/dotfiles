@@ -1,4 +1,5 @@
 return {
+    'leissa/vim-acme', -- Syntax hilighting for 6402
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {

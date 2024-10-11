@@ -45,8 +45,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc="
 vim.keymap.set("n", "<leader>o", 'o<Esc>0"_Dk', {desc = "newline below"})
 vim.keymap.set("n", "<leader>O", 'O<Esc>0"_Dj', {desc = "newline above"})
 
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>", {desc = "make it rain"});
-
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end, {desc="source file"})
