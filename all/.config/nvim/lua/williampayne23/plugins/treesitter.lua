@@ -151,7 +151,7 @@ return {
                             ["]l"] = { query = "@loop.*", desc = "Next loop start" },
                             ["]s"] = { query = "@scope", desc = "Next scope" },
                             ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-                            ["]i"] = {"@conditional.outer", desc = "Next conditional start"},
+                            ["]i"] = { "@conditional.outer", desc = "Next conditional start" },
                         },
                         goto_previous_start = {
                             ["[F"] = { query = "@function.outer", desc = "Previous function start" },
@@ -160,7 +160,7 @@ return {
                             ["[l"] = { query = "@loop.*", desc = "Previous loop start" },
                             ["[s"] = { query = "@scope", desc = "Previous scope" },
                             ["[z"] = { query = "@fold", query_group = "folds", desc = "Previous fold" },
-                            ["[i"] = {"@conditional.outer", desc = "Previous conditional start"},
+                            ["[i"] = { "@conditional.outer", desc = "Previous conditional start" },
                         },
                     },
                 },
@@ -182,15 +182,6 @@ return {
             vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
             vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 
-            local wk = require("which-key")
-            wk.register({
-                n = {
-                    name = "swap next",
-                },
-                N = {
-                    name = "swap previous",
-                }
-            }, {prefix = "<leader>"})
         end
     },
     {
@@ -229,10 +220,17 @@ return {
                 -- },
             })
 
-            function gWrapper(opfunc) 
+            local wk = require("which-key")
+            wk.add({
+                { "<leader>N", group = "swap previous" },
+                { "<leader>n", group = "swap next" },
+            })
+
+            function gWrapper(opfunc)
                 vim.go.operatorfunc = opfunc
                 return "g@l"
             end
+
             _G.swap_with_left = function()
                 vim.go.operatorfunc = "v:lua.require'sibling-swap'.swap_with_left"
                 return "g@l"
