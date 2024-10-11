@@ -12,9 +12,6 @@ return {
     -- Puts the vim pipeline in tmux
     {
         "vimpostor/vim-tpipeline",
-        config = function()
-            vim.g.tpipeline_autoembed = 0
-        end,
     },
     {
         "nvim-lualine/lualine.nvim",
@@ -124,6 +121,7 @@ return {
                 tabline = {},
                 extensions = {},
             }
+            pcall(function() vim.cmd("Lazy reload vim-tpipeline"); end)
         end
     },
 }
