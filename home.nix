@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "ubuntu";
@@ -20,8 +22,9 @@
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
+    pkgs.cargo
     pkgs.neovim
-    pkgs.gh 
+    pkgs.gh
     pkgs.neovim
     pkgs.tmux
     pkgs.stow
@@ -33,6 +36,7 @@
     pkgs.zoxide
     pkgs.starship
     pkgs.atuin
+    pkgs.alejandra
     # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -55,28 +59,28 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
     ".config/nvim" = {
-	source = config/nvim;
-	recursive = true;
+      source = config/nvim;
+      recursive = true;
     };
 
     ".config/bat" = {
-	source = config/bat;
-	recursive = true;
+      source = config/bat;
+      recursive = true;
     };
 
     ".config/k9s" = {
-	source = config/k9s;
-	recursive = true;
+      source = config/k9s;
+      recursive = true;
     };
 
     ".config/tmux" = {
-	source = config/tmux;
-	recursive = true;
+      source = config/tmux;
+      recursive = true;
     };
 
     ".config/zsh" = {
-	source = config/zsh;
-	recursive = true;
+      source = config/zsh;
+      recursive = true;
     };
 
     ".config/starship.toml".source = config/starship.toml;
@@ -105,7 +109,10 @@
   #  /etc/profiles/per-user/ubuntu/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
+  };
+
+  programs.zsh = {
   };
 
   # Let Home Manager install and manage itself.
