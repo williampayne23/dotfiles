@@ -55,9 +55,32 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
     ".config/nvim" = {
-	source = ../config/nvim;
+	source = config/nvim;
 	recursive = true;
     };
+
+    ".config/bat" = {
+	source = config/bat;
+	recursive = true;
+    };
+
+    ".config/k9s" = {
+	source = config/k9s;
+	recursive = true;
+    };
+
+    ".config/tmux" = {
+	source = config/tmux;
+	recursive = true;
+    };
+
+    ".config/zsh" = {
+	source = config/zsh;
+	recursive = true;
+    };
+
+    ".config/starship.toml".source = config/starship.toml;
+
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
