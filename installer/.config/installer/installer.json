@@ -1,7 +1,0 @@
-{
-  "cargo": {
-    "load": "lazy",
-    "install": "curl https://sh.rustup.rs -sSf | sh",
-    "after": "source $HOME/.cargo/env"
-  },
-}
