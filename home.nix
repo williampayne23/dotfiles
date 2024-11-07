@@ -66,6 +66,7 @@
     ".config/bat" = {
       source = config/bat;
       recursive = true;
+      onChange = "bat cache --build";
     };
 
     ".config/k9s" = {
@@ -112,9 +113,18 @@
     EDITOR = "nvim";
   };
 
-  programs.zsh = {
-  };
+  nix.package = pkgs.nix;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  programes.zsh.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
+
+
+
+
+
