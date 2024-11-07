@@ -23,6 +23,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.cargo
+    pkgs.poetry
     pkgs.neovim
     pkgs.gh
     pkgs.neovim
@@ -50,6 +51,8 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  # Set environment variables for your user session.
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -118,7 +121,13 @@
     experimental-features = nix-command flakes
   '';
 
-  programes.zsh.enable = true;
+  programs.zsh.enable = true;
+  programs.zsh.initExtra = ''
+    source $HOME/.config/zsh/zshinit.zsh
+  '';
+  programs.zsh.sessionVariables = {
+    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc pkgs.zlib];
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
