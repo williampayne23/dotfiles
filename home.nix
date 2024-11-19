@@ -26,7 +26,6 @@
     pkgs.poetry
     pkgs.neovim
     pkgs.gh
-    pkgs.neovim
     pkgs.tmux
     pkgs.stow
     pkgs.zsh
@@ -62,7 +61,7 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
     ".config/nvim" = {
-      source = config/nvim;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
       recursive = true;
     };
 
@@ -131,6 +130,12 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  # };
+
 }
 
 

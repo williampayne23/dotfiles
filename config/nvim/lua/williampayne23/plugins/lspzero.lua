@@ -39,6 +39,7 @@ return {
             'rcarriga/nvim-dap-ui',
             'mfussenegger/nvim-dap',
             'folke/neodev.nvim',
+            'nvimtools/none-ls.nvim'
         },
         branch = 'v3.x',
         config = function()
@@ -66,6 +67,18 @@ return {
                 end,
                 library = { plugins = { 'nvim-dap-ui' }, types = true },
             })
+
+            -- local none_ls = require('null-ls')
+            -- none_ls.setup({
+            --     sources = {
+            --         none_ls.builtins.diagnostics.mypy.with({
+            --             extra_args = function()
+            --                 local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX") or "/usr"
+            --                 return { "--python-executable", virtual .. "/bin/python3" }
+            --             end,
+            --         }),
+            --     }
+            -- })
 
 
             lsp.set_preferences({
@@ -120,11 +133,13 @@ return {
 
             lsp.setup()
 
+            vim.diagnostic.config({virtual_text = { source = "always" }})
+
             -- Mason yummy borders
             require('mason').setup({ ui = { border = "rounded" } })
             -- Mason LSP
             require('mason-lspconfig').setup({
-                ensure_installed = { 'tsserver', 'rust_analyzer', 'lua_ls', 'jedi_language_server', 'ruff_lsp', 'nil_ls' },
+                ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'mypy', 'nil_ls' },
                 automatic_installation = true,
                 handlers = {
                     lsp.default_setup,
@@ -143,7 +158,19 @@ return {
                                 },
                             },
                         })
-                    end
+                    end,
+                    basedpyright = function()
+                        require('lspconfig').basedpyright.setup({
+                            capabilities = { },
+                            settings = {
+                                basedpyright = {
+                                    analysis = {
+                                        typeCheckingMode = "basic",
+                                    },
+                                },
+                            },
+                        })
+                    end,
                 },
             })
 
