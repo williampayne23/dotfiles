@@ -54,13 +54,13 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 100
+vim.opt.scrolloff = 88
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "88"
 vim.opt.textwidth = 0
 vim.opt.wrap = true
 vim.opt.wrapmargin = 0
