@@ -1,14 +1,21 @@
 # Wills Dotfiles
 
-Use stow (`brew install stow` on mac) to install these. You need to be in the dotfiles directory which needs to be in the home directory (unless you configure stow)
+Use nix home-manager to install from the flake
 
-You must include source ~/.config/zsh/zshinit.zsh
+Setup nix if it isn't already
+```
+sh <(curl -L https://nixos.org/nix/install) --daemon --yes
 
-For bat you need to run `bat cache --build`
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+```
+
+Then run the command
+```
+nix run home-manager --extra-experimental-features "nix-command flakes" -- switch --flake .#ubuntu --extra-experimental-features "nix-command flakes"
+```
 
 ## TODO:
-- [ ] Pylsps produce a bunch of not found messages every time you hover (presumably because all but one LSP can't handle hover?
-- [ ] Good installer script which solves the bat cache problem
-- [ ] Refactor into minimal and GUI installs
 - [ ] Zoxide + tmux path switcher
 - [ ] Harpoon for tmux file paths
