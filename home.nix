@@ -63,7 +63,7 @@
     ".config/nvim" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
       recursive = true;
-      onChange = "${pkgs.neovim}/bin/nvim --headless \"+Lazy! restore\" +qa";
+      onChange = "${pkgs.neovim}/bin/nvim --headless \"+Lazy! install\" \"+TSUpdateSync\" +qa";
     };
 
     ".config/bat" = {
