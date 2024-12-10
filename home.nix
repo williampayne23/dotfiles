@@ -63,13 +63,13 @@
     ".config/nvim" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
       recursive = true;
-      onChange = "nvim --headless \"+Lazy! restore\" +qa";
+      onChange = "${pkgs.neovim}/bin/nvim --headless \"+Lazy! restore\" +qa";
     };
 
     ".config/bat" = {
       source = config/bat;
       recursive = true;
-      onChange = "bat cache --build";
+      onChange = "${pkgs.bat}/bin/bat cache --build";
     };
 
     ".config/k9s" = {
