@@ -39,7 +39,7 @@
         name = "init";
         runtimeInputs = with pkgs; [git curl bash];
         text = ''
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          # bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           nix run nix-darwin -- switch --flake ~/dotfiles
           nix run home-manager/master -- switch --flake ~/dotfiles
         '';
@@ -61,7 +61,7 @@
       program = "${init}/bin/init";
     };
     darwinConfigurations = {
-      wills-mbp = mkDarwin {
+      "Wills-MacBook-Pro" = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
       };
     };
@@ -71,7 +71,7 @@
         extraModules = [./nix/home/work.nix];
         arch = "x86_64-linux";
       };
-      "wills-mbp" = mkHm {
+      "willpayne" = mkHm {
         extraModules = [./nix/home/personal.nix];
         arch = "aarch64-darwin";
       };

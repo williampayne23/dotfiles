@@ -5,8 +5,8 @@
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "ubuntu";
-  home.homeDirectory = "/home/ubuntu";
+  home.username = "willpayne";
+  home.homeDirectory = "/Users/willpayne";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -67,33 +67,28 @@
     };
 
     ".config/bat" = {
-      source = config/bat;
+      source = ../../config/bat;
       recursive = true;
       onChange = "${pkgs.bat}/bin/bat cache --build";
     };
 
     ".config/k9s" = {
-      source = config/k9s;
+      source = ../../config/k9s;
       recursive = true;
     };
 
     ".config/tmux" = {
-      source = config/tmux;
+      source = ../../config/tmux;
       recursive = true;
     };
 
     ".config/zsh" = {
-      source = config/zsh;
+      source = ../../config/zsh;
       recursive = true;
     };
 
-    ".config/starship.toml".source = config/starship.toml;
+    ".config/starship.toml".source = ../../config/starship.toml;
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
   };
 
   # Home Manager can also manage your environment variables through
