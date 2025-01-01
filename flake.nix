@@ -6,9 +6,19 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    ghostty-hm.url = "github:clo4/ghostty-hm-module";
+    # ghostty = {
+    #   url = "git+ssh://git@github.com/ghostty-org/ghostty";
+    #   inputs.nixpkgs-stable.follows = "nixpkgs";
+    #   inputs.nixpkgs-unstable.follows = "nixpkgs";
+    # };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+   color-schemes = {
+      url = "github:mbadolato/iTerm2-Color-Schemes";
+      flake = false;
     };
   };
 
@@ -17,6 +27,9 @@
     nix-darwin,
     nixpkgs,
     home-manager,
+    ghostty-hm,
+    color-schemes,
+    # ghostty,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
@@ -30,7 +43,12 @@
     }:
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch};
-        modules = extraModules;
+        modules = [
+          # Include so we can configure ghostty
+          ghostty-hm.homeModules.default
+        ]
+        ++ extraModules;
+        extraSpecialArgs = {color-schemes = color-schemes;};
       };
   in {
     apps."aarch64-darwin".default = let
@@ -42,6 +60,7 @@
           # bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           nix run nix-darwin -- switch --flake ~/dotfiles
           nix run home-manager/master -- switch --flake ~/dotfiles
+          /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
         '';
       };
     in {
@@ -72,7 +91,9 @@
         arch = "x86_64-linux";
       };
       "willpayne" = mkHm {
-        extraModules = [./nix/home/personal.nix];
+        extraModules = [
+            ./nix/home/personal.nix
+        ];
         arch = "aarch64-darwin";
       };
     };

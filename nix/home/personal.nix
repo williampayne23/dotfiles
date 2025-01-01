@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  color-schemes,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -17,11 +18,14 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfree = true;
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
+    pkgs.raycast
     pkgs.cargo
     pkgs.poetry
     pkgs.neovim
@@ -50,6 +54,25 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  programs.ghostty = {
+    enable = true;
+    settings = {
+        font-size = 18;
+        font-family = "JetBrainsMono Nerd Font";
+        font-feature = ["-liga" "-dlig" "-calt"];
+        quick-terminal-position = "center";
+        macos-non-native-fullscreen = true;
+        fullscreen = true;
+        # config-file = [
+        # (color-schemes + "/ghostty/catppuccin-frappe")
+        #   ];
+    };
+    extraConfig = builtins.readFile (color-schemes + "/ghostty/catppuccin-frappe");
+    keybindings = {
+        "super+/" = "toggle_quick_terminal";
+    };
+  };
 
   # Set environment variables for your user session.
 

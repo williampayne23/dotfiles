@@ -24,11 +24,15 @@
 
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.trackpad.TrackpadRightClick = true;
+  system.defaults.NSGlobalDomain."com.apple.trackpad.trackpadCornerClickBehavior" = 1;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.show-recents = false;
-  system.defaults.dock.tilesize = 50;
+  system.defaults.CustomUserPreferences = {
+    "com.apple.symbolichotkeys".AppleSymbolicHotKeys."64".enabled = 0;
+      "com.raycast.macos".raycastGlobalHotkey = "Command-49";
+    };
 
   programs.zsh.enable = true;
   homebrew.enable = true;

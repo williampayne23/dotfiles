@@ -1,5 +1,36 @@
 {
   "nodes": {
+    "color-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1735685443,
+        "narHash": "sha256-v4/Q4HDygEfZEMirv2NG+013tIR53uA80qzi88fK1/M=",
+        "owner": "mbadolato",
+        "repo": "iTerm2-Color-Schemes",
+        "rev": "9e0830e15a498740b95d63939c39bc8bc5f81dc0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mbadolato",
+        "repo": "iTerm2-Color-Schemes",
+        "type": "github"
+      }
+    },
+    "ghostty-hm": {
+      "locked": {
+        "lastModified": 1702368251,
+        "narHash": "sha256-hafrDmzGplzm+vdIo+LkOjRfA4qRcy5JmpGGksnht5c=",
+        "owner": "clo4",
+        "repo": "ghostty-hm-module",
+        "rev": "887e13a6e7acf5ffaab0119d96e476d84db90904",
+        "type": "github"
+      },
+      "original": {
+        "owner": "clo4",
+        "repo": "ghostty-hm-module",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -58,6 +89,8 @@
     },
     "root": {
       "inputs": {
+        "color-schemes": "color-schemes",
+        "ghostty-hm": "ghostty-hm",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs"
