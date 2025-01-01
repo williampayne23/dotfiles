@@ -1,9 +1,11 @@
 {
-  description = "Home Manager configuration of ubuntu";
+  description = "home-manager and nix-darwin configuration";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,28 +13,68 @@
   };
 
   outputs = {
+    self,
+    nix-darwin,
     nixpkgs,
     home-manager,
-    ...
-  }: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+  } @ inputs: let
+    mkDarwin = {extraDarwinModules ? {}}:
+      nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {inherit self;};
+        modules = [./nix/darwin.nix] ++ extraDarwinModules;
+      };
+    mkHm = {
+      extraModules ? [],
+      arch,
+    }:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${arch};
+        modules = extraModules;
+      };
   in {
-    homeConfigurations."ubuntu" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
-      modules = [./home.nix];
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
+    apps."aarch64-darwin".default = let
+      pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+      init = pkgs.writeShellApplication {
+        name = "init";
+        runtimeInputs = with pkgs; [git curl bash];
+        text = ''
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          nix run nix-darwin -- switch --flake ~/dotfiles
+          nix run home-manager/master -- switch --flake ~/dotfiles
+        '';
+      };
+    in {
+      type = "app";
+      program = "${init}/bin/init";
+    };
+    apps."x86_64-linux".default = let
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      init = pkgs.writeShellApplication {
+        name = "init";
+        text = ''
+          nix run home-manager/master -- switch --flake ~/.dotfiles
+        '';
+      };
+    in {
+      type = "app";
+      program = "${init}/bin/init";
+    };
+    darwinConfigurations = {
+      wills-mbp = mkDarwin {
+        extraDarwinModules = [./nix/darwin/personal.nix];
+      };
     };
 
-    # Define a dev shell for x86_64-linux.
-    devShell.x86_64-linux = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        # Add your development tools here.
-        git
-      ];
+    homeConfigurations = {
+      "ubuntu" = mkHm {
+        extraModules = [./nix/home/work.nix];
+        arch = "x86_64-linux";
+      };
+      "wills-mbp" = mkHm {
+        extraModules = [./nix/home/personal.nix];
+        arch = "aarch64-darwin";
+      };
     };
   };
 }
