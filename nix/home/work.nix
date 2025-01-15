@@ -115,6 +115,16 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  home.sessionPath = [
+    "/snap/bin"
+  ];
+
+  programs.git = {
+    enable = true;
+    extraConfig = {
+        push.autoSetupRemote = true;
+    };
+  };
 
   nix.package = pkgs.nix;
   nix.extraOptions = ''
