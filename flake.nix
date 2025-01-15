@@ -39,7 +39,6 @@
         pkgs = nixpkgs.legacyPackages.${arch};
         modules = [
           # Include so we can configure ghostty
-          ghostty-hm.homeModules.default
         ]
         ++ extraModules;
         extraSpecialArgs = {color-schemes = color-schemes;};
@@ -86,6 +85,7 @@
       };
       "willpayne" = mkHm {
         extraModules = [
+            ghostty-hm.homeModules.default
             ./nix/home/personal.nix
         ];
         arch = "aarch64-darwin";

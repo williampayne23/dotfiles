@@ -67,27 +67,27 @@
     };
 
     ".config/bat" = {
-      source = config/bat;
+      source = ../../config/bat;
       recursive = true;
       onChange = "${pkgs.bat}/bin/bat cache --build";
     };
 
     ".config/k9s" = {
-      source = config/k9s;
+      source = ../../config/k9s;
       recursive = true;
     };
 
     ".config/tmux" = {
-      source = config/tmux;
+      source = ../../config/tmux;
       recursive = true;
     };
 
     ".config/zsh" = {
-      source = config/zsh;
+      source = ../../config/zsh;
       recursive = true;
     };
 
-    ".config/starship.toml".source = config/starship.toml;
+    ".config/starship.toml".source = ../../config/starship.toml;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -126,7 +126,7 @@
     source $HOME/.config/zsh/zshinit.zsh
   '';
   programs.zsh.sessionVariables = {
-    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc pkgs.zlib];
+    # LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc pkgs.zlib];
   };
 
   # Let Home Manager install and manage itself.
