@@ -18,6 +18,7 @@
 in {
   home.packages = [
     customPoetry
+    pkgs.thefuck
     pkgs.cargo
     pkgs.neovim
     pkgs.gh
@@ -85,6 +86,7 @@ in {
   programs.zsh.enable = true;
   programs.zsh.initExtra = ''
     source $HOME/.config/zsh/zshinit.zsh
+    eval $(thefuck --alias)
   '';
 
  
