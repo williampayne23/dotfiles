@@ -8,8 +8,8 @@ export WHITE=0xffffffff
 # export ACCENT_COLOR=0xff2cf9ed
 
 # -- Gray Scheme --
-export BAR_COLOR=0x00101314
-export ITEM_BG_COLOR=0xff353c3f
+export BAR_COLOR=0x55101314
+export ITEM_BG_COLOR=$BAR_COLOR
 export ACCENT_COLOR=0xffffffff
 
 # -- Purple Scheme --

@@ -26,8 +26,8 @@
     # Is for Mac only GUI packages
     pkgs.raycast
     pkgs.aerospace
-    pkgs.jankyborders
     pkgs.sketchybar
+    pkgs.sketchybar-app-font
     pkgs.ghostty
     pkgs.prismlauncher
     pkgs.modrinth-app

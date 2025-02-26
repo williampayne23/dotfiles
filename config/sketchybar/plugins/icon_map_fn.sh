@@ -425,6 +425,9 @@ function icon_map() {
   "WhatsApp")
     icon_result=":whats_app:"
     ;;
+  "Ghostty")
+    icon_result=":terminal:"
+    ;;
   *)
     icon_result=":default:"
     ;;

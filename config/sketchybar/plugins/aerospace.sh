@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-sketchybar \
-    --set aerospace_workspace \
-        label="$FOCUSED_WORKSPACE" \
+if [ "$SENDER" = "aerospace_workspace_change" ]; then
+    sketchybar \
+        --set aerospace_workspace \
+            label="$FOCUSED_WORKSPACE"
+fi

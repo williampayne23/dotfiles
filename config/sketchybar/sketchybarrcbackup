@@ -1,9 +1,0 @@
-#!/bin/bash
-
-sketchybar --bar color=0xff222222 y_offset=2 corner_radius=400 margin=5 shadow=true
-
-
-ITEMDIR="$CONFIG_DIR/items"
-
-
-source "$ITEMDIR/aerospace.sh"
