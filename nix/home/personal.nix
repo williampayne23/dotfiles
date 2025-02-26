@@ -30,6 +30,7 @@
     pkgs.sketchybar
     pkgs.ghostty
     pkgs.prismlauncher
+    pkgs.modrinth-app
 
     # Should pull out into common config    
     pkgs.cargo
