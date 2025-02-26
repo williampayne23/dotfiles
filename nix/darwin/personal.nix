@@ -20,6 +20,7 @@ in
     {
     homebrew.casks =
         [
+            "steam"
             "cleanmymac"
             "font-sf-pro"
             "sf-symbols"
