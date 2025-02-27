@@ -6,7 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    ghostty-hm.url = "github:clo4/ghostty-hm-module";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +21,6 @@
     nix-darwin,
     nixpkgs,
     home-manager,
-    ghostty-hm,
     color-schemes,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
@@ -51,8 +49,8 @@
         runtimeInputs = with pkgs; [git curl bash];
         text = ''
           # bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          nix run nix-darwin -- switch --flake ~/dotfiles
-          nix run home-manager/master -- switch --flake ~/dotfiles
+          nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles
+          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
           /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
         '';
       };
@@ -85,7 +83,6 @@
       };
       "willpayne" = mkHm {
         extraModules = [
-            ghostty-hm.homeModules.default
             ./nix/home/personal.nix
         ];
         arch = "aarch64-darwin";

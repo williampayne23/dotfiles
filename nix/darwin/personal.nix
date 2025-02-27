@@ -20,6 +20,7 @@ in
     {
     homebrew.casks =
         [
+            "steam"
             "cleanmymac"
             "font-sf-pro"
             "sf-symbols"
@@ -30,16 +31,6 @@ in
     launchd = {
         user = {
             agents = {
-                borders = make_named_plist {
-                    name = "borders";
-                    text = "borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0";
-                    runtimeInputs = [pkgs.jankyborders];
-                    props = {
-                        KeepAlive = true;
-                        RunAtLoad = true;
-                        StandardOutPath = "/tmp/borders_will.out.log";
-                    };
-                };
                 sketchybar = make_named_plist {
                     name = "sketchybar";
                     text = "sketchybar";

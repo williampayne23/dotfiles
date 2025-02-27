@@ -27,6 +27,10 @@
   system.defaults.NSGlobalDomain."com.apple.trackpad.trackpadCornerClickBehavior" = 1;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
   system.defaults.dock.autohide = true;
+    # Empty dock
+  system.defaults.dock.persistent-apps = [
+
+    ];
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.show-recents = false;
   system.defaults.CustomUserPreferences = {
@@ -40,18 +44,6 @@
   homebrew.taps = [
     "homebrew/services"
   ];
-
-  homebrew.masApps = {
-    # Magnet = 441258766;
-    # Dato = 1470584107;
-    # Reeder = 1529448980;
-    # Blackout = 1319884285;
-    # Shareful = 1522267256;
-    # Actions = 1586435171;
-    # MenuBarStats = 714196447;
-    # Things = 904280696;
-    # Keynote = 409183694;
-  };
 
   nixpkgs.config.allowUnfree = true;
   # The platform the configuration will be used on.
