@@ -431,8 +431,6 @@ function icon_map() {
   esac
 }
 
-icon_map "$1" "$2"
-code=$?
+icon_map "$1"
 
 echo "$icon_result"
-exit $code

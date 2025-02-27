@@ -139,7 +139,7 @@ return {
             require('mason').setup({ ui = { border = "rounded" } })
             -- Mason LSP
             require('mason-lspconfig').setup({
-                ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'mypy', 'nil_ls' },
+                ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'basedpyright', 'nil_ls' },
                 automatic_installation = true,
                 handlers = {
                     lsp.default_setup,

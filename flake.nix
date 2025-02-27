@@ -6,7 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    ghostty-hm.url = "github:clo4/ghostty-hm-module";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +21,6 @@
     nix-darwin,
     nixpkgs,
     home-manager,
-    ghostty-hm,
     color-schemes,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
@@ -39,7 +37,6 @@
         pkgs = nixpkgs.legacyPackages.${arch};
         modules = [
           # Include so we can configure ghostty
-          ghostty-hm.homeModules.default
         ]
         ++ extraModules;
         extraSpecialArgs = {color-schemes = color-schemes;};
@@ -66,7 +63,7 @@
       init = pkgs.writeShellApplication {
         name = "init";
         text = ''
-          nix run home-manager/master -- switch --flake ~/.dotfiles
+          nix run home-manager/master -- switch --flake ~/dotfiles
         '';
       };
     in {

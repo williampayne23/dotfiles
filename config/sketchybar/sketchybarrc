@@ -41,7 +41,6 @@ sketchybar --bar "${bar[@]}" --default "${defaults[@]}" --hotload true
 
 # -- Left Side Items --
 source $ITEM_DIR/aerospace.sh
-# source $ITEM_DIR/front_app.sh
 
 # -- Right Side Of Notch Items --
 source $ITEM_DIR/media.sh
@@ -52,7 +51,10 @@ source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/cpu.sh
 
+
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
 # force all scripts to run the first time, it should never be run in an item script.
+sketchybar --hotload true
+
 sketchybar --update
