@@ -1,6 +1,10 @@
 
 
-export WHITE=0xffffffff
+export WHITE=0xFFFFFFFFF
+
+with_alpha(){
+    echo $2 | sed s/0xFF/0x$1/
+}
 
 # -- Teal Scheme --
 # export BAR_COLOR=0xff001f30 
@@ -8,9 +12,11 @@ export WHITE=0xffffffff
 # export ACCENT_COLOR=0xff2cf9ed
 
 # -- Gray Scheme --
-export BAR_COLOR=0x55101314
-export ITEM_BG_COLOR=$BAR_COLOR
-export ACCENT_COLOR=0xffffffff
+export BACKGROUND=0xFF101314
+export BAR_COLOR=$(with_alpha 55 $BACKGROUND)
+export ITEM_BG=$(with_alpha 55 $BACKGROUND)
+export ITEM_FG=0x99ffffff
+export ITEM_ACCENT=0xffffffff
 
 # -- Purple Scheme --
 # export BAR_COLOR=0xff140c42

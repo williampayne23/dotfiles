@@ -63,6 +63,9 @@ run = 'move-node-to-workspace B'
 if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace T'
 
+[[on-window-detected]]
+    check-further-callbacks = true
+    run = 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]

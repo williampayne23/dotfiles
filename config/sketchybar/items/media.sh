@@ -5,5 +5,6 @@ sketchybar --add item media center \
                        label.max_chars=120 \
                        scroll_texts=on \
                        icon=􀑪             \
+                       drawing=off\
                        script="$PLUGIN_DIR/media.sh" \
            --subscribe media media_change
