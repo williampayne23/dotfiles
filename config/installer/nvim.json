@@ -1,5 +1,0 @@
-{
-    "nvim": { },
-    "fzf": { },
-    "ripgrep": {  "command": "rg", "install": "cargo install ripgrep" },
-}
