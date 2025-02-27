@@ -4,4 +4,4 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
-nix run home-manager --extra-experimental-features "nix-command flakes" -- switch --flake .#ubuntu --extra-experimental-features "nix-command flakes"
+nix run . --extra-experimental-features "nix-command flakes"

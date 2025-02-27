@@ -27,9 +27,8 @@
     pkgs.raycast
     pkgs.aerospace
     pkgs.sketchybar
-    pkgs.ghostty
-    pkgs.prismlauncher
-    pkgs.modrinth-app
+    # pkgs.ghostty
+    # pkgs.modrinth-app
     # Fonts
     pkgs.sketchybar-app-font
     pkgs.nerd-fonts.jetbrains-mono
@@ -53,20 +52,7 @@
     pkgs.alejandra
   ];
 
-  # programs.ghostty = {
-  #   enable = true;
-  #   settings = {
-  #       font-size = 18;
-  #       font-family = "JetBrainsMono Nerd Font";
-  #       font-feature = ["-liga" "-dlig" "-calt"];
-  #       quick-terminal-position = "center";
-  #   };
-  #   extraConfig = builtins.readFile (color-schemes + "/ghostty/catppuccin-frappe");
-  #   keybindings = {
-  #       "super+/" = "toggle_quick_terminal";
-  #   };
-  # };
-  #
+
   home.file = {
     ".config/aerospace" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace";

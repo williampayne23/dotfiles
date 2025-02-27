@@ -17,7 +17,6 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
-
 # Start AeroSpace at login
 start-at-login = true
 
@@ -55,17 +54,6 @@ inherit-env-vars = true
 [exec.env-vars]
 PATH = '${HOME}/.nix-profile/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
-[[on-window-detected]]
-if.app-id = 'com.apple.Safari'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace T'
-
-[[on-window-detected]]
-    check-further-callbacks = true
-    run = 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -79,12 +67,12 @@ preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 5
-inner.vertical =   5
-outer.left =       5
-outer.bottom =     5
+inner.horizontal = 10
+inner.vertical =   10
+outer.left =       10
+outer.bottom =     10
 outer.top =        30
-outer.right =      5
+outer.right =      10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -145,8 +133,6 @@ ctrl-6 = 'workspace 6'
 ctrl-7 = 'workspace 7'
 ctrl-8 = 'workspace 8'
 ctrl-9 = 'workspace 9'
-ctrl-t = 'workspace T'
-ctrl-b = 'workspace B'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 ctrl-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
@@ -158,8 +144,6 @@ ctrl-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 ctrl-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 ctrl-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
-ctrl-shift-t = ['move-node-to-workspace T', 'workspace T']
-ctrl-shift-b = ['move-node-to-workspace B', 'workspace B']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 ctrl-tab = 'workspace-back-and-forth'
@@ -188,4 +172,3 @@ ctrl-shift-l = ['join-with right', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
-

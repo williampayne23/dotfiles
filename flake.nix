@@ -7,11 +7,6 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     ghostty-hm.url = "github:clo4/ghostty-hm-module";
-    # ghostty = {
-    #   url = "git+ssh://git@github.com/ghostty-org/ghostty";
-    #   inputs.nixpkgs-stable.follows = "nixpkgs";
-    #   inputs.nixpkgs-unstable.follows = "nixpkgs";
-    # };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +24,6 @@
     home-manager,
     ghostty-hm,
     color-schemes,
-    # ghostty,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
@@ -58,8 +52,8 @@
         runtimeInputs = with pkgs; [git curl bash];
         text = ''
           # bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          nix run nix-darwin -- switch --flake ~/dotfiles
-          nix run home-manager/master -- switch --flake ~/dotfiles
+          nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles
+          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
           /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
         '';
       };
