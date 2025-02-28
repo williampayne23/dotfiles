@@ -60,7 +60,7 @@ if.app-id = 'com.apple.Safari'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Terminal'
+if.app-id = 'org.alacritty'
 run = 'move-node-to-workspace T'
 
 # Possible values: (qwerty|dvorak)

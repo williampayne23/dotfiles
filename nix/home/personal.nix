@@ -35,6 +35,29 @@
     pkgs.sketchybar-app-font
     pkgs.nerd-fonts.jetbrains-mono
   ];
+
+
+  programs.alacritty = {
+        enable = true;
+        settings = {
+            general.import = [
+                "~/dotfiles/config/alacritty/catppuccin-frappe.toml"
+            ];
+            font.normal = {
+                family = "JetBrainsMono NF";
+                style = "Regular";
+            };
+            font.size = 16;
+            keyboard.bindings = [
+                {
+                    mods = "Control";
+                    key = "Space";
+                    chars = "\\u0000";
+                }
+            ];
+        };
+  };
+
   home.file = {
     ".config/aerospace" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace";
