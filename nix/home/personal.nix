@@ -43,11 +43,20 @@
             general.import = [
                 "~/dotfiles/config/alacritty/catppuccin-frappe.toml"
             ];
-            font.normal = {
-                family = "JetBrainsMono NF";
-                style = "Regular";
+            window = {
+                decorations = "Buttonless";
+                padding = {
+                    x = 5;
+                    y = 5;
+                };
             };
-            font.size = 16;
+            font = {
+                normal = {
+                    family = "JetBrainsMono NF";
+                    style = "Regular";
+                };
+                size = 19;
+            };
             keyboard.bindings = [
                 {
                     mods = "Control";
