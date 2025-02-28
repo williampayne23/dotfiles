@@ -425,7 +425,13 @@ function icon_map() {
   "WhatsApp")
     icon_result=":whats_app:"
     ;;
-  *)
+  "Modrinth App")
+    icon_result="󰍳"
+    ;;
+  "java")
+    icon_result="󰍳"
+    ;;
+   *)
     icon_result=":app_store:"
     ;;
   esac

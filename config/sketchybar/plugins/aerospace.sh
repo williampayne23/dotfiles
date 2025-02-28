@@ -29,8 +29,8 @@ workspace_list_window_app_names() {
 for ws in $(aerospace list-workspaces --all); do
     icons=$(workspace_list_window_app_names $ws | uniq |\
         while read -r item; do
-            $CONFIG_DIR/plugins/icon_map_fn.sh $item
-        done | xargs)
+            $CONFIG_DIR/plugins/icon_map_fn.sh "$item"
+        done | sort | uniq | xargs)
     highlight=$(workspace_is_focused $ws || echo "off" && echo "on")
     if workspace_has_windows $ws; then
         cmd+=" --set aerospace_workspace.$ws drawing=on label=\"$icons\""

@@ -13,7 +13,7 @@ for i in $(aerospace list-workspaces --all); do
            --set aerospace_workspace.$i\
                  drawing=off\
                  icon=\"$i\"\
-                 icon.font=\"JetBrainsMono NF:Bold:12.0\"\
+                 icon.font=\"sketchybar-app-font:Regular:12.0\"\
                  icon.color=\"0x99ffffff\"\
                  icon.y_offset=\"1\"\
                  label.font=\"sketchybar-app-font:Regular:12.0\"\
