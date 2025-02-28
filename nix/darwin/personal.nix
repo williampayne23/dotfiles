@@ -24,6 +24,7 @@ in
             "cleanmymac"
             "font-sf-pro"
             "sf-symbols"
+            "modrinth"
         ];
     homebrew.brews = [];
     nix.settings.trusted-users = ["will"];
