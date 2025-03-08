@@ -63,6 +63,9 @@ run = 'move-node-to-workspace B'
 if.app-id = 'org.alacritty'
 run = 'move-node-to-workspace T'
 
+[[on-window-detected]]
+if.app-id = 'com.raycast.macos'
+run = 'layout floating'
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
