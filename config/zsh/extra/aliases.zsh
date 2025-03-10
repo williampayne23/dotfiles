@@ -50,3 +50,4 @@ s () {
         git switch -c $branch_name
 }
 
+alias gfp='git push --force-with-lease'
