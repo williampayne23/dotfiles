@@ -45,10 +45,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc="
 vim.keymap.set("n", "<leader>o", 'o<Esc>0"_Dk', {desc = "newline below"})
 vim.keymap.set("n", "<leader>O", 'O<Esc>0"_Dj', {desc = "newline above"})
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end, {desc="source file"})
-
 vim.keymap.set("n", "<C-w>|", "<cmd>vsplit<CR>", {desc = "Vertical split"})
 vim.keymap.set("n", "<C-w>-", "<cmd>split<CR>", {desc = "Horizontal split"})
 

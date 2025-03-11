@@ -23,6 +23,20 @@ return {
                 -- configuration here, or leave empty to use defaults
             })
 
+            require('mini.diff').setup({
+                view = {
+                    -- Visualization style. Possible values are 'sign' and 'number'.
+                    -- Default: 'number' if line numbers are enabled, 'sign' otherwise.
+                    style = 'sign',
+
+                    -- Signs used for hunks with 'sign' view
+                    signs = { add = '┃', change = '┃', delete = '┃' },
+
+                    -- Priority of used visualization extmarks
+                    priority = -1,
+                },
+            })
+
             -- local wk = require "which-key"
             -- wk.register({
             --     ["aF"] = [[a function]],
