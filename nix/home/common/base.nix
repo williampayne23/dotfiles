@@ -16,22 +16,25 @@
             exec ${pkgs.poetry}/bin/poetry $@
             '';
 in {
+  nixpkgs.config.allowUnfree = true;
   home.packages = [
     customPoetry
-    pkgs.thefuck
+    pkgs.alejandra
+    pkgs.atuin
+    pkgs.bat
     pkgs.cargo
-    pkgs.neovim
-    pkgs.gh
-    pkgs.tmux
-    pkgs.zsh
     pkgs.cmake
     pkgs.fzf
+    pkgs.gh
+    pkgs.neovim
+    pkgs.claude-code
     pkgs.ripgrep
-    pkgs.bat
-    pkgs.zoxide
     pkgs.starship
-    pkgs.atuin
-    pkgs.alejandra
+    pkgs.thefuck
+    pkgs.tmux
+    pkgs.uv
+    pkgs.zoxide
+    pkgs.zsh
   ];
 
   home.file = {
