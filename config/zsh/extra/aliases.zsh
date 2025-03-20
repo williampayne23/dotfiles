@@ -51,3 +51,22 @@ s () {
 }
 
 alias gfp='git push --force-with-lease'
+
+# Check if I have unpushed work
+workcheck () {
+    # find all .git folders one level down
+    find . -maxdepth 2 -type d -name .git | while read gitdir; do
+        # get the directory containing the .git folder
+        dir=$(dirname $gitdir)
+        # cd into the directory
+        cd $dir
+        # print the directory name
+        echo $dir
+        # quietly fetch the latest changes
+        git fetch --quiet
+        # list the unpushed work
+        git for-each-ref --format="%(refname:short) %(upstream:track) %(upstream:remotename)" refs/heads
+        # cd back to the original directory
+        cd -
+    done
+}
