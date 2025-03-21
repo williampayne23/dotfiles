@@ -88,6 +88,7 @@ in {
 
   programs.zsh.enable = true;
   programs.zsh.initExtra = ''
+    PATH=$HOME/bin:$PATH
     source $HOME/.config/zsh/zshinit.zsh
     eval $(thefuck --alias)
   '';
