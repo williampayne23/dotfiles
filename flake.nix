@@ -14,6 +14,13 @@
       url = "github:mbadolato/iTerm2-Color-Schemes";
       flake = false;
     };
+    # For private work configurations which shouldn't be exposed in this repo
+    # Local and remote are used to allow for local development
+    # (Local will be used by default)
+    private-repo = { 
+      url = "path:/home/ubuntu/scratchpad"; 
+      flake = false;
+    };
   };
 
   outputs = {
@@ -22,6 +29,7 @@
     nixpkgs,
     home-manager,
     color-schemes,
+    private-repo,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
@@ -39,7 +47,7 @@
           # Include so we can configure ghostty
         ]
         ++ extraModules;
-        extraSpecialArgs = {color-schemes = color-schemes;};
+        extraSpecialArgs = inputs // { inherit private-repo; };
       };
   in {
     apps."aarch64-darwin".default = let
@@ -63,6 +71,9 @@
       init = pkgs.writeShellApplication {
         name = "init";
         text = ''
+          if [ -d "/home/ubuntu/scratchpad" ]; then
+            nix flake update --update-input private-repo
+          fi 
           nix run home-manager/master -- switch --flake ~/dotfiles
         '';
       };

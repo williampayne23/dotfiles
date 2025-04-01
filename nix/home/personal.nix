@@ -34,35 +34,34 @@
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
-
   programs.alacritty = {
-        enable = true;
-        settings = {
-            general.import = [
-                "~/dotfiles/config/alacritty/catppuccin-frappe.toml"
-            ];
-            window = {
-                decorations = "Buttonless";
-                padding = {
-                    x = 5;
-                    y = 5;
-                };
-            };
-            font = {
-                normal = {
-                    family = "JetBrainsMono NF";
-                    style = "Regular";
-                };
-                size = 19;
-            };
-            keyboard.bindings = [
-                {
-                    mods = "Control";
-                    key = "Space";
-                    chars = "\\u0000";
-                }
-            ];
+    enable = true;
+    settings = {
+      general.import = [
+        "~/dotfiles/config/alacritty/catppuccin-frappe.toml"
+      ];
+      window = {
+        decorations = "Buttonless";
+        padding = {
+          x = 5;
+          y = 5;
         };
+      };
+      font = {
+        normal = {
+          family = "JetBrainsMono NF";
+          style = "Regular";
+        };
+        size = 19;
+      };
+      keyboard.bindings = [
+        {
+          mods = "Control";
+          key = "Space";
+          chars = "\\u0000";
+        }
+      ];
+    };
   };
 
   home.file = {

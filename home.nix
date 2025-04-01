@@ -126,7 +126,7 @@
     source $HOME/.config/zsh/zshinit.zsh
   '';
   programs.zsh.sessionVariables = {
-    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc pkgs.zlib];
+    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib];
   };
 
   # Let Home Manager install and manage itself.
@@ -136,10 +136,4 @@
   #   enable = true;
   #   defaultEditor = true;
   # };
-
 }
-
-
-
-
-
