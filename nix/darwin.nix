@@ -28,16 +28,15 @@
   system.defaults.NSGlobalDomain."com.apple.trackpad.trackpadCornerClickBehavior" = 1;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
   system.defaults.dock.autohide = true;
-    # Empty dock
+  # Empty dock
   system.defaults.dock.persistent-apps = [
-
-    ];
+  ];
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.show-recents = false;
   system.defaults.CustomUserPreferences = {
     "com.apple.symbolichotkeys".AppleSymbolicHotKeys."64".enabled = 0;
-      "com.raycast.macos".raycastGlobalHotkey = "Command-49";
-    };
+    "com.raycast.macos".raycastGlobalHotkey = "Command-49";
+  };
 
   programs.zsh.enable = true;
   homebrew.enable = true;
