@@ -10,15 +10,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-   color-schemes = {
+    color-schemes = {
       url = "github:mbadolato/iTerm2-Color-Schemes";
       flake = false;
     };
     # For private work configurations which shouldn't be exposed in this repo
     # Local and remote are used to allow for local development
     # (Local will be used by default)
-    private-repo = { 
-      url = "path:/home/ubuntu/scratchpad"; 
+    private-repo = {
+      url = "path:/home/ubuntu/scratchpad";
       flake = false;
     };
   };
@@ -43,11 +43,12 @@
     }:
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch};
-        modules = [
-          # Include so we can configure ghostty
-        ]
-        ++ extraModules;
-        extraSpecialArgs = inputs // { inherit private-repo; };
+        modules =
+          [
+            # Include so we can configure ghostty
+          ]
+          ++ extraModules;
+        extraSpecialArgs = inputs // {inherit private-repo;};
       };
   in {
     apps."aarch64-darwin".default = let
@@ -73,7 +74,7 @@
         text = ''
           if [ -d "/home/ubuntu/scratchpad" ]; then
             nix flake update --update-input private-repo
-          fi 
+          fi
           nix run home-manager/master -- switch --flake ~/dotfiles
         '';
       };
@@ -94,7 +95,7 @@
       };
       "willpayne" = mkHm {
         extraModules = [
-            ./nix/home/personal.nix
+          ./nix/home/personal.nix
         ];
         arch = "aarch64-darwin";
       };
