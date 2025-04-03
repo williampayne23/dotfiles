@@ -1,51 +1,12 @@
-function dump(o)
-    if type(o) == 'table' then
-        local s = '{ '
-        for k, v in pairs(o) do
-            if type(k) ~= 'number' then k = '"' .. k .. '"' end
-            s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
-        end
-        return s .. '} '
-    else
-        return tostring(o)
-    end
-end
-
-function len(o)
-    if type(o) == 'table' then
-        local count = 0
-        for _ in pairs(o) do count = count + 1 end
-        return count
-    else
-        return 0
-    end
-end
-
-function get_attached_clients()
-    local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
-    if #buf_clients == 0 then
-        return "LSP Inactive"
-    end
-
-    local buf_ft = vim.bo.filetype
-    local buf_client_names = {}
-
-    -- add client
-    for _, client in pairs(buf_clients) do
-        if client.name ~= "copilot" and client.name ~= "null-ls" then
-            table.insert(buf_client_names, client.name)
-        end
-    end
-
-    print(dump(buf_client_names))
-end
-
 return {
     -- mason-lspconfig has to be at the top of the list so that it's set up first
     -- Not totally sure why this breaks the handlers but it does and some help text
     -- somewhere recommended this
     {
         'williamboman/mason-lspconfig.nvim',
+        -- Try load last to resolve continued unreliability with lsp configs being
+        -- actually listened too >:(
+        priority = 0,
         dependencies = {
             'neovim/nvim-lspconfig',
             'williamboman/mason.nvim',
@@ -59,11 +20,11 @@ return {
         },
         config = function()
             vim.api.nvim_create_autocmd("BufWritePre", {
-                buffer = buffer,
                 callback = function(event)
-                    local buffer = buffer or vim.api.nvim_get_current_buf()
-                    -- Check if there's a formatter for the current buffer
-                    --
+                    local buffer = vim.api.nvim_get_current_buf()
+                    -- Check if there's a lsp for the current buffer
+                    -- There is probably some way to filter for lsp's with formatting
+                    -- capabilities but I don't know how to do that
                     for _, client in pairs(vim.lsp.get_clients({ bufnr = buffer })) do
                         if client.name ~= "null-ls" and client.name ~= "copilot" then
                             vim.lsp.buf.format { async = false }
@@ -79,8 +40,6 @@ return {
                     local opts = { buffer = bufnr, remap = false }
                     opts["desc"] = "Go to definition"
                     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                    -- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-                    -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
                     opts["desc"] = "Open diagonistic float"
                     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
                     opts["desc"] = "Next diagnostic"
@@ -156,6 +115,14 @@ return {
                                     },
                                 },
                             },
+                        })
+                    end,
+                    ruff = function()
+                        require('lspconfig').ruff.setup({
+                            init_options = {
+                                settings = {
+                                }
+                            }
                         })
                     end,
                 },
