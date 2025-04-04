@@ -26,6 +26,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     table.insert(newVirtText, { suffix, 'MoreMsg' })
     return newVirtText
 end
+
 return {
     -- Folds
     'kevinhwang91/nvim-ufo',

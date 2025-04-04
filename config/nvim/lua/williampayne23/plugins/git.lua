@@ -3,23 +3,20 @@ return {
         "NeogitOrg/neogit",
         commit = "bc0c609",
         dependencies = {
-            "nvim-lua/plenary.nvim",         -- required
-            "sindrets/diffview.nvim",        -- optional - Diff integration
-            -- Only one of these is needed, not both.
-            "nvim-telescope/telescope.nvim", -- optional
+            "nvim-lua/plenary.nvim", -- required
         },
-        config = function()
-            require('neogit').setup({
-                kind = "replace"
-            })
-            vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>")
-        end
+        keys = {
+            { "<leader>g", "<cmd>Neogit<CR>", mode = "n", desc = "Neogit" }
+        },
+        opts = { kind = "replace" },
     },
     {
         "https://github.com/lewis6991/gitsigns.nvim",
-        config = function()
-            require('gitsigns').setup()
-            vim.keymap.set("n", "<leader>b", "<cmd>Gitsigns blame_line<CR>")
-        end
+        lazy = false,
+        keys = {
+            { "<leader>b", "<cmd>Gitsigns blame_line<CR>", mode = "n", desc = "Git Blame" }
+        },
+        main = "gitsigns",
+        config = true,
     }
 }

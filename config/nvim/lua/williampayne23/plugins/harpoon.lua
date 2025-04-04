@@ -1,17 +1,50 @@
 return {
     {
         "theprimeagen/harpoon",
-        config = function()
-            local mark = require("harpoon.mark")
-            local ui = require("harpoon.ui")
+        keys = {
+            {
+                "<leader>h",
+                function()
+                    require("harpoon.mark").add_file()
+                end,
+                desc = "Add Harpoon"
+            },
+            {
+                "<C-e>",
+                function()
+                    require("harpoon.ui").toggle_quick_menu()
+                end,
+                desc = "Toggle Harpoon Menu"
+            },
+            {
+                "<C-h>",
+                function()
+                    require("harpoon.ui").nav_file(1)
+                end,
+                desc = "Harpoon File 1"
+            },
+            {
+                "<C-j>",
+                function()
+                    require("harpoon.ui").nav_file(2)
+                end,
+                desc = "Harpoon File 2"
+            },
+            {
+                "<C-k>",
+                function()
+                    require("harpoon.ui").nav_file(3)
+                end,
+                desc = "Harpoon File 3"
+            },
+            {
+                "<C-l>",
+                function()
+                    require("harpoon.ui").nav_file(4)
+                end,
+                desc = "Harpoon File 4"
+            },
 
-            vim.keymap.set("n", "<leader>h", mark.add_file, { desc = "add harpoon" })
-            vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
-            vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-            vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
-            vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
-            vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
-        end
+        },
     }
 }

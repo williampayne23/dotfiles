@@ -2,26 +2,33 @@
 return {
     {
         'numToStr/Comment.nvim',
-        opts = {
-            -- add any options here
+        keys = {
+            {
+                "<leader>/",
+                function()
+                    require("Comment.api").toggle.linewise.current()
+                end,
+                desc = "toggle comment"
+            },
+            {
+                "<leader>/",
+                function()
+                    local esc = vim.api.nvim_replace_termcodes(
+                        '<ESC>', true, false, true
+                    )
+                    vim.api.nvim_feedkeys(esc, 'nx', false)
+                    require("Comment.api").toggle.linewise(vim.fn.visualmode())
+                end,
+                desc = "toggle comment",
+                mode = "x"
+            },
         },
-        lazy = false,
         config = function()
-            require("Comment").setup({
+            require('Comment').setup {
                 mappings = { basic = false, extra = false },
                 pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-            })
-            local api = require("Comment.api")
-            vim.keymap.set('n', '<leader>/', api.toggle.linewise.current, { desc = "toggle comment" })
-
-            local esc = vim.api.nvim_replace_termcodes(
-                '<ESC>', true, false, true
-            )
-
-            vim.keymap.set('x', '<leader>/', function()
-                vim.api.nvim_feedkeys(esc, 'nx', false)
-                api.toggle.linewise(vim.fn.visualmode())
-            end, { desc = "toggle comment" })
-        end
+            }
+        end,
+        lazy = false,
     }
 }

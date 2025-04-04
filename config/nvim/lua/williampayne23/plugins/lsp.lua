@@ -9,7 +9,19 @@ return {
         priority = 0,
         dependencies = {
             'neovim/nvim-lspconfig',
-            'williamboman/mason.nvim',
+            {
+                'williamboman/mason.nvim',
+                opts = {
+                    ui = {
+                        border = "rounded",
+                        icons = {
+                            package_installed = "✓",
+                            package_pending = "➜",
+                            package_uninstalled = "✗"
+                        }
+                    }
+                }
+            }
             -- Snippets
             -- 'L3MON4D3/LuaSnip',
 
@@ -70,13 +82,6 @@ return {
 
             vim.diagnostic.config({ virtual_text = { source = "always" } })
 
-            -- local lua_opts = lsp.nvim_lua_ls()
-            -- require('lspconfig').lua_ls.setup(lua_opts)
-
-
-
-            -- Mason yummy borders
-            require('mason').setup({ ui = { border = "rounded" } })
             -- Mason LSP
             require('mason-lspconfig').setup({
                 ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'basedpyright', 'nil_ls' },
@@ -139,6 +144,7 @@ return {
         event = "LspAttach",
         dependencies = { "neovim/nvim-lspconfig" },
         config = function()
+            -- Tried to move this to "opts" but it didn't work
             require("inlay-hints").setup()
         end
     },

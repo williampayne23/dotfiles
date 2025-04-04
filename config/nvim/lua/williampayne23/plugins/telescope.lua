@@ -3,6 +3,29 @@ return {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' },
+        opts = {
+            defaults = {
+                mappings = {
+                    i = {
+                        ["<C-S-Q>"] = require('telescope.actions').send_selected_to_qflist +
+                            require('telescope.actions').open_qflist
+                    },
+                    n = {
+                        ["<C-S-Q>"] = require('telescope.actions').send_selected_to_qflist +
+                            require('telescope.actions').open_qflist
+                    },
+                },
+                vimgrep_arguments = {
+                    'rg',
+                    '--color=never',
+                    '--no-heading',
+                    '--with-filename',
+                    '--line-number',
+                    '--column',
+                    '--smart-case',
+                }
+            }
+        },
         config = function(_, _)
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "find files" })
@@ -14,27 +37,6 @@ return {
             wk.add({
                 { "<leader>p", group = "search" },
             });
-            require('telescope').setup {
-                defaults = {
-                    mappings = {
-                        i = {
-                            ["<C-Q>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist
-                        },
-                        n = {
-                            ["<C-Q>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist
-                        },
-                    },
-                    vimgrep_arguments = {
-                        'rg',
-                        '--color=never',
-                        '--no-heading',
-                        '--with-filename',
-                        '--line-number',
-                        '--column',
-                        '--smart-case',
-                    }
-                }
-            }
         end
     },
 }
