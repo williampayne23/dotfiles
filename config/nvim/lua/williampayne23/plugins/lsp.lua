@@ -95,7 +95,7 @@ return {
                                         globals = { 'vim' },
                                     },
                                 },
-                            },
+                            }
                         })
                     end,
                     nil_ls = function()

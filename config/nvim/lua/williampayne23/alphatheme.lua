@@ -1,3 +1,4 @@
+-- DOes nothing atm need to use it as reference to edit snacks.dashboard
 local M = {}
 
 M.dashboard = {}

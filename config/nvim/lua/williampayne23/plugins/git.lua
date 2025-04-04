@@ -1,6 +1,7 @@
 return {
     {
         "NeogitOrg/neogit",
+        lazy = false,
         commit = "bc0c609",
         dependencies = {
             "nvim-lua/plenary.nvim", -- required
