@@ -23,11 +23,12 @@ in {
     pkgs.atuin
     pkgs.bat
     pkgs.cargo
+    pkgs.claude-code
     pkgs.cmake
     pkgs.fzf
     pkgs.gh
     pkgs.neovim
-    pkgs.claude-code
+    pkgs.python312Packages.imgcat
     pkgs.ripgrep
     pkgs.starship
     pkgs.thefuck
