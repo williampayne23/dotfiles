@@ -26,7 +26,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     table.insert(newVirtText, { suffix, 'MoreMsg' })
     return newVirtText
 end
-return  {
+return {
     -- Folds
     'kevinhwang91/nvim-ufo',
     dependencies = {
@@ -41,7 +41,7 @@ return  {
             dynamicRegistration = false,
             lineFoldingOnly = true
         }
-        local language_servers = require("lspconfig").util.available_servers()     -- or list servers manually like {'gopls', 'clangd'}
+        local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
         for _, ls in ipairs(language_servers) do
             require('lspconfig')[ls].setup({
                 capabilities = capabilities

@@ -182,7 +182,6 @@ return {
             vim.keymap.set({ "x", "n", "o" }, "F", ts_repeat_move.builtin_F)
             vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
             vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
-
         end
     },
     {

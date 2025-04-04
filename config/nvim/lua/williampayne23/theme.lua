@@ -6,7 +6,7 @@ require("catppuccin").setup({
     custom_highlights = function(colors)
         return {
             TreesitterContext = { bg = colors.none },
-            TreesitterContextLineNumber = {bg = colors.none},
+            TreesitterContextLineNumber = { bg = colors.none },
             TreesitterContextBottom = { underline = colors.flamingo },
             TreesitterContextSeperator = { bg = colors.flamingo },
             NormalFloat = { bg = colors.none },
@@ -21,16 +21,15 @@ require("catppuccin").setup({
             NvimTreeStatusLineNC = { fg = colors.blue },
         }
     end,
-	integrations = {
+    integrations = {
         notify = true,
-        which_key= true,
+        which_key = true,
         telescope = true,
-		cmp = true,
+        cmp = true,
         harpoon = true,
         treesitter_context = true,
         treesitter = true
-	}
+    }
 })
 
 vim.cmd.colorscheme "catppuccin-frappe"
-

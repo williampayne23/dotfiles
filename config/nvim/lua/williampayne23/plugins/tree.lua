@@ -35,7 +35,7 @@ return {
                 end,
             },
         })
-        vim.keymap.set("n", "<leader>pv", function() vim.cmd('NvimTreeFindFile') end, {desc = "open file tree"})
+        vim.keymap.set("n", "<leader>pv", function() vim.cmd('NvimTreeFindFile') end, { desc = "open file tree" })
         vim.keymap.set("n", "<Esc>", function()
             require("nvim-tree.api").tree.close()
         end)

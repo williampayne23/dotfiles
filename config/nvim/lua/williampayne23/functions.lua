@@ -1,48 +1,48 @@
 local function tbl_length(T)
-  local count = 0
-  for _ in pairs(T) do count = count + 1 end
-  return count
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
 end
 
 
 local function get_visual_selection()
-  -- this will exit visual mode
-  -- use 'gv' to reselect the text
-  local _, csrow, cscol, cerow, cecol
-  local mode = vim.fn.mode()
-  if mode == "v" or mode == "V" or mode == "" then
-    -- if we are in visual mode use the live position
-    _, csrow, cscol, _ = unpack(vim.fn.getpos("."))
-    _, cerow, cecol, _ = unpack(vim.fn.getpos("v"))
-    if mode == "V" then
-      -- visual line doesn't provide columns
-      cscol, cecol = 0, 999
+    -- this will exit visual mode
+    -- use 'gv' to reselect the text
+    local _, csrow, cscol, cerow, cecol
+    local mode = vim.fn.mode()
+    if mode == "v" or mode == "V" or mode == "" then
+        -- if we are in visual mode use the live position
+        _, csrow, cscol, _ = unpack(vim.fn.getpos("."))
+        _, cerow, cecol, _ = unpack(vim.fn.getpos("v"))
+        if mode == "V" then
+            -- visual line doesn't provide columns
+            cscol, cecol = 0, 999
+        end
+        -- exit visual mode
+        vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes("<Esc>",
+                true, false, true), "n", true)
+    else
+        -- otherwise, use the last known visual position
+        _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
+        _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
     end
-    -- exit visual mode
-    vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes("<Esc>",
-        true, false, true), "n", true)
-  else
-    -- otherwise, use the last known visual position
-    _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
-    _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
-  end
-  -- swap vars if needed
-  if cerow < csrow then csrow, cerow = cerow, csrow end
-  if cecol < cscol then cscol, cecol = cecol, cscol end
-  local lines = vim.fn.getline(csrow, cerow)
-  -- local n = cerow-csrow+1
-  local n = tbl_length(lines)
-  if n <= 0 then return "" end
-  lines[n] = string.sub(lines[n], 1, cecol)
-  lines[1] = string.sub(lines[1], cscol)
-  return table.concat(lines, "\n")
+    -- swap vars if needed
+    if cerow < csrow then csrow, cerow = cerow, csrow end
+    if cecol < cscol then cscol, cecol = cecol, cscol end
+    local lines = vim.fn.getline(csrow, cerow)
+    -- local n = cerow-csrow+1
+    local n = tbl_length(lines)
+    if n <= 0 then return "" end
+    lines[n] = string.sub(lines[n], 1, cecol)
+    lines[1] = string.sub(lines[1], cscol)
+    return table.concat(lines, "\n")
 end
 
 local function split(str, split)
     local t = {}
     local section = ""
-    for char in str:gmatch(".") do 
+    for char in str:gmatch(".") do
         if char == split then
             table.insert(t, section)
             section = ""
@@ -70,23 +70,23 @@ function FlipAround()
     -- If the first element starts with tabs strip it (vim magic seems to include them when we paste)
     local tab = string.match(left, "^%s+")
     if tab then
-        left = string.sub(left, string.len(tab)+1)
+        left = string.sub(left, string.len(tab) + 1)
     end
 
     -- If first element ends with spaces, move them to the end of the second element
     local space = string.match(left, "%s+$")
     if space then
-        left = string.sub(left, 1, -string.len(space)-1)
+        left = string.sub(left, 1, -string.len(space) - 1)
         right = right .. space
     end
     -- If the last element starts with spaces, move them to the start of the first element
     space = string.match(right, "^%s+")
     if space then
-        right = string.sub(right, string.len(space)+1)
+        right = string.sub(right, string.len(space) + 1)
         left = space .. left
     end
     local flipped = right .. char .. left
-    vim.api.nvim_feedkeys('gv','m',false)
+    vim.api.nvim_feedkeys('gv', 'm', false)
     local _, cerow, cecol, _ = unpack(vim.fn.getpos("."))
     -- Get the line we are on
     local lines = vim.fn.getline(cerow, cerow)
@@ -94,13 +94,13 @@ function FlipAround()
     -- If the end cursor position is greater than the length of the line add a new line
     -- This is to prevent pulling in the next line
     if cecol > string.len(line) then
-        vim.api.nvim_feedkeys('h','m',false)
+        vim.api.nvim_feedkeys('h', 'm', false)
     end
-    vim.api.nvim_feedkeys("c"..flipped, 'm', false)
-    local keys = vim.api.nvim_replace_termcodes('<ESC>',true,false,true)
+    vim.api.nvim_feedkeys("c" .. flipped, 'm', false)
+    local keys = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
     vim.api.nvim_feedkeys(keys, 'm', false)
     -- put cursor back
-    vim.api.nvim_feedkeys('`<','m',false)
+    vim.api.nvim_feedkeys('`<', 'm', false)
 end
 
 function Scratch()
@@ -118,20 +118,18 @@ function Scratch()
 
     -- Create the floating window
     local opts = {
-        relative='editor',
-        width=width,
-        height=height,
-        col=(win_width/2) - (width/2),
-        row=(win_height/2) - (height/2),
-        anchor='NW',
-        style='minimal',
-        border='rounded',
-        title="Scratch"
+        relative = 'editor',
+        width = width,
+        height = height,
+        col = (win_width / 2) - (width / 2),
+        row = (win_height / 2) - (height / 2),
+        anchor = 'NW',
+        style = 'minimal',
+        border = 'rounded',
+        title = "Scratch"
     }
     local win = vim.api.nvim_open_win(buf, true, opts)
 end
-
-
 
 local function get_or_create_buffer(filename)
     -- Only changed function relative to harpoon. Now allows a terminal buffer
