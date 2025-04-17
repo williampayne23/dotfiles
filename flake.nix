@@ -73,9 +73,9 @@
         name = "init";
         text = ''
           if [ -d "/home/ubuntu/scratchpad" ]; then
-            nix flake update --update-input private-repo
+            nix flake --extra-experimental-features "nix-command flakes" update --update-input private-repo
           fi
-          nix run home-manager/master -- switch --flake ~/dotfiles
+          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
         '';
       };
     in {
