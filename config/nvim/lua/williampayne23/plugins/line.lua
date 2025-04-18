@@ -3,7 +3,6 @@ local function show_macro_recording()
     if recording_register == "" then
         return ""
     else
-        -- vim.notify("Recording @" .. recording_register)
         return "Recording @" .. recording_register
     end
 end
