@@ -3,6 +3,7 @@ return {
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
+        animate = {},
         bigfile = {},
         dashboard = {},
         explorer = {
@@ -26,13 +27,18 @@ return {
             }
         },
         quickfile = {},
+        scratch = {},
+        scroll = {},
+        terminal = {},
     },
     lazy = false,
     keys = {
+        { "<leader>s",  function() Snacks.scratch() end,          desc = "Toggle Scratch Buffer" },
+        { "<leader>t",  function() Snacks.terminal.toggle() end,  desc = "Toggle Terminal" },
         { "<leader>pv", "<cmd>lua Snacks.explorer.open()<cr>",    desc = "File Explorer" },
         { "<leader>pf", "<cmd>lua Snacks.picker.files()<cr>",     desc = "Find Files" },
         { "<leader>pg", "<cmd>lua Snacks.picker.git_files()<cr>", desc = "Find Git Files" },
         { "<leader>ps", "<cmd>lua Snacks.picker.git_grep()<cr>",  desc = "Grep Files" },
-        { "<leader>p",  "<Nop>",                                  desc = "pickers" }
+        { "<leader>p",  "<Nop>",                                  desc = "Pickers" }
     }
 }
