@@ -23,6 +23,7 @@ in {
     "font-sf-pro"
     "sf-symbols"
     "modrinth"
+    "obsidian"
   ];
   homebrew.brews = [];
   nix.settings.trusted-users = ["will"];
