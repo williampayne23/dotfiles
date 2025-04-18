@@ -1,6 +1,7 @@
 return {
     {
         "zbirenbaum/copilot.lua",
+        event = "InsertEnter",
         -- enable = false,
         keys = {
             {
@@ -28,7 +29,7 @@ return {
     },
     {
         "yetone/avante.nvim",
-        event = "VeryLazy",
+        event = "InsertEnter",
         version = false, -- Never set this value to "*"! Never!
         opts = {
             provider = "copilot",

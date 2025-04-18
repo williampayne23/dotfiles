@@ -1,5 +1,8 @@
 return {
-    'leissa/vim-acme', -- Syntax hilighting for 6402
+    {
+        'leissa/vim-acme',
+        ft = 'asm68k'
+    },
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
@@ -83,7 +86,10 @@ return {
             }
         end
     },
-    "nvim-treesitter/playground",
+    {
+        "nvim-treesitter/playground",
+        cmd = { "TSPlaygroundToggle" },
+    },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         lazy = true,

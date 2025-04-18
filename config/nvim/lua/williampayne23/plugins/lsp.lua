@@ -121,8 +121,6 @@ return {
                     end,
                 },
             })
-
-
             -- LSP Info nice borders
             require('lspconfig.ui.windows').default_options.border = 'single'
         end
@@ -132,10 +130,8 @@ return {
         "MysticalDevil/inlay-hints.nvim",
         event = "LspAttach",
         dependencies = { "neovim/nvim-lspconfig" },
-        config = function()
-            -- Tried to move this to "opts" but it didn't work
-            require("inlay-hints").setup()
-        end
+        name = "inlay-hints",
+        config = true,
     },
     {
         "folke/lazydev.nvim",
@@ -149,7 +145,6 @@ return {
         },
     },
     {
-
         'hrsh7th/nvim-cmp',
         dependencies = {
             'hrsh7th/cmp-buffer',
@@ -160,6 +155,7 @@ return {
             'hrsh7th/cmp-nvim-lua',
             'folke/lazydev.nvim',
         },
+        event = "InsertEnter",
         config = function()
             -- CMP autocompletion
             local cmp = require('cmp')
