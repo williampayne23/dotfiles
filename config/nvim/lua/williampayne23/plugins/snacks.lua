@@ -28,11 +28,33 @@ return {
         },
         quickfile = {},
         scratch = {},
-        scroll = {},
+        -- scroll = {},
         terminal = {},
+        words = {},
+        zen = {}
     },
     lazy = false,
     keys = {
+        {
+            "]r",
+            function()
+                if vim.v.count == 0 then
+                    Snacks.words.jump(1, true)
+                end
+                Snacks.words.jump(vim.v.count, true)
+            end,
+            desc = "Next Ref"
+        },
+        {
+            "[r",
+            function()
+                if vim.v.count == 0 then
+                    Snacks.words.jump(-1, true)
+                end
+                Snacks.words.jump(-vim.v.count, true)
+            end,
+            desc = "Previous Ref"
+        },
         { "<leader>s",  function() Snacks.scratch() end,          desc = "Toggle Scratch Buffer" },
         { "<leader>t",  function() Snacks.terminal.toggle() end,  desc = "Toggle Terminal" },
         { "<leader>pv", "<cmd>lua Snacks.explorer.open()<cr>",    desc = "File Explorer" },
