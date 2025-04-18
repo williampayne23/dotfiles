@@ -49,34 +49,23 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',
                 callback = function(event)
-                    local opts = { buffer = bufnr, remap = false }
-                    opts["desc"] = "Go to definition"
-                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                    opts["desc"] = "Open diagonistic float"
-                    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-                    opts["desc"] = "Next diagnostic"
-                    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-                    opts["desc"] = "Previous diagnostic"
-                    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-                    opts["desc"] = "Show code actions"
-                    vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.code_action() end, opts)
-                    opts["desc"] = "Show references"
-                    vim.keymap.set("n", "<leader>vR", function() vim.lsp.buf.references() end, opts)
-                    opts["desc"] = "Rename"
-                    vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, opts)
-                    opts["desc"] = "Help"
-                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-                    opts["desc"] = "Format"
-                    vim.keymap.set({ 'n' }, '<leader>F', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-                    opts["desc"] = "find references"
-                    vim.keymap.set({ 'n', 'x' }, '<leader>pr', '<cmd>Telescope lsp_references<cr>', opts)
-                    local wk = require("which-key")
-                    wk.register({
-                        v = {
-                            name = "lsp",
-                            r = "Rename"
-                        }
-                    }, { prefix = "<leader>" })
+                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "go to definition" })
+                    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end,
+                        { desc = "Open diagonistic float" })
+                    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "next diagnostic" })
+                    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "previous diagnostic" })
+                    vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.code_action() end,
+                        { desc = "show code actions" })
+                    vim.keymap.set("n", "<leader>vR", function() vim.lsp.buf.references() end,
+                        { desc = "show references" })
+                    vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, { desc = "rename" })
+                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "help" })
+                    vim.keymap.set({ 'n' }, '<leader>f', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', {
+                        desc = "format buffer"
+                    })
+                    vim.keymap.set({ 'n', 'x' }, '<leader>pr', function() Snacks.picker.lsp_references() end,
+                        { desc = "find references" })
+                    vim.keymap.set({ 'n', 'x' }, '<leader>v', '<Nop>', { desc = 'lsp' })
                 end
             })
 

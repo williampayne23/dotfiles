@@ -50,7 +50,8 @@ return {
 
         },
         keys = {
-            { "<leader>ac", "<cmd>AvanteClear<CR>", mode = "n", silent = true, desc = "Clear Chat" }
+            { "<leader>ac", "<cmd>AvanteClear<CR>", mode = "n", silent = true,  desc = "clear Chat" },
+            { "<leader>a",  "<Nop>",                mode = "n", desc = "avante" }
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",

@@ -28,17 +28,13 @@ vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "close window" })
 -- Exit terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
-vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
-end, { desc = "format" })
-
-
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>cnext<CR>zz", { desc = "quickfix next" })
 vim.keymap.set("n", "<leader>j", "<cmd>cprev<CR>zz", { desc = "quickfix prev" })
 
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "replace word in file" })
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "replace word in file" })
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "make executable" })
 
 -- Newlines

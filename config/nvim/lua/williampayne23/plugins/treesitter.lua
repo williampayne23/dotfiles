@@ -220,11 +220,8 @@ return {
                 -- },
             })
 
-            local wk = require("which-key")
-            wk.add({
-                { "<leader>N", group = "swap previous" },
-                { "<leader>n", group = "swap next" },
-            })
+            vim.keymap.set("n", "<leader>N", "<Nop>", { desc = "swap Previous" })
+            vim.keymap.set("n", "<leader>n", "<Nop>", { desc = "swap Next" })
 
             function gWrapper(opfunc)
                 vim.go.operatorfunc = opfunc

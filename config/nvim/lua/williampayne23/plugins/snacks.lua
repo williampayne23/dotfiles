@@ -44,5 +44,6 @@ return {
         { "<leader>pf", "<cmd>lua Snacks.picker.files()<cr>",     desc = "Find Files" },
         { "<leader>pg", "<cmd>lua Snacks.picker.git_files()<cr>", desc = "Find Git Files" },
         { "<leader>ps", "<cmd>lua Snacks.picker.git_grep()<cr>",  desc = "Grep Files" },
+        { "<leader>p",  "<Nop>",                                  desc = "pickers" }
     }
 }
