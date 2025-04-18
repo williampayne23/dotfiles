@@ -24,6 +24,7 @@ in {
     pkgs.bat
     pkgs.cargo
     pkgs.cmake
+    pkgs.fd
     pkgs.fzf
     pkgs.gh
     pkgs.neovim

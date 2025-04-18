@@ -22,13 +22,6 @@ return {
                     }
                 }
             }
-            -- Snippets
-            -- 'L3MON4D3/LuaSnip',
-
-            -- 'rcarriga/nvim-dap-ui',
-            -- 'mfussenegger/nvim-dap',
-            -- 'folke/neodev.nvim',
-            -- 'nvimtools/none-ls.nvim'
         },
         config = function()
             vim.api.nvim_create_autocmd("BufWritePre", {
