@@ -42,23 +42,23 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',
                 callback = function(event)
-                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "go to definition" })
+                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "Go To Definition" })
                     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end,
-                        { desc = "Open diagonistic float" })
-                    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "next diagnostic" })
-                    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "previous diagnostic" })
+                        { desc = "Open Diagonistic Float" })
+                    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next Diagnostic" })
+                    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous Diagnostic" })
                     vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.code_action() end,
-                        { desc = "show code actions" })
+                        { desc = "Show Code Actions" })
                     vim.keymap.set("n", "<leader>vR", function() vim.lsp.buf.references() end,
-                        { desc = "show references" })
-                    vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, { desc = "rename" })
-                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "help" })
+                        { desc = "Show References" })
+                    vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, { desc = "Rename" })
+                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Help" })
                     vim.keymap.set({ 'n' }, '<leader>f', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', {
-                        desc = "format buffer"
+                        desc = "Format Buffer"
                     })
                     vim.keymap.set({ 'n', 'x' }, '<leader>pr', function() Snacks.picker.lsp_references() end,
-                        { desc = "find references" })
-                    vim.keymap.set({ 'n', 'x' }, '<leader>v', '<Nop>', { desc = 'lsp' })
+                        { desc = "Find References" })
+                    vim.keymap.set({ 'n', 'x' }, '<leader>v', '<Nop>', { desc = 'LSP' })
                 end
             })
 
@@ -69,6 +69,9 @@ return {
                 ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'basedpyright', 'nil_ls' },
                 automatic_installation = true,
                 handlers = {
+                    function(server_name)
+                        require('lspconfig')[server_name].setup({})
+                    end,
                     lua_ls = function()
                         require('lspconfig').lua_ls.setup({
                             settings = {
@@ -111,6 +114,12 @@ return {
                                 }
                             }
                         })
+                    end,
+                    ts_ls = function()
+                        require('lspconfig').ts_ls.setup({})
+                    end,
+                    emmet_language_server = function()
+                        require('lspconfig').emmet_language_server.setup({})
                     end,
                 },
             })

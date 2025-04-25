@@ -1,7 +1,7 @@
 return {
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
+        priority = 0,
         opts = {
             -- you can enable a preset for easier configuration
             presets = {
@@ -17,7 +17,7 @@ return {
                 -- event is always "notify" and kind can be any log level as a string
                 -- The default routes will forward notifications to nvim-notify
                 -- Benefit of using Noice for this is the routing and consistent history view
-                enabled = true,
+                enabled = false,
                 view = "notify",
             },
             cmdline = {

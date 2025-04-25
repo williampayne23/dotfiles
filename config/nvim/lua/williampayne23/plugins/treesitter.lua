@@ -226,8 +226,8 @@ return {
                 -- },
             })
 
-            vim.keymap.set("n", "<leader>N", "<Nop>", { desc = "swap Previous" })
-            vim.keymap.set("n", "<leader>n", "<Nop>", { desc = "swap Next" })
+            vim.keymap.set("n", "<leader>N", "<Nop>", { desc = "Swap Previous" })
+            vim.keymap.set("n", "<leader>n", "<Nop>", { desc = "Swap Next" })
 
             function gWrapper(opfunc)
                 vim.go.operatorfunc = opfunc

@@ -55,12 +55,36 @@ return {
             end,
             desc = "Previous Ref"
         },
-        { "<leader>s",  function() Snacks.scratch() end,          desc = "Toggle Scratch Buffer" },
-        { "<leader>t",  function() Snacks.terminal.toggle() end,  desc = "Toggle Terminal" },
-        { "<leader>pv", "<cmd>lua Snacks.explorer.open()<cr>",    desc = "File Explorer" },
-        { "<leader>pf", "<cmd>lua Snacks.picker.files()<cr>",     desc = "Find Files" },
-        { "<leader>pg", "<cmd>lua Snacks.picker.git_files()<cr>", desc = "Find Git Files" },
-        { "<leader>ps", "<cmd>lua Snacks.picker.git_grep()<cr>",  desc = "Grep Files" },
-        { "<leader>p",  "<Nop>",                                  desc = "Pickers" }
-    }
+        -- { "<leader>t",  function() Snacks.terminal.toggle() end,  desc = "Toggle Terminal" },
+        { "<leader>pv", function() Snacks.explorer.open() end,      desc = "File Explorer" },
+        { "<leader>pf", function() Snacks.picker.files() end,       desc = "Find Files" },
+        { "<leader>pg", function() Snacks.picker.git_files() end,   desc = "Find Git Files" },
+        { "<leader>ps", function() Snacks.picker.git_grep() end,    desc = "Grep Files" },
+        { "<leader>pS", function() Snacks.picker.lsp_symbols() end, desc = "Find Symbols" },
+        { "<leader>pp", function() Snacks.picker.pickers() end,     desc = "Find Symbols" },
+        { "<leader>p",  "<Nop>",                                    desc = "Pickers" }
+    },
+    init = function()
+        local Snacks = require("snacks")
+        Snacks.toggle.new({
+            id = "sb",
+            name = "Scratch Buffer",
+            get = function()
+                local buf = vim.api.nvim_get_current_buf()
+                local name = vim.api.nvim_buf_get_name(buf)
+                local scratch_bufs = Snacks.scratch.list()
+                for _, scratch_buf in ipairs(scratch_bufs) do
+                    local file = scratch_buf.file
+                    if file == name then
+                        return true
+                    end
+                end
+                return false
+            end,
+            set = function(state)
+                Snacks.scratch()
+            end,
+            notify = false
+        }):map("<leader>s")
+    end
 }

@@ -8,7 +8,7 @@ return {
                 function()
                     require("Comment.api").toggle.linewise.current()
                 end,
-                desc = "toggle comment"
+                desc = "Toggle Comment"
             },
             {
                 "<leader>/",
@@ -19,7 +19,7 @@ return {
                     vim.api.nvim_feedkeys(esc, 'nx', false)
                     require("Comment.api").toggle.linewise(vim.fn.visualmode())
                 end,
-                desc = "toggle comment",
+                desc = "Toggle Comment",
                 mode = "x"
             },
         },
