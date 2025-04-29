@@ -62,6 +62,17 @@ return {
                 end
             })
 
+            -- Hacky workaround for mason-lspconfig not loading the handlers correctly
+            vim.api.nvim_create_autocmd("LspAttach", {
+                desc = "Fix lsp config",
+                callback = function(args)
+                    if not vim.g.lsp_config_fixed then
+                        vim.cmd("Lazy reload mason-lspconfig.nvim")
+                        vim.g.lsp_config_fixed = true
+                    end
+                end,
+            })
+
             vim.diagnostic.config({ virtual_text = { source = "always" } })
 
             -- Mason LSP
