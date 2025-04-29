@@ -75,8 +75,8 @@
     "private-repo": {
       "flake": false,
       "locked": {
-        "lastModified": 1743599116,
-        "narHash": "sha256-UjodCeMxJa1VvH3VNh0K+TsCS2E6j7aKAbx6HGOFk/I=",
+        "lastModified": 1745931001,
+        "narHash": "sha256-2UoJfIgrrjPz9th+pKCKSZqbGWzEs1S1rt2EXvn616c=",
         "path": "/home/ubuntu/scratchpad",
         "type": "path"
       },

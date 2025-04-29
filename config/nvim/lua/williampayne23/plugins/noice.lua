@@ -1,7 +1,7 @@
 return {
     {
         "folke/noice.nvim",
-        priority = 0,
+        event = "CmdlineEnter",
         opts = {
             -- you can enable a preset for easier configuration
             presets = {

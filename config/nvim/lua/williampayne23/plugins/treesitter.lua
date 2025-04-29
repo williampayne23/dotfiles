@@ -217,13 +217,6 @@ return {
                     ['>='] = '<=',
                 },
                 use_default_keymaps = false
-                -- keymaps = {
-                --
-                --     ['<leader>ns'] = 'swap_with_right',
-                --     ['<leader>Ns'] = 'swap_with_left',
-                --     ['<space>nS'] = 'swap_with_right_with_opp',
-                --     ['<space>NS,'] = 'swap_with_left_with_opp',
-                -- },
             })
 
             vim.keymap.set("n", "<leader>N", "<Nop>", { desc = "Swap Previous" })

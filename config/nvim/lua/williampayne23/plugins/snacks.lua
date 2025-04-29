@@ -28,13 +28,13 @@ return {
         },
         quickfile = {},
         scratch = {},
-        -- scroll = {},
         terminal = {},
         words = {},
         zen = {}
     },
     lazy = false,
     keys = {
+        -- REFERENCES
         {
             "]r",
             function()
@@ -55,14 +55,16 @@ return {
             end,
             desc = "Previous Ref"
         },
-        -- { "<leader>t",  function() Snacks.terminal.toggle() end,  desc = "Toggle Terminal" },
-        { "<leader>pv", function() Snacks.explorer.open() end,      desc = "File Explorer" },
-        { "<leader>pf", function() Snacks.picker.files() end,       desc = "Find Files" },
-        { "<leader>pg", function() Snacks.picker.git_files() end,   desc = "Find Git Files" },
-        { "<leader>ps", function() Snacks.picker.git_grep() end,    desc = "Grep Files" },
-        { "<leader>pS", function() Snacks.picker.lsp_symbols() end, desc = "Find Symbols" },
-        { "<leader>pp", function() Snacks.picker.pickers() end,     desc = "Find Symbols" },
-        { "<leader>p",  "<Nop>",                                    desc = "Pickers" }
+
+        --- PICKERS
+        { "<leader>p",  "<Nop>",                                      desc = "Pickers" },
+        { "<leader>pv", function() Snacks.explorer.open() end,        desc = "File Explorer" },
+        { "<leader>pf", function() Snacks.picker.files() end,         desc = "Find Files" },
+        { "<leader>pg", function() Snacks.picker.git_files() end,     desc = "Find Git Files" },
+        { "<leader>ps", function() Snacks.picker.git_grep() end,      desc = "Grep Files" },
+        { "<leader>pS", function() Snacks.picker.lsp_symbols() end,   desc = "Find Symbols" },
+        { "<leader>pn", function() Snacks.picker.notifications() end, desc = "Find Notification" },
+        { "<leader>pp", function() Snacks.picker.pickers() end,       desc = "Find Symbols" },
     },
     init = function()
         local Snacks = require("snacks")
