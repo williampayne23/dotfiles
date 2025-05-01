@@ -43,3 +43,7 @@ vim.keymap.set("n", "<C-w>-", "<cmd>split<CR>", { desc = "Horizontal Split" })
 
 vim.keymap.set("n", "|", ":%!", { desc = "Pipe" })
 vim.keymap.set("v", "|", ":%!", { desc = "Pipe" })
+
+-- More convenient indenting
+vim.keymap.set("v", ">>", ">gv", { desc = "Indent Right" })
+vim.keymap.set("v", "<<", "<gv", { desc = "Indent Left" })
