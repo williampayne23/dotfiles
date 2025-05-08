@@ -50,6 +50,22 @@ s () {
         git switch -c $branch_name
 }
 
+_s_autocomplete() {
+    # All branch names
+    # + all remote branches
+    # + all branches that start with will/ with the will/ prefix removed
+    branches="$(git for-each-ref --format='%(refname:short)' refs/heads)"
+    remote_branches="$(git for-each-ref --format='%(refname:short)' refs/remotes/origin)"
+    will_branches="$(git for-each-ref --format='%(refname:short)' refs/heads | grep '^will/' | sed 's/will\///')"
+
+    COMPREPLY=()
+    COMPREPLY+=($branches)
+    COMPREPLY+=($remote_branches)
+    COMPREPLY+=($will_branches)
+}
+
+complete -F _s_autocomplete s
+
 alias gfp='git push --force-with-lease'
 
 # Check if I have unpushed work
