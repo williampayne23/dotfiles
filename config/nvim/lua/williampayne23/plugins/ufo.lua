@@ -58,7 +58,7 @@ return {
             if not winid then
                 -- choose one of coc.nvim and nvim lsp
                 -- vim.fn.CocActionAsync('definitionHover')     -- coc.nvim
-                vim.lsp.buf.hover()
+                vim.lsp.buf.hover { border = "single", max_height = 25, max_width = 120 }
             end
         end)
     end

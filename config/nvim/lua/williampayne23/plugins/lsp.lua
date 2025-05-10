@@ -74,6 +74,23 @@ return {
             })
 
             vim.diagnostic.config({ virtual_text = { source = "always" } })
+            -- require('lspconfig').rust_analyzer.setup({
+            --     settings = {
+            --         ["rust-analyzer"] = {
+            --             checkOnSave = {
+            --                 command = "clippy",
+            --             },
+            --             cargo = {
+            --                 buildScripts = {
+            --                     enable = true,
+            --                 },
+            --                 proc_macro = {
+            --                     enable = true,
+            --                 },
+            --             }
+            --         },
+            --     },
+            -- })
 
             -- Mason LSP
             require('mason-lspconfig').setup({
