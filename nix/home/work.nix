@@ -19,6 +19,7 @@
     ++ lib.optional (builtins.pathExists "${private-repo}/hidden_nix_config/work.nix") "${private-repo}/hidden_nix_config/work.nix";
 
   home.packages = [
+    pkgs.quarto
   ];
 
   home.sessionPath = [
