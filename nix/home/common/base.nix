@@ -28,7 +28,7 @@ in {
     pkgs.fzf
     pkgs.gh
     pkgs.neovim
-    pkgs.nodejs_23
+    pkgs.nodejs_24
     pkgs.claude-code
     pkgs.ripgrep
     pkgs.starship

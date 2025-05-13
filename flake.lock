@@ -3,11 +3,11 @@
     "color-schemes": {
       "flake": false,
       "locked": {
-        "lastModified": 1740624158,
-        "narHash": "sha256-fkKZj/S0U1SBUZzjKDxbKTrtvbABTu75XW4itDyG8HE=",
+        "lastModified": 1747086409,
+        "narHash": "sha256-pzW6T8CtguSUqrllaLnN6Mvn6ePrJy5HEtD1OUekb9M=",
         "owner": "mbadolato",
         "repo": "iTerm2-Color-Schemes",
-        "rev": "e21d5ffd19605741d0e3e19d7c5a8c6c25648673",
+        "rev": "f979d8b1959d004390acede9f298be389cb9a1e0",
         "type": "github"
       },
       "original": {
@@ -23,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741791118,
-        "narHash": "sha256-4Y427uj0eql4yRU5rely3EcOlB9q457UDbG9omPtXiA=",
+        "lastModified": 1747106332,
+        "narHash": "sha256-mOdRWJzJAMp0hF8aSResyp8BeOO5VoSng1uqtEq+8xI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "18780912345970e5b546b1b085385789b6935a83",
+        "rev": "535a541b429c1e89f0955c160df1d6d2bfeaf802",
         "type": "github"
       },
       "original": {
@@ -43,11 +43,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741794429,
-        "narHash": "sha256-4J46D8sOZ3UroVyGYKYMU3peq9gv0tjRX0KbZihWhhw=",
+        "lastModified": 1747138802,
+        "narHash": "sha256-Ou4zV3OskaDKlkuiM2VT+1w/xceXoZ5RRM4ZuW7n5+I=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "2fb6b09b678a1ab258cf88e3ea4a966edceec6a8",
+        "rev": "f88be00227161a1e9369a1d199f452dd5d720feb",
         "type": "github"
       },
       "original": {
@@ -58,11 +58,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1741708242,
-        "narHash": "sha256-cNRqdQD4sZpN7JLqxVOze4+WsWTmv2DGH0wNCOVwrWc=",
+        "lastModified": 1747060738,
+        "narHash": "sha256-ByfPRQuqj+nhtVV0koinEpmJw0KLzNbgcgi9EF+NVow=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b62d2a95c72fb068aecd374a7262b37ed92df82b",
+        "rev": "eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1",
         "type": "github"
       },
       "original": {
@@ -75,8 +75,8 @@
     "private-repo": {
       "flake": false,
       "locked": {
-        "lastModified": 1745931001,
-        "narHash": "sha256-2UoJfIgrrjPz9th+pKCKSZqbGWzEs1S1rt2EXvn616c=",
+        "lastModified": 1747040558,
+        "narHash": "sha256-4RuTu7bLP5MAABGxnV64tanViUrawkj7qnu5UOZLPU4=",
         "path": "/home/ubuntu/scratchpad",
         "type": "path"
       },
