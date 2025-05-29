@@ -55,7 +55,7 @@ _s_autocomplete() {
     # + all remote branches
     # + all branches that start with will/ with the will/ prefix removed
     branches="$(git for-each-ref --format='%(refname:short)' refs/heads)"
-    remote_branches="$(git for-each-ref --format='%(refname:short)' refs/remotes/origin)"
+    remote_branches="$(git for-each-ref --format='%(refname:short)' refs/remotes/origin | sed 's/^origin\///')"
     will_branches="$(git for-each-ref --format='%(refname:short)' refs/heads | grep '^will/' | sed 's/will\///')"
 
     COMPREPLY=()
