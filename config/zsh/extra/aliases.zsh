@@ -68,8 +68,46 @@ complete -F _s_autocomplete s
 
 alias gfp='git push --force-with-lease'
 
+git_branch_status() {
+    # Check if we're in a git repository
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        echo "Error: Not in a git repository"
+        return 1
+    fi
+
+    ISSUES=0
+    # Check for uncommitted changes in current branch
+    if ! git diff --quiet --exit-code || ! git diff --cached --quiet --exit-code; then
+        echo "Warning: Uncommitted changes in current branch ($(git branch --show-current))"
+        ISSUES=1
+    fi
+
+
+    # Get all local branches
+    while IFS= read -r branch; do
+        # Get the upstream branch
+        upstream=$(git rev-parse --abbrev-ref "$branch@{upstream}" 2>/dev/null)
+        
+        if [ $? -eq 0 ]; then
+            # Check if local branch is ahead
+            ahead=$(git rev-list --count "$upstream..$branch" 2>/dev/null)
+            if [ "$ahead" -gt 0 ]; then
+                ISSUES=1
+                echo "$branch [ahead $ahead]"
+            fi
+        else
+            # No upstream tracking
+            ISSUES=1
+            echo "$branch [not tracked]"
+        fi
+    done < <(git for-each-ref --format='%(refname:short)' refs/heads/)
+    return $ISSUES
+}
+
 # Check if I have unpushed work
 workcheck () {
+    # get current directory
+    current_dir=$(pwd)
     # find all .git folders one level down
     find . -maxdepth 2 -type d -name .git | while read gitdir; do
         # get the directory containing the .git folder
@@ -77,12 +115,11 @@ workcheck () {
         # cd into the directory
         cd $dir
         # print the directory name
-        echo $dir
-        # quietly fetch the latest changes
-        git fetch --quiet
-        # list the unpushed work
-        git for-each-ref --format="%(refname:short) %(upstream:track) %(upstream:remotename)" refs/heads
-        # cd back to the original directory
-        cd -
+        answer=$(git_branch_status)
+        if [ $? -eq 1 ]; then
+            echo "$dir:"
+            echo "$answer"
+        fi
+        cd $current_dir
     done
 }
