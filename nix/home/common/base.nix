@@ -1,6 +1,8 @@
 {
   config,
   pkgs,
+  mcp-hub,
+  arch,
   ...
 }: let
   customPoetry = pkgs.writeShellScriptBin "poetry" ''
@@ -19,6 +21,7 @@ in {
   nixpkgs.config.allowUnfree = true;
   home.packages = [
     customPoetry
+    mcp-hub.packages."${arch}".default
     pkgs.alejandra
     pkgs.atuin
     pkgs.bat

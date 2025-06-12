@@ -3,6 +3,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
+    mcp-hub.url = "github:ravitemer/mcp-hub";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +31,7 @@
     home-manager,
     color-schemes,
     private-repo,
+    mcp-hub,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
@@ -48,7 +50,10 @@
             # Include so we can configure ghostty
           ]
           ++ extraModules;
-        extraSpecialArgs = inputs // {inherit private-repo;};
+        extraSpecialArgs = inputs // {inherit private-repo;} // {
+          inherit mcp-hub;
+          inherit arch;
+        };
       };
   in {
     apps."aarch64-darwin".default = let

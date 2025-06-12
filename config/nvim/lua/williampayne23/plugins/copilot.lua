@@ -30,16 +30,21 @@ return {
     {
         "yetone/avante.nvim",
         event = "InsertEnter",
-        version = false, -- Never set this value to "*"! Never!
-        opts = {
-            provider = "copilot",
-            openai = {
-                endpoint = "https://api.openai.com/v1",
-                model = "gpt-4o",             -- your desired model (or use gpt-4o, etc.)
-                timeout = 30000,              -- Timeout in milliseconds, increase this for reasoning models
-                temperature = 0,
-                max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-                --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+        config = {
+            provider = "claude-proxy",
+            providers = {
+                ["openai_proxy"] = {
+                    __inherited_from = "openai",
+                    endpoint = "https://openai-proxy.i.apps.ai-safety-institute.org.uk/v1",
+                    model = "o4-mini",
+                    api_key_name = "OPENAI_RESOLVED_KEY", -- environment variable name for your OpenAI API key
+                },
+                ["claude-proxy"] = {
+                    __inherited_from = "claude",
+                    endpoint = "https://anthropic-proxy.i.apps.ai-safety-institute.org.uk",
+                    model = "claude-sonnet-4-0",
+                    api_key_name = "ANTHROPIC_RESOLVED_KEY",
+                },
             },
             mappings = {
                 focus = "<leader>aq",
@@ -47,8 +52,17 @@ return {
                     add_current = "<leader>af",
                 }
 
-            }
-
+            },
+            system_prompt = function()
+                local hub = require("mcphub").get_hub_instance()
+                return hub and hub:get_active_servers_prompt() or ""
+            end,
+            -- Using function prevents requiring mcphub before it's loaded
+            custom_tools = function()
+                return {
+                    require("mcphub.extensions.avante").mcp_tool(),
+                }
+            end,
         },
         keys = {
             { "<leader>ac", "<cmd>AvanteClear<CR>", mode = "n", silent = true,  desc = "Clear Chat" },
@@ -73,6 +87,19 @@ return {
                 },
                 ft = { "markdown", "Avante" },
             },
+            {
+                "ravitemer/mcphub.nvim",
+                dependencies = {
+                    "nvim-lua/plenary.nvim",
+                },
+                config = {
+                    extensions = {
+                        avante = {
+                            make_slash_commands = true,
+                        }
+                    },
+                }
+            }
         },
     },
 }
