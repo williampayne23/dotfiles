@@ -3,11 +3,11 @@
     "color-schemes": {
       "flake": false,
       "locked": {
-        "lastModified": 1747086409,
-        "narHash": "sha256-pzW6T8CtguSUqrllaLnN6Mvn6ePrJy5HEtD1OUekb9M=",
+        "lastModified": 1750949787,
+        "narHash": "sha256-tqLjqX8KdZJibn6H/NMRmnPasnsglbpnFFZ71MWBngA=",
         "owner": "mbadolato",
         "repo": "iTerm2-Color-Schemes",
-        "rev": "f979d8b1959d004390acede9f298be389cb9a1e0",
+        "rev": "6fa671fdc1daf1fcfa025cb960ffa3e7373a2ed8",
         "type": "github"
       },
       "original": {
@@ -44,11 +44,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747106332,
-        "narHash": "sha256-mOdRWJzJAMp0hF8aSResyp8BeOO5VoSng1uqtEq+8xI=",
+        "lastModified": 1751336185,
+        "narHash": "sha256-ptnVr2x+sl7cZcTuGx/0BOE2qCAIYHTcgfA+/h60ml0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "535a541b429c1e89f0955c160df1d6d2bfeaf802",
+        "rev": "96354906f58464605ff81d2f6c2ea23211cbf051",
         "type": "github"
       },
       "original": {
@@ -63,11 +63,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1749142017,
-        "narHash": "sha256-g5r0meIJ+iBOP3TkqEwPTuN4B0aKegV4ZsgfOMrDTRg=",
+        "lastModified": 1750959734,
+        "narHash": "sha256-xGgSqrs2mvs82YzqLZnvZqy2Zw8WFhlRXQwr79Gc4j4=",
         "owner": "ravitemer",
         "repo": "mcp-hub",
-        "rev": "03c6abf6941595bbc3995efb042b745f8a515e4d",
+        "rev": "1925147953a4c85d9f2385c217fb6c37d0e73f42",
         "type": "github"
       },
       "original": {
@@ -83,11 +83,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747138802,
-        "narHash": "sha256-Ou4zV3OskaDKlkuiM2VT+1w/xceXoZ5RRM4ZuW7n5+I=",
+        "lastModified": 1751313918,
+        "narHash": "sha256-HsJM3XLa43WpG+665aGEh8iS8AfEwOIQWk3Mke3e7nk=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "f88be00227161a1e9369a1d199f452dd5d720feb",
+        "rev": "e04a388232d9a6ba56967ce5b53a8a6f713cdfcf",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1747060738,
-        "narHash": "sha256-ByfPRQuqj+nhtVV0koinEpmJw0KLzNbgcgi9EF+NVow=",
+        "lastModified": 1751349533,
+        "narHash": "sha256-5XRh0mB06/7WYDLu9ZXsx1GhyvvNVZDtPyg34sUCLJs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1",
+        "rev": "bdfd0f2afcf764e531d0960c821ab070a6174b15",
         "type": "github"
       },
       "original": {
@@ -131,8 +131,8 @@
     "private-repo": {
       "flake": false,
       "locked": {
-        "lastModified": 1749463236,
-        "narHash": "sha256-RM8WUy4QvCJHQ70ahQmWeO0hsca7ybPnbajoaX3QdZc=",
+        "lastModified": 1751296285,
+        "narHash": "sha256-S856mnjupXWClsPYFDgOMqWZK5paH/AIbkpn1umJb38=",
         "path": "/home/ubuntu/scratchpad",
         "type": "path"
       },
