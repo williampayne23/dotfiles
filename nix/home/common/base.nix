@@ -35,7 +35,6 @@ in {
     pkgs.claude-code
     pkgs.ripgrep
     pkgs.starship
-    pkgs.thefuck
     pkgs.tmux
     pkgs.uv
     pkgs.zoxide
