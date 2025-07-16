@@ -1,3 +1,8 @@
+# If home is not ubuntu this is likely not a work machine
+if [[ "$HOME" != "/home/ubuntu" ]]; then
+    return 0
+fi
+
 if ! command -v aisitools &> /dev/null; then
     uv tool install git+ssh://git@github.com/AI-Safety-Institute/aisi-inspect-tools.git
 fi

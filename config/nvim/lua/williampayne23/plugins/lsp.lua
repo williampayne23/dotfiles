@@ -94,7 +94,7 @@ return {
 
             -- Mason LSP
             require('mason-lspconfig').setup({
-                ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'basedpyright', 'nil_ls' },
+                ensure_installed = { 'ts_ls', 'rust_analyzer', 'lua_ls', 'ruff', 'basedpyright', 'nil_ls', 'terraformls' },
                 automatic_installation = true,
                 handlers = {
                     function(server_name)

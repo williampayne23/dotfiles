@@ -6,6 +6,8 @@
 }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
+
+  system.primaryUser = "willpayne";
   environment.systemPackages = [];
 
   ids.gids.nixbld = 350;

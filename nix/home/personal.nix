@@ -24,11 +24,14 @@
   # environment.
   home.packages = [
     # Is for Mac only GUI packages
+    pkgs.terraform
+    pkgs.ansible
     pkgs.raycast
     pkgs.alacritty
     pkgs.aerospace
     pkgs.jankyborders
     pkgs.sketchybar
+    pkgs.yoink
     # Fonts
     pkgs.sketchybar-app-font
     pkgs.nerd-fonts.jetbrains-mono

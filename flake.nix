@@ -15,13 +15,6 @@
       url = "github:mbadolato/iTerm2-Color-Schemes";
       flake = false;
     };
-    # For private work configurations which shouldn't be exposed in this repo
-    # Local and remote are used to allow for local development
-    # (Local will be used by default)
-    private-repo = {
-      url = "path:/home/ubuntu/scratchpad";
-      flake = false;
-    };
   };
 
   outputs = {
@@ -30,7 +23,6 @@
     nixpkgs,
     home-manager,
     color-schemes,
-    private-repo,
     mcp-hub,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
@@ -50,10 +42,12 @@
             # Include so we can configure ghostty
           ]
           ++ extraModules;
-        extraSpecialArgs = inputs // {inherit private-repo;} // {
-          inherit mcp-hub;
-          inherit arch;
-        };
+        extraSpecialArgs =
+          inputs
+          // {
+            inherit mcp-hub;
+            inherit arch;
+          };
       };
   in {
     apps."aarch64-darwin".default = let
@@ -62,8 +56,7 @@
         name = "init";
         runtimeInputs = with pkgs; [git curl bash];
         text = ''
-          # bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles
+          sudo nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles
           nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
           /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
         '';
@@ -77,9 +70,6 @@
       init = pkgs.writeShellApplication {
         name = "init";
         text = ''
-          if [ -d "/home/ubuntu/scratchpad" ]; then
-            nix flake --extra-experimental-features "nix-command flakes" update --update-input private-repo
-          fi
           nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
         '';
       };

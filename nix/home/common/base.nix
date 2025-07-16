@@ -93,7 +93,6 @@ in {
   programs.zsh.initExtra = ''
     PATH=$HOME/bin:$HOME/.local/bin:$PATH
     source $HOME/.config/zsh/zshinit.zsh
-    eval $(thefuck --alias)
   '';
 
   # Let Home Manager install and manage itself.

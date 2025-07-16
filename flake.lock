@@ -44,11 +44,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751336185,
-        "narHash": "sha256-ptnVr2x+sl7cZcTuGx/0BOE2qCAIYHTcgfA+/h60ml0=",
+        "lastModified": 1751823746,
+        "narHash": "sha256-Yg3bcdaATDavXBRJWmxwNgmlx5mvDtUH3rqu8mDZlbc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "96354906f58464605ff81d2f6c2ea23211cbf051",
+        "rev": "9d21f9985e279bb5d35dbf03a25644ed6e954d8c",
         "type": "github"
       },
       "original": {
@@ -63,11 +63,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1750959734,
-        "narHash": "sha256-xGgSqrs2mvs82YzqLZnvZqy2Zw8WFhlRXQwr79Gc4j4=",
+        "lastModified": 1751652238,
+        "narHash": "sha256-PEDrcNzwoTbKx7ptsJJQvEO0J40VC8FUMg4gCQ0HGBI=",
         "owner": "ravitemer",
         "repo": "mcp-hub",
-        "rev": "1925147953a4c85d9f2385c217fb6c37d0e73f42",
+        "rev": "5cdd5719c70d98e20e23ae4301338d897e862ec3",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1751349533,
-        "narHash": "sha256-5XRh0mB06/7WYDLu9ZXsx1GhyvvNVZDtPyg34sUCLJs=",
+        "lastModified": 1751786137,
+        "narHash": "sha256-lIlUKVGCGsh0Q2EA7/6xRtKUZjaQ/ur8uUyY+MynHXQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bdfd0f2afcf764e531d0960c821ab070a6174b15",
+        "rev": "ceb24d94c6feaa4e8737a8e2bd3cf71c3a7eaaa0",
         "type": "github"
       },
       "original": {
@@ -128,27 +128,13 @@
         "type": "github"
       }
     },
-    "private-repo": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1751296285,
-        "narHash": "sha256-S856mnjupXWClsPYFDgOMqWZK5paH/AIbkpn1umJb38=",
-        "path": "/home/ubuntu/scratchpad",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/ubuntu/scratchpad",
-        "type": "path"
-      }
-    },
     "root": {
       "inputs": {
         "color-schemes": "color-schemes",
         "home-manager": "home-manager",
         "mcp-hub": "mcp-hub",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_2",
-        "private-repo": "private-repo"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
