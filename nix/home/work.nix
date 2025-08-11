@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  private-repo,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -15,8 +14,7 @@
   imports =
     [
       ./common/base.nix
-    ]
-    ++ lib.optional (builtins.pathExists "${private-repo}/hidden_nix_config/work.nix") "${private-repo}/hidden_nix_config/work.nix";
+    ];
 
   home.packages = [
     pkgs.quarto
