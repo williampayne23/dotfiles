@@ -1,5 +1,6 @@
 #!/bin/bash
 
+hostname=$(hostname | sed s/will-//)
 session=$(tmux display-message -p '#S' | awk '{print toupper($0)}' )
 last_window=$(tmux list-windows -F "#I" | tail -1)
 out=""
@@ -15,7 +16,7 @@ if [[ $vimbridge_color == "" ]]; then
 fi
 
 if [[ $1 == "1" ]]; then
-    out=${session}
+    out="${hostname} ${session}"
 fi
 
 if [[ $3 == "active" ]]; then
