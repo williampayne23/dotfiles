@@ -12,6 +12,10 @@ return {
             {
                 'williamboman/mason.nvim',
                 opts = {
+                    registries = {
+                        "github:mason-org/mason-registry",
+                        "github:Crashdummyy/mason-registry",
+                    },
                     ui = {
                         border = "rounded",
                         icons = {
@@ -155,6 +159,17 @@ return {
             require('lspconfig.ui.windows').default_options.border = 'single'
         end
 
+    },
+    {
+        "seblyng/roslyn.nvim",
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        opts = {},
+        config = function()
+            require("roslyn").setup()
+            vim.lsp.config("roslyn", {
+            })
+        end
     },
     {
         "MysticalDevil/inlay-hints.nvim",

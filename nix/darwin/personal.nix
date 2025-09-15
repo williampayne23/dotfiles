@@ -24,6 +24,8 @@ in {
     "sf-symbols"
     "modrinth"
     "obsidian"
+    "unity-hub"
+    "visual-studio"
   ];
   homebrew.brews = [];
   nix.settings.trusted-users = ["will"];
