@@ -25,7 +25,10 @@ in {
     pkgs.alejandra
     pkgs.atuin
     pkgs.bat
-    pkgs.cargo
+    # pkgs.cargo
+    pkgs.cargo-generate
+    pkgs.rustc
+    pkgs.rustup
     pkgs.cmake
     pkgs.fd
     pkgs.fzf
