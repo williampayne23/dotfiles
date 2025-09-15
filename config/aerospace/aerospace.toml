@@ -64,6 +64,10 @@ if.app-id = 'org.alacritty'
 run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
+if.window-title-regex-substring = 'bevy'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.raycast.macos'
 run = 'layout floating'
 # Possible values: (qwerty|dvorak)
