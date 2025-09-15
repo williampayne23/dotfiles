@@ -31,16 +31,16 @@ in {
   launchd = {
     user = {
       agents = {
-        sketchybar = make_named_plist {
-          name = "sketchybar";
-          text = "sketchybar";
-          runtimeInputs = [pkgs.sketchybar pkgs.aerospace];
-          props = {
-            KeepAlive = true;
-            RunAtLoad = true;
-            StandardOutPath = "/tmp/skeychybat_will.out.log";
-          };
-        };
+        # sketchybar = make_named_plist {
+        #   name = "sketchybar";
+        #   text = "sketchybar";
+        #   runtimeInputs = [pkgs.sketchybar pkgs.aerospace];
+        #   props = {
+        #     KeepAlive = true;
+        #     RunAtLoad = true;
+        #     StandardOutPath = "/tmp/skeychybat_will.out.log";
+        #   };
+        # };
       };
     };
   };

@@ -25,15 +25,19 @@
   home.packages = [
     # Is for Mac only GUI packages
     pkgs.terraform
+    pkgs.blender
+    pkgs.neovide
+    pkgs.ffmpeg
+    pkgs.dotnetCorePackages.sdk_9_0_1xx-bin
     pkgs.ansible
     pkgs.raycast
     pkgs.alacritty
-    pkgs.aerospace
-    pkgs.jankyborders
-    pkgs.sketchybar
+    # pkgs.aerospace
+    # pkgs.jankyborders
+    # pkgs.sketchybar
     pkgs.yoink
     # Fonts
-    pkgs.sketchybar-app-font
+    # pkgs.sketchybar-app-font
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
@@ -68,15 +72,15 @@
   };
 
   home.file = {
-    ".config/aerospace" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace";
-      recursive = true;
-      onChange = "${pkgs.aerospace}/bin/aerospace reload-config";
-    };
-
-    ".config/sketchybar" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/sketchybar";
-      recursive = true;
-    };
+    # ".config/aerospace" = {
+    #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace";
+    #   recursive = true;
+    #   onChange = "${pkgs.aerospace}/bin/aerospace reload-config";
+    # };
+    #
+    # ".config/sketchybar" = {
+    #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/sketchybar";
+    #   recursive = true;
+    # };
   };
 }
