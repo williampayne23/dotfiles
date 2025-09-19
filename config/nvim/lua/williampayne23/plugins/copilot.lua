@@ -2,7 +2,6 @@ return {
     {
         "zbirenbaum/copilot.lua",
         event = "InsertEnter",
-        -- enable = false,
         keys = {
             {
                 "<Right>",
