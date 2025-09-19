@@ -1,7 +1,3 @@
--- if os.getenv("ZELLIJ") == "0" then
--- CursorLineNrCursorLineNr CursorLineNr   vim.g.tpipeline_refreshcmd = "kitty @ set-tab-title Master test"
--- end
-
 vim.g.tmux_navigator_no_mappings = 1
 
 if vim.env.PROF then

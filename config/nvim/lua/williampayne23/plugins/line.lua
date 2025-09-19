@@ -8,10 +8,6 @@ local function show_macro_recording()
 end
 
 return {
-    -- Puts the vim pipeline in tmux
-    {
-        "vimpostor/vim-tpipeline",
-    },
     {
         "nvim-lualine/lualine.nvim",
         config = function()
@@ -120,7 +116,6 @@ return {
                 tabline = {},
                 extensions = {},
             }
-            pcall(function() vim.cmd("Lazy reload vim-tpipeline"); end)
         end
     },
 }

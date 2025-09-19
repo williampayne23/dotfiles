@@ -26,11 +26,12 @@ return {
                 }
             }
         },
+        profiler = {},
         quickfile = {},
         scratch = {},
         terminal = {},
         words = {},
-        zen = {}
+        zen = {},
     },
     lazy = false,
     keys = {
@@ -88,5 +89,6 @@ return {
             end,
             notify = false
         }):map("<leader>s")
+        Snacks.toggle.profiler():map("<leader>pP")
     end
 }
