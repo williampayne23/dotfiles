@@ -14,8 +14,30 @@ vim.opt.rtp:prepend(lazypath)
 -- Example using a list of specs with the default options
 vim.g.mapleader = " "      -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.maplocalleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
-require("lazy").setup("williampayne23.plugins", {
+
+require("lazy").setup({
+    { import = "williampayne23.plugins" },
+    { import = "williampayne23.plugins.lsp" },
+}, {
+    change_detection = {
+        enabled = false,
+    },
     ui = {
-        border = "rounded"
-    }
+        border = "rounded",
+    },
+    performance = {
+        rtp = {
+            -- Disable VIM's default plugins that are superseded by newer plugins
+            disabled_plugins = {
+                "gzip",
+                "matchit",
+                "matchparen",
+                "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
 })

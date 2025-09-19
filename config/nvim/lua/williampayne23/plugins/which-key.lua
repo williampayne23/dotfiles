@@ -15,7 +15,7 @@ return {
         ---@class wk.Opts
         opts = {
             win = {
-                border = "single",        -- none, single, double, shadow
+                border = "rounded",       -- none, single, double, shadow
                 padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
             },
             layout = {

@@ -83,6 +83,12 @@ return {
                 'MeanderingProgrammer/render-markdown.nvim',
                 opts = {
                     file_types = { "markdown", "Avante" },
+                    code = {
+                        highlight_info = "FloatNormal",
+                        highlight = "FloatNormal",
+                        highlight_fallback = "FloatNormal",
+                        style = "normal"
+                    }
                 },
                 ft = { "markdown", "Avante" },
             },
