@@ -1,7 +1,7 @@
 return {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1,
+    priority = 1000,
     config = function()
         local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
         ---@diagnostic disable-next-line: duplicate-set-field
