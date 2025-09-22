@@ -21,13 +21,12 @@ return {
 
         mason_lspconfig.setup({
             ensure_installed = {
-                'ts_ls',
-                'rust_analyzer',
-                'lua_ls',
-                'nil_ls',
-                'terraformls',
-                -- 'basedpyright',
-                'pyright',
+                "ts_ls",
+                "rust_analyzer",
+                "lua_ls",
+                "nil_ls",
+                "terraformls",
+                "pyright",
             },
 
             automatic_installation = true, -- Automatically run vim.lsp.enable()
@@ -37,14 +36,13 @@ return {
             ensure_installed = {
                 -- Formatters
                 "prettier", -- Javascript et al
-                "stylua",   -- Lua
+                "stylua", -- Lua
 
-                "ruff",     -- Python
-                "shfmt",    -- Shell
+                "ruff", -- Python
+                "shfmt", -- Shell
 
                 -- Linters
-                "eslint_d",   -- Javascript et al
-                "luacheck",   -- Lua
+                "eslint_d", -- Javascript et al
                 "shellcheck", -- Shell
             },
         })
