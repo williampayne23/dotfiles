@@ -1,7 +1,7 @@
 -- Folds
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
-    local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+    local suffix = (" 󰁂 %d "):format(endLnum - lnum)
     local sufWidth = vim.fn.strdisplaywidth(suffix)
     local targetWidth = width - sufWidth
     local curWidth = 0
@@ -17,49 +17,49 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
             chunkWidth = vim.fn.strdisplaywidth(chunkText)
             -- str width returned from truncate() may less than 2nd argument, need padding
             if curWidth + chunkWidth < targetWidth then
-                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
             end
             break
         end
         curWidth = curWidth + chunkWidth
     end
-    table.insert(newVirtText, { suffix, 'MoreMsg' })
+    table.insert(newVirtText, { suffix, "MoreMsg" })
     return newVirtText
 end
 
 return {
     -- Folds
-    'kevinhwang91/nvim-ufo',
+    "kevinhwang91/nvim-ufo",
     dependencies = {
-        'kevinhwang91/promise-async',
-        'neovim/nvim-lspconfig'
+        "kevinhwang91/promise-async",
+        "neovim/nvim-lspconfig",
     },
-    event = 'BufReadPost',
+    event = "BufReadPost",
     config = function()
         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
         vim.o.foldlevelstart = 99
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities.textDocument.foldingRange = {
             dynamicRegistration = false,
-            lineFoldingOnly = true
+            lineFoldingOnly = true,
         }
-        local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+        local language_servers = vim.lsp.config.util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
         for _, ls in ipairs(language_servers) do
-            require('lspconfig')[ls].setup({
-                capabilities = capabilities
+            require("lspconfig")[ls].setup({
+                capabilities = capabilities,
                 -- you can add other fields for setting up lsp server in this table
             })
         end
-        require('ufo').setup({
-            fold_virt_text_handler = handler
+        require("ufo").setup({
+            fold_virt_text_handler = handler,
         })
-        vim.keymap.set('n', 'K', function()
-            local winid = require('ufo').peekFoldedLinesUnderCursor()
+        vim.keymap.set("n", "K", function()
+            local winid = require("ufo").peekFoldedLinesUnderCursor()
             if not winid then
                 -- choose one of coc.nvim and nvim lsp
                 -- vim.fn.CocActionAsync('definitionHover')     -- coc.nvim
-                vim.lsp.buf.hover { border = "single", max_height = 25, max_width = 120 }
+                vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
             end
         end)
-    end
+    end,
 }

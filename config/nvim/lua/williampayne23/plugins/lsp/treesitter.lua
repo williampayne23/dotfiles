@@ -1,22 +1,23 @@
 return {
     {
-        'leissa/vim-acme',
-        ft = 'asm68k'
+        "leissa/vim-acme",
+        ft = "asm68k",
     },
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-context',
-            'JoosepAlviste/nvim-ts-context-commentstring',
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            'Wansmer/sibling-swap.nvim',
+            { "nvim-treesitter/nvim-treesitter-context",     lazy = true },
+            { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+            { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
+            { "Wansmer/sibling-swap.nvim",                   lazy = true },
         },
+        lazy = true,
         build = ":TSUpdate",
         event = { "BufReadPre", "BufNewFile" },
         config = function(_, _)
             local treesitter = require("nvim-treesitter.configs")
 
-            treesitter.setup {
+            treesitter.setup({
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
                 ensure_installed = {
                     "json",
@@ -65,26 +66,26 @@ return {
                     additional_vim_regex_highlighting = false,
                 },
                 indent = {
-                    enable = true
+                    enable = true,
                 },
-            }
+            })
             vim.g.skip_ts_context_commentstring_module = true
-            require 'ts_context_commentstring'.setup({})
-            require 'treesitter-context'.setup {
-                enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
-                max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
-                min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+            require("ts_context_commentstring").setup({})
+            require("treesitter-context").setup({
+                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+                min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
                 line_numbers = true,
                 multiline_threshold = 20, -- Maximum number of lines to show for a single context
-                trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-                mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
+                trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+                mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
                 -- Separator between context and content. Should be a single character string, like '-'.
                 -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
                 separator = nil,
-                zindex = 1,      -- The Z-index of the context window
+                zindex = 1, -- The Z-index of the context window
                 on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-            }
-        end
+            })
+        end,
     },
     {
         "nvim-treesitter/playground",
@@ -172,7 +173,7 @@ return {
                     },
                 },
             })
-            local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+            local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
             -- Repeat movement with ; and ,
             -- ensure ; goes forward and , goes backward regardless of the last direction
@@ -188,35 +189,35 @@ return {
             vim.keymap.set({ "x", "n", "o" }, "F", ts_repeat_move.builtin_F)
             vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
             vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
-        end
+        end,
     },
     {
         "Wansmer/sibling-swap.nvim",
         lazy = true,
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require('sibling-swap').setup({
+            require("sibling-swap").setup({
                 allowed_separators = {
-                    ',',
-                    ';',
-                    'and',
-                    'or',
-                    '&&',
-                    '&',
-                    '||',
-                    '|',
-                    '==',
-                    '===',
-                    '!=',
-                    '!==',
-                    '-',
-                    '+',
-                    ['<'] = '>',
-                    ['<='] = '>=',
-                    ['>'] = '<',
-                    ['>='] = '<=',
+                    ",",
+                    ";",
+                    "and",
+                    "or",
+                    "&&",
+                    "&",
+                    "||",
+                    "|",
+                    "==",
+                    "===",
+                    "!=",
+                    "!==",
+                    "-",
+                    "+",
+                    ["<"] = ">",
+                    ["<="] = ">=",
+                    [">"] = "<",
+                    [">="] = "<=",
                 },
-                use_default_keymaps = false
+                use_default_keymaps = false,
             })
 
             vim.keymap.set("n", "<leader>N", "<Nop>", { desc = "Swap Previous" })
@@ -240,6 +241,5 @@ return {
             vim.keymap.set("n", "<space>ns", swap_with_right, { expr = true, desc = "a list/comparison/property" })
             vim.keymap.set("n", "<space>Ns", swap_with_left, { expr = true, desc = "a list/comparison/property" })
         end,
-    }
-
+    },
 }

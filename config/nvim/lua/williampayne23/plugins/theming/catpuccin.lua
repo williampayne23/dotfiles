@@ -33,18 +33,17 @@ return {
             integrations = {
                 notify = true,
                 which_key = true,
-                telescope = true,
                 harpoon = true,
                 treesitter_context = true,
                 treesitter = true,
                 blink_cmp = {
                     style = "bordered",
-                }
+                },
             },
             float = {
                 solid = true,
                 transparent = false,
-            }
+            },
         })
-    end
+    end,
 }

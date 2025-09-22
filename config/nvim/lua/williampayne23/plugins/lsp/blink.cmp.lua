@@ -1,5 +1,7 @@
 return {
     "saghen/blink.cmp",
+    lazy = true,
+    event = "InsertEnter",
     -- optional: provides snippets for the snippet source
     dependencies = {
         "rafamadriz/friendly-snippets",
@@ -16,13 +18,13 @@ return {
         keymap = {
             preset = "default",
             -- Unmap arrows they get in the way
-            ['<Up>'] = false,
-            ['<Down>'] = false,
+            ["<Up>"] = false,
+            ["<Down>"] = false,
             -- Use <C-a> instead of <C-y> to accept
-            ['<C-y>'] = false,
-            ['<C-a>'] = { 'accept' },
+            ["<C-y>"] = false,
+            ["<C-a>"] = { "accept" },
 
-            ['<C-d>'] = { 'show_documentation', 'hide_documentation' }
+            ["<C-d>"] = { "show_documentation", "hide_documentation" },
         },
 
         signature = {
@@ -41,7 +43,7 @@ return {
                     border = "rounded",
                     max_width = 80,
                     max_height = 20,
-                }
+                },
             },
             menu = {
                 -- winblend = 30, -- Transparency of the completion menu
