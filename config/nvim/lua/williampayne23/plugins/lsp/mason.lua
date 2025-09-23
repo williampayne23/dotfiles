@@ -1,7 +1,6 @@
 return {
     "williamboman/mason.nvim",
-    lazy = true,
-    cmd = "Mason",
+    -- lazy = true,
     dependencies = {
         "mason-org/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -28,10 +27,10 @@ return {
                 "lua_ls",
                 "nil_ls",
                 "terraformls",
-                "pyright",
+                "basedpyright",
             },
 
-            automatic_installation = true, -- Automatically run vim.lsp.enable()
+            -- automatic_installation = true, -- Automatically run vim.lsp.enable()
         })
 
         mason_tool_installer.setup({
@@ -39,6 +38,7 @@ return {
                 -- Formatters
                 "prettier", -- Javascript et al
                 "stylua", -- Lua
+                "alejandra", -- Nix
 
                 "ruff", -- Python
                 "shfmt", -- Shell
