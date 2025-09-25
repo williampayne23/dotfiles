@@ -9,13 +9,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Keep Reg and Paste" })
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Keep Reg and Paste" })
 
-vim.keymap.set("n", "<leader>y", "\"+y", { desc = "Yank To Clipboard" })
-vim.keymap.set("v", "<leader>y", "\"+y", { desc = "Yank To Clipboard" })
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank To Clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank To Clipboard" })
 
-vim.keymap.set("n", "<leader>d", "\"_d", { desc = "Delete To Null" })
-vim.keymap.set("v", "<leader>d", "\"_d", { desc = "Delete To Null" })
+vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete To Null" })
+vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete To Null" })
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "Q", "@q", { desc = "Replay q Macro" })
@@ -30,8 +30,12 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>k", "<cmd>cnext<CR>zz", { desc = "Quickfix Next" })
 vim.keymap.set("n", "<leader>j", "<cmd>cprev<CR>zz", { desc = "Quickfix Prev" })
 
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Replace Word in File" })
+vim.keymap.set(
+	"n",
+	"<leader>S",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Replace Word in File" }
+)
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make Executable" })
 
 -- Newlines

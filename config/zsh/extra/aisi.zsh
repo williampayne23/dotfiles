@@ -57,7 +57,7 @@ complete -F _get_key_autocomplete get_key
 
 # Generate a claude key for claude code from api_key_proxy
 claudekey() {
-    export ANTHROPIC_API_KEY=$(get_key anthropic)
+    export ANTHROPIC_RAW_API_KEY=$(get_key anthropic)
 }
 
 # Generate a claude key for claude code from api_key_proxy
