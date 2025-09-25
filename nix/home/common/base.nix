@@ -22,12 +22,8 @@ in {
   home.packages = [
     customPoetry
     mcp-hub.packages."${arch}".default
-    pkgs.alejandra
     pkgs.atuin
     pkgs.bat
-    # pkgs.cargo
-    pkgs.cargo-generate
-    pkgs.rustc
     pkgs.rustup
     pkgs.cmake
     pkgs.fd
