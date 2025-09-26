@@ -4,7 +4,6 @@ alias c=clear
 alias cd=z
 alias cd!=\\cd
 
-
 nr() {
     nix run nixpkgs#"$1" -- "${@:2}"
 }
@@ -23,31 +22,26 @@ _switch_if_exists() {
     fi
 }
 
-s () {
-        branch_name=$1
-        if [ "$branch_name" = "-h" ]
-        then
-                echo "Usage: s [branch_name]"
-                echo "Switch to branch_name or will/branch_name if it exists (prioritise branch_name), otherwise create a new branch called will/branch_name"
-                return
-        fi
-        if [ -z "$branch_name" ]
-        then
-                branch_name=main
-        fi
-        if _switch_if_exists $branch_name
-        then
-                return
-        fi
-        if [[ $branch_name != will/* ]]
-        then
-                branch_name="will/$branch_name"
-        fi
-        if _switch_if_exists $branch_name
-        then
-                return
-        fi
-        git switch -c $branch_name
+s() {
+    branch_name=$1
+    if [ "$branch_name" = "-h" ]; then
+        echo "Usage: s [branch_name]"
+        echo "Switch to branch_name or will/branch_name if it exists (prioritise branch_name), otherwise create a new branch called will/branch_name"
+        return
+    fi
+    if [ -z "$branch_name" ]; then
+        branch_name=main
+    fi
+    if _switch_if_exists $branch_name; then
+        return
+    fi
+    if [[ $branch_name != will/* ]]; then
+        branch_name="will/$branch_name"
+    fi
+    if _switch_if_exists $branch_name; then
+        return
+    fi
+    git switch -c $branch_name
 }
 
 _s_autocomplete() {
@@ -70,7 +64,7 @@ alias gfp='git push --force-with-lease'
 
 git_branch_status() {
     # Check if we're in a git repository
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
         echo "Error: Not in a git repository"
         return 1
     fi
@@ -82,12 +76,11 @@ git_branch_status() {
         ISSUES=1
     fi
 
-
     # Get all local branches
     while IFS= read -r branch; do
         # Get the upstream branch
         upstream=$(git rev-parse --abbrev-ref "$branch@{upstream}" 2>/dev/null)
-        
+
         if [ $? -eq 0 ]; then
             # Check if local branch is ahead
             ahead=$(git rev-list --count "$upstream..$branch" 2>/dev/null)
@@ -105,7 +98,7 @@ git_branch_status() {
 }
 
 # Check if I have unpushed work
-workcheck () {
+workcheck() {
     # get current directory
     current_dir=$(pwd)
     # find all .git folders one level down
