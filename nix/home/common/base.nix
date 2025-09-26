@@ -32,6 +32,7 @@ in {
     pkgs.neovim
     pkgs.nodejs_24
     pkgs.claude-code
+    pkgs.opencode
     pkgs.ripgrep
     pkgs.starship
     pkgs.tmux
@@ -66,6 +67,11 @@ in {
 
     ".config/zsh" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zsh";
+      recursive = true;
+    };
+
+    ".config/opencode" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/opencode";
       recursive = true;
     };
 

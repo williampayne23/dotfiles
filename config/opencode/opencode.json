@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "provider": {
+    "openai": {
+      "options": {
+        "baseURL": "{env:OPENAI_BASE_URL}",
+        "apiKey": "{env:OPENAI_RAW_API_KEY}"
+      }
+    },
+    "anthropic": {
+      "options": {
+        "baseURL": "{env:ANTHROPIC_BASE_URL}",
+        "apiKey": "{env:ANTHROPIC_RAW_API_KEY}"
+      }
+    }
+  },
+  "theme": "catpuccin-frappe"
+}
