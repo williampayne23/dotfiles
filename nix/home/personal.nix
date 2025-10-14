@@ -24,20 +24,17 @@
   # environment.
   home.packages = [
     # Is for Mac only GUI packages
+    pkgs.kubectl
+    pkgs.ollama
+    pkgs.k9s
     pkgs.terraform
-    pkgs.blender
-    pkgs.neovide
     pkgs.ffmpeg
     pkgs.dotnetCorePackages.sdk_9_0_1xx-bin
     pkgs.ansible
     pkgs.raycast
     pkgs.alacritty
-    # pkgs.aerospace
-    # pkgs.jankyborders
-    # pkgs.sketchybar
     pkgs.yoink
     # Fonts
-    # pkgs.sketchybar-app-font
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
