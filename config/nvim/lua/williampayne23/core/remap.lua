@@ -51,3 +51,15 @@ vim.keymap.set("v", "|", ":%!", { desc = "Pipe" })
 -- More convenient indenting
 vim.keymap.set("v", ">>", ">gv", { desc = "Indent Right" })
 vim.keymap.set("v", "<<", "<gv", { desc = "Indent Left" })
+
+-- Toggle markdown todos with leader leader
+vim.keymap.set("n", "<leader><leader>", function()
+	local line = vim.api.nvim_get_current_line()
+	if line:match("^%s*%- %[ %]") then
+		local new_line = line:gsub("%- %[ %]", "- [x]", 1)
+		vim.api.nvim_set_current_line(new_line)
+	elseif line:match("^%s*%- %[x%]") then
+		local new_line = line:gsub("%- %[x%]", "- [ ]", 1)
+		vim.api.nvim_set_current_line(new_line)
+	end
+end, { desc = "Toggle Todo" })
