@@ -3,6 +3,27 @@ if [[ -z "$AISI_PLATFORM_USER" ]]; then
     return 0
 fi
 
+setup_aisi_atuin_server() {
+    export ATUIN_SYNC_ADDRESS=https://atuin.apps.aisi.org.uk
+    # if sync address is in atuin status then skip setup
+    if /home/ubuntu/.nix-profile/bin/atuin status | grep -q "$ATUIN_SYNC_ADDRESS"; then
+        echo "Skip"
+        return
+    fi
+
+    ATUIN_KEY=$(aws secretsmanager get-secret-value --secret-id "users/$AISI_PLATFORM_USER/atuin-key" --query SecretString --output text)
+    ATUIN_PASSWORD=$(aws secretsmanager get-secret-value --secret-id "users/$AISI_PLATFORM_USER/atuin-password" --query SecretString --output text)
+
+    # Use the full path to the Atuin binary, since the shell completion won't yet have loaded.
+    # Also add a space before the command, so the command itself doesn't go in the shell history.
+    /home/ubuntu/.nix-profile/bin/atuin login -u "${AISI_PLATFORM_USER}" -k "$ATUIN_KEY" -p "$ATUIN_PASSWORD" >/dev/null 2>&1
+
+    # Pull down previous shell history
+    /home/ubuntu/.nix-profile/bin/atuin sync >/dev/null 2>&1
+}
+
+setup_aisi_atuin_server
+
 ecr_auth() {
     AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
     aws ecr get-login-password --region ${AWS_DEFAULT_REGION} |
