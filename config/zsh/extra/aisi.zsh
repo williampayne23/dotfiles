@@ -7,7 +7,6 @@ setup_aisi_atuin_server() {
     export ATUIN_SYNC_ADDRESS=https://atuin.apps.aisi.org.uk
     # if sync address is in atuin status then skip setup
     if /home/ubuntu/.nix-profile/bin/atuin status | grep -q "$ATUIN_SYNC_ADDRESS"; then
-        echo "Skip"
         return
     fi
 
