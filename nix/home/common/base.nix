@@ -35,6 +35,7 @@ in {
     pkgs.opencode
     pkgs.ripgrep
     pkgs.starship
+    pkgs.tree-sitter
     pkgs.tmux
     pkgs.uv
     pkgs.zoxide
@@ -84,7 +85,7 @@ in {
 
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       push.autoSetupRemote = true;
     };
   };
@@ -95,7 +96,7 @@ in {
   '';
 
   programs.zsh.enable = true;
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     PATH=$HOME/bin:$HOME/.local/bin:$PATH
     source $HOME/.config/zsh/zshinit.zsh
   '';
