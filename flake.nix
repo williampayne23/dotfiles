@@ -70,7 +70,8 @@
       init = pkgs.writeShellApplication {
         name = "init";
         text = ''
-          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
+          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch -b backup --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
+
         '';
       };
     in {

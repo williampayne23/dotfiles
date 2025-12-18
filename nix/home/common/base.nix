@@ -103,4 +103,16 @@ in {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.atuin = {
+    enable = true;
+    settings = {
+      auto_sync = true;
+      sync_frequency = "5s";
+      search_mode = "fuzzy";
+      style = "compact";
+      inline_height = 20;
+      ctrl_n_shortcuts = true;
+    };
+  };
 }
