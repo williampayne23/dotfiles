@@ -1,13 +1,19 @@
 alias cat=bat
 alias cat!=\\cat
-alias c=clear
 alias cd=z
 alias cd!=\\cd
+
+c() {
+    printf "\033[H\033[2J"
+}
+
+clear() {
+    printf "\033[H\033[2J"
+}
 
 nr() {
     nix run nixpkgs#"$1" -- "${@:2}"
 }
-
 _switch_if_exists() {
     # $1 should be branch name
     # If branch exists (either locally or remote) git switch to it
