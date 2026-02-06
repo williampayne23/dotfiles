@@ -101,6 +101,13 @@ in {
     source $HOME/.config/zsh/zshinit.zsh
   '';
 
+  programs.zsh.envExtra = ''
+    # Initialize zoxide for all zsh sessions (including non-interactive)
+    if command -v zoxide >/dev/null 2>&1; then
+        eval "$(zoxide init zsh)"
+    fi
+  '';
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
