@@ -24,7 +24,7 @@ in {
     mcp-hub.packages."${arch}".default
     pkgs.atuin
     pkgs.bat
-    pkgs.rustup
+    pkgs.cargo
     pkgs.cmake
     pkgs.fd
     pkgs.fzf
