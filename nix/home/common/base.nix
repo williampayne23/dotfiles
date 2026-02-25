@@ -1,8 +1,9 @@
 {
   config,
+  lib,
   pkgs,
   mcp-hub,
-  arch,
+  getConfigSymlink,
   ...
 }: let
   customPoetry = pkgs.writeShellScriptBin "poetry" ''
@@ -21,7 +22,7 @@ in {
   nixpkgs.config.allowUnfree = true;
   home.packages = [
     customPoetry
-    mcp-hub.packages."${arch}".default
+    mcp-hub.default
     pkgs.atuin
     pkgs.bat
     pkgs.cargo
@@ -43,42 +44,88 @@ in {
   ];
 
   home.file = {
-    # Pull everything below into common
-    ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
-      recursive = true;
-      # onChange = "${pkgs.neovim}/bin/nvim --headless \"+Lazy! install\" \"+TSUpdateSync\" +qa";
+    ".config/nvim" = getConfigSymlink {
+      config = config;
+      path = "nvim";
     };
 
-    ".config/bat" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/bat";
-      recursive = true;
+    ".config/bat" = getConfigSymlink {
+      config = config;
+      path = "bat";
       onChange = "${pkgs.bat}/bin/bat cache --build";
     };
 
-    ".config/k9s" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/k9s";
-      recursive = true;
+    ".config/k9s" = getConfigSymlink {
+      config = config;
+      path = "k9s";
     };
 
-    ".config/tmux" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/tmux";
-      recursive = true;
+    ".config/tmux" = getConfigSymlink {
+      config = config;
+      path = "tmux";
     };
 
-    ".config/zsh" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zsh";
-      recursive = true;
+    ".config/zsh" = getConfigSymlink {
+      config = config;
+      path = "zsh";
     };
 
-    ".config/opencode" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/opencode";
-      recursive = true;
+    ".config/opencode" = getConfigSymlink {
+      config = config;
+      path = "opencode";
     };
 
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/starship.toml";
+    ".config/starship.toml" = getConfigSymlink {
+      config = config;
+      path = "starship.toml";
+    };
+
+    ".claude/CLAUDE.md" = getConfigSymlink {
+      config = config;
+      path = "claude/CLAUDE.md";
+    };
+
+    ".claude/settings.json" = getConfigSymlink {
+      config = config;
+      path = "claude/settings.json";
+    };
+
+    ".claude/agents" = getConfigSymlink {
+      config = config;
+      path = "claude/agents";
+    };
   };
 
+  home.activation = {
+    install_tmux_plugins = config.lib.dag.entryAfter ["writeBoundary"] ''
+      export PATH="${lib.makeBinPath [
+        pkgs.tmux
+        pkgs.git
+        pkgs.gawk
+        pkgs.coreutils
+        pkgs.bash
+        pkgs.gnused
+        pkgs.gnugrep
+        pkgs.findutils
+      ]}:$PATH"
+
+      if [ -x "${config.home.homeDirectory}/.tmux/plugins/tpm/bin/install_plugins" ]; then
+        $DRY_RUN_CMD ${config.home.homeDirectory}/.tmux/plugins/tpm/bin/install_plugins || true
+      fi
+    '';
+    install_nvim_plugins = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      export PATH="${lib.makeBinPath [
+        pkgs.neovim
+        pkgs.git
+        pkgs.coreutils
+        pkgs.curl
+        pkgs.gnutar
+        pkgs.gzip
+      ]}:$PATH"
+
+      $DRY_RUN_CMD ${pkgs.neovim}/bin/nvim --headless "+Lazy! sync" +qa || true
+    '';
+  };
   home.sessionVariables = {
     EDITOR = "nvim";
   };

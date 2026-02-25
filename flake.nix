@@ -24,31 +24,20 @@
     home-manager,
     color-schemes,
     mcp-hub,
-  } @ inputs: let
-    mkDarwin = {extraDarwinModules ? {}}:
-      nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit self;};
-        modules = [./nix/darwin.nix] ++ extraDarwinModules;
-      };
-    mkHm = {
-      extraModules ? [],
-      arch,
+  }: let
+    getConfigSymlink = {
+      config,
+      path,
+      onChange ? null,
     }:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${arch};
-        modules =
-          [
-            # Include so we can configure ghostty
-          ]
-          ++ extraModules;
-        extraSpecialArgs =
-          inputs
-          // {
-            inherit mcp-hub;
-            inherit arch;
-          };
-      };
+      {
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/${path}";
+      }
+      // (
+        if onChange != null
+        then {inherit onChange;}
+        else {}
+      );
   in {
     apps."aarch64-darwin".default = let
       pkgs = nixpkgs.legacyPackages."aarch64-darwin";
@@ -71,29 +60,39 @@
         name = "init";
         text = ''
           nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch -b backup --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
-
         '';
       };
     in {
       type = "app";
       program = "${init}/bin/init";
     };
+
     darwinConfigurations = {
-      "Wills-MacBook-Pro" = mkDarwin {
-        extraDarwinModules = [./nix/darwin/personal.nix];
+      "Wills-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {inherit self;};
+        modules = [./nix/darwin.nix ./nix/darwin/personal.nix];
       };
     };
 
     homeConfigurations = {
-      "ubuntu" = mkHm {
-        extraModules = [./nix/home/work.nix];
-        arch = "x86_64-linux";
+      "ubuntu" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [./nix/home/common/base.nix ./nix/home/work.nix];
+        extraSpecialArgs = {
+          mcp-hub = mcp-hub.packages."x86_64-linux";
+          colorSchemes = color-schemes;
+          getConfigSymlink = getConfigSymlink;
+        };
       };
-      "willpayne" = mkHm {
-        extraModules = [
-          ./nix/home/personal.nix
-        ];
-        arch = "aarch64-darwin";
+      "willpayne" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+        modules = [.nix/home/common/base.nix ./nix/home/personal.nix];
+        extraSpecialArgs = {
+          mcp-hub = mcp-hub.packages."aarch64-darwin";
+          getConfigSymlink = getConfigSymlink;
+          colorSchemes = color-schemes;
+        };
       };
     };
   };
