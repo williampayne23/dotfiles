@@ -2,7 +2,6 @@
   description = "home-manager and nix-darwin configuration";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     mcp-hub.url = "github:ravitemer/mcp-hub";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
@@ -24,21 +23,7 @@
     home-manager,
     color-schemes,
     mcp-hub,
-  }: let
-    getConfigSymlink = {
-      config,
-      path,
-      onChange ? null,
-    }:
-      {
-        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/${path}";
-      }
-      // (
-        if onChange != null
-        then {inherit onChange;}
-        else {}
-      );
-  in {
+  }: {
     apps."aarch64-darwin".default = let
       pkgs = nixpkgs.legacyPackages."aarch64-darwin";
       init = pkgs.writeShellApplication {
@@ -54,6 +39,7 @@
       type = "app";
       program = "${init}/bin/init";
     };
+
     apps."x86_64-linux".default = let
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
       init = pkgs.writeShellApplication {
@@ -71,26 +57,26 @@
       "Wills-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit self;};
-        modules = [./nix/darwin.nix ./nix/darwin/personal.nix];
+        # ./nix/darwin resolves to ./nix/darwin/default.nix
+        modules = [./nix/darwin ./nix/darwin/personal.nix];
       };
     };
 
     homeConfigurations = {
       "ubuntu" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [./nix/home/common/base.nix ./nix/home/work.nix];
+        # ./nix/home/common resolves to ./nix/home/common/default.nix
+        modules = [./nix/home/common ./nix/home/work.nix];
         extraSpecialArgs = {
           mcp-hub = mcp-hub.packages."x86_64-linux";
           colorSchemes = color-schemes;
-          getConfigSymlink = getConfigSymlink;
         };
       };
       "willpayne" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-        modules = [.nix/home/common/base.nix ./nix/home/personal.nix];
+        modules = [./nix/home/common ./nix/home/personal.nix];
         extraSpecialArgs = {
           mcp-hub = mcp-hub.packages."aarch64-darwin";
-          getConfigSymlink = getConfigSymlink;
           colorSchemes = color-schemes;
         };
       };
