@@ -1,6 +1,10 @@
-# Neovim: default editor + headless plugin sync on activation
-{ config, lib, pkgs, ... }: {
+# Neovim: package, config symlink, default editor, headless plugin sync on activation
+{ config, lib, pkgs, liveLink, ... }: {
+  home.packages = [ pkgs.neovim pkgs.tree-sitter ];
+
   home.sessionVariables.EDITOR = "nvim";
+
+  home.file.".config/nvim" = liveLink { path = "nvim"; };
 
   home.activation.install_nvim_plugins = lib.hm.dag.entryAfter ["writeBoundary"] ''
     export PATH="${lib.makeBinPath [

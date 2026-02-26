@@ -1,5 +1,9 @@
-# Tmux: run TPM plugin installer on activation (TPM must be bootstrapped manually first)
-{ config, lib, pkgs, ... }: {
+# Tmux: package, config symlink, TPM plugin installer on activation
+{ config, lib, pkgs, liveLink, ... }: {
+  home.packages = [ pkgs.tmux ];
+
+  home.file.".config/tmux" = liveLink { path = "tmux"; };
+
   home.activation.install_tmux_plugins = config.lib.dag.entryAfter ["writeBoundary"] ''
     export PATH="${lib.makeBinPath [
       pkgs.tmux

@@ -1,5 +1,10 @@
-# Shell environment: zsh, atuin, zoxide
-{ ... }: {
+# Shell environment: zsh, atuin, zoxide, starship — plus their config symlinks
+{ pkgs, liveLink, ... }: {
+  home.packages = [ pkgs.starship pkgs.zoxide ];
+
+  home.file.".config/zsh"           = liveLink { path = "zsh"; };
+  home.file.".config/starship.toml" = liveLink { path = "starship.toml"; };
+
   programs.zsh = {
     enable = true;
     # PATH additions + source the main zsh config from the dotfiles symlink
