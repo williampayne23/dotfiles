@@ -2,7 +2,7 @@
 { config, lib, pkgs, liveLink, ... }: {
   home.packages = [ pkgs.tmux ];
 
-  home.file.".config/tmux" = liveLink { path = "tmux"; };
+  home.file.".config/tmux" = liveLink config { path = "tmux"; };
 
   home.activation.install_tmux_plugins = config.lib.dag.entryAfter ["writeBoundary"] ''
     export PATH="${lib.makeBinPath [

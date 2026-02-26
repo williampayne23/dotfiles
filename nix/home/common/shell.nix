@@ -1,9 +1,9 @@
 # Shell environment: zsh, atuin, zoxide, starship — plus their config symlinks
-{ pkgs, liveLink, ... }: {
+{ config, pkgs, liveLink, ... }: {
   home.packages = [ pkgs.starship pkgs.zoxide ];
 
-  home.file.".config/zsh"           = liveLink { path = "zsh"; };
-  home.file.".config/starship.toml" = liveLink { path = "starship.toml"; };
+  home.file.".config/zsh"           = liveLink config { path = "zsh"; };
+  home.file.".config/starship.toml" = liveLink config { path = "starship.toml"; };
 
   programs.zsh = {
     enable = true;

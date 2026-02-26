@@ -16,69 +16,38 @@
     };
   };
 
-  outputs = {
-    self,
-    nix-darwin,
-    nixpkgs,
-    home-manager,
-    color-schemes,
-    mcp-hub,
-  }: {
-    apps."aarch64-darwin".default = let
-      pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-      init = pkgs.writeShellApplication {
-        name = "init";
-        runtimeInputs = with pkgs; [git curl bash];
-        text = ''
-          sudo nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles
-          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
-          /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-        '';
-      };
-    in {
-      type = "app";
-      program = "${init}/bin/init";
-    };
+  outputs = { self, nix-darwin, nixpkgs, home-manager, color-schemes, mcp-hub }: let
+    # Creates an out-of-store symlink from ~/.config/<path> to ~/dotfiles/config/<path>
+    # so edits to config files take effect immediately without re-running home-manager.
+    # Modules receive this via extraSpecialArgs and call it as: liveLink config { path = "foo"; }
+    liveLink = config: { path, onChange ? null }:
+      { source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/${path}"; }
+      // (if onChange != null then { inherit onChange; } else {});
 
-    apps."x86_64-linux".default = let
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      init = pkgs.writeShellApplication {
-        name = "init";
-        text = ''
-          nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch -b backup --flake ~/dotfiles --extra-experimental-features "nix-command flakes"
-        '';
-      };
-    in {
-      type = "app";
-      program = "${init}/bin/init";
+    homeArgs = system: {
+      mcp-hub = mcp-hub.packages.${system};
+      colorSchemes = color-schemes;
+      inherit liveLink;
     };
+  in {
+    apps = import ./nix/apps.nix { inherit nixpkgs; };
 
-    darwinConfigurations = {
-      "Wills-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit self;};
-        # ./nix/darwin resolves to ./nix/darwin/default.nix
-        modules = [./nix/darwin ./nix/darwin/personal.nix];
-      };
+    darwinConfigurations."Wills-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      specialArgs = { inherit self; };
+      modules = [./nix/darwin ./nix/darwin/personal.nix];
     };
 
     homeConfigurations = {
       "ubuntu" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        # ./nix/home/common resolves to ./nix/home/common/default.nix
         modules = [./nix/home/common ./nix/home/work.nix];
-        extraSpecialArgs = {
-          mcp-hub = mcp-hub.packages."x86_64-linux";
-          colorSchemes = color-schemes;
-        };
+        extraSpecialArgs = homeArgs "x86_64-linux";
       };
       "willpayne" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [./nix/home/common ./nix/home/personal.nix];
-        extraSpecialArgs = {
-          mcp-hub = mcp-hub.packages."aarch64-darwin";
-          colorSchemes = color-schemes;
-        };
+        extraSpecialArgs = homeArgs "aarch64-darwin";
       };
     };
   };

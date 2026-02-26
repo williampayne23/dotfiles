@@ -4,7 +4,7 @@
 
   home.sessionVariables.EDITOR = "nvim";
 
-  home.file.".config/nvim" = liveLink { path = "nvim"; };
+  home.file.".config/nvim" = liveLink config { path = "nvim"; };
 
   home.activation.install_nvim_plugins = lib.hm.dag.entryAfter ["writeBoundary"] ''
     export PATH="${lib.makeBinPath [

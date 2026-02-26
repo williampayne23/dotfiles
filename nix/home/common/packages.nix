@@ -1,5 +1,5 @@
 # Core CLI packages — each entry owns its package and config symlink
-{ pkgs, mcp-hub, liveLink, ... }: let
+{ config, pkgs, mcp-hub, liveLink, ... }: let
   # Python packages are sometimes pre-built against C libraries not available
   # in the nix sandbox. This wrapper patches LD_LIBRARY_PATH so poetry-managed
   # environments can find stdenv and zlib at runtime.
@@ -27,12 +27,12 @@ in {
   ];
 
   home.file = {
-    ".config/bat"      = liveLink { path = "bat"; onChange = "${pkgs.bat}/bin/bat cache --build"; };
-    ".config/k9s"      = liveLink { path = "k9s"; };
-    ".config/opencode" = liveLink { path = "opencode"; };
+    ".config/bat"      = liveLink config { path = "bat"; onChange = "${pkgs.bat}/bin/bat cache --build"; };
+    ".config/k9s"      = liveLink config { path = "k9s"; };
+    ".config/opencode" = liveLink config { path = "opencode"; };
 
-    ".claude/CLAUDE.md"     = liveLink { path = "claude/CLAUDE.md"; };
-    ".claude/settings.json" = liveLink { path = "claude/settings.json"; };
-    ".claude/agents"        = liveLink { path = "claude/agents"; };
+    ".claude/CLAUDE.md"     = liveLink config { path = "claude/CLAUDE.md"; };
+    ".claude/settings.json" = liveLink config { path = "claude/settings.json"; };
+    ".claude/agents"        = liveLink config { path = "claude/agents"; };
   };
 }
