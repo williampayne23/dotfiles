@@ -1,22 +1,5 @@
-{pkgs, ...}: let
-  writeShellApplication = pkgs.writeShellApplication;
-  make_named_plist = {
-    name,
-    text,
-    runtimeInputs,
-    props,
-  }: {
-    serviceConfig =
-      {
-        Program = "${writeShellApplication {
-          inherit name;
-          inherit runtimeInputs;
-          inherit text;
-        }}/bin/${name}";
-      }
-      // props;
-  };
-in {
+# Personal macOS additions: Homebrew casks and machine-specific settings
+{ ... }: {
   homebrew.casks = [
     "steam"
     "cleanmymac"
@@ -27,23 +10,6 @@ in {
     "unity-hub"
     "visual-studio"
   ];
-  homebrew.brews = [];
-  nix.settings.trusted-users = ["will"];
 
-  launchd = {
-    user = {
-      agents = {
-        # sketchybar = make_named_plist {
-        #   name = "sketchybar";
-        #   text = "sketchybar";
-        #   runtimeInputs = [pkgs.sketchybar pkgs.aerospace];
-        #   props = {
-        #     KeepAlive = true;
-        #     RunAtLoad = true;
-        #     StandardOutPath = "/tmp/skeychybat_will.out.log";
-        #   };
-        # };
-      };
-    };
-  };
+  nix.settings.trusted-users = ["will"];
 }
