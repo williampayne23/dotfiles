@@ -85,7 +85,7 @@ oaikey() {
     export OPENAI_RAW_API_KEY=$(get_key openai)
 }
 
-claudekey
-oaikey
+# claudekey
+# oaikey
 
-export ANTHROPIC_MODEL=claude-opus-4-20250514
+# export ANTHROPIC_MODEL=claude-opus-4-20250514
