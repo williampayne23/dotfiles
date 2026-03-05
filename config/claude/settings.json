@@ -59,7 +59,6 @@
   },
   "model": "opus",
   "enabledPlugins": {
-    "github@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
