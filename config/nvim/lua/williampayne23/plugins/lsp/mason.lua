@@ -27,10 +27,11 @@ return {
 				"lua_ls",
 				"nil_ls",
 				"terraformls",
+				"pyright",
 				"basedpyright",
 			},
-
-			-- automatic_installation = true, -- Automatically run vim.lsp.enable()
+			automatic_enable = false,
+			automatic_installation = true,
 		})
 
 		mason_tool_installer.setup({

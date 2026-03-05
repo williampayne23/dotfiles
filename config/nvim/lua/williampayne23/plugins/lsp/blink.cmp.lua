@@ -72,6 +72,10 @@ return {
 				"cmdline",
 			},
 			providers = {
+				lsp = {
+					min_keyword_length = 3,
+					async = true,
+				},
 				copilot = {
 					name = "copilot",
 					module = "blink-copilot",

@@ -7,14 +7,32 @@ return {
 	opts = {
 		servers = {
 			basedpyright = {
-				settings = {
-					basedpyright = {
-						analysis = {
-							typeCheckingMode = "basic", -- or "basic"/"off" if you want lighter
-						},
-					},
-				},
+				capabilities = {},
+				on_init = function(client)
+					-- Only keep code actions and semantic tokens from basedpyright.
+					client.server_capabilities.completionProvider = nil
+					client.server_capabilities.hoverProvider = nil
+					client.server_capabilities.signatureHelpProvider = nil
+					client.server_capabilities.referencesProvider = nil
+					client.server_capabilities.renameProvider = nil
+					client.server_capabilities.definitionProvider = nil
+					client.server_capabilities.documentHighlightProvider = nil
+				end,
 			},
+			pyright = {
+				on_init = function(client)
+					-- Pyright handles completions, diagnostics, hover, go-to-def, etc.
+					-- Disable code actions and semantic tokens (basedpyright handles those).
+					client.server_capabilities.codeActionProvider = nil
+					client.server_capabilities.semanticTokensProvider = nil
+				end,
+			},
+			lua_ls = {},
+			ts_ls = {},
+			nil_ls = {},
+			yamlls = {},
+			terraformls = {},
+			rust_analyzer = {},
 		},
 	},
 	config = function(_, opts)
@@ -23,7 +41,9 @@ return {
 
 		for server, config in pairs(opts.servers) do
 			vim.lsp.enable(server)
-			config.capabilities = blink.get_lsp_capabilities(config.capabilities)
+			if server ~= "basedpyright" then
+				config.capabilities = blink.get_lsp_capabilities(config.capabilities)
+			end
 			vim.lsp.config(server, config)
 		end
 
@@ -31,6 +51,20 @@ return {
 			update_in_insert = false,
 			severity_sort = true,
 			virtual_text = { spacing = 2 },
+		})
+
+		-- Disable diagnostics specifically for basedpyright, since it only provides code actions and semantic tokens.
+		-- This is necessary because basedpyright is very very slow! Annoyingly it still sends diagnostics so it's still
+		-- Slow but at least I don't have to see them
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("basedpyright_no_diag", {}),
+			callback = function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				if client and client.name == "basedpyright" then
+					local ns = vim.lsp.diagnostic.get_namespace(client.id)
+					vim.diagnostic.enable(false, { ns_id = ns, bufnr = args.buf })
+				end
+			end,
 		})
 
 		-- Keymaps, see :h lsp-attach
