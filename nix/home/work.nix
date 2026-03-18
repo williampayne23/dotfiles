@@ -58,6 +58,7 @@
       pkgs.awscli
       pkgs.claude-code
     ]}:$PATH"
+    mkdir -p ~/.config/gh
     aws secretsmanager get-secret-value \
       --secret-id "users/$AISI_PLATFORM_USER/gh-auth-credentials" \
       --query SecretString --output text > ~/.config/gh/hosts.yml
