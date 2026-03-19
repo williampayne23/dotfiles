@@ -17,6 +17,7 @@
   # environment.
   home.packages = [
     # Is for Mac only GUI packages
+    pkgs.awscli2
     pkgs.kubectl
     pkgs.ollama
     pkgs.k9s

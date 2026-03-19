@@ -2,7 +2,12 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  sessionLauncherPython = pkgs.python3.withPackages (ps: [
+    ps.fastapi
+    ps.uvicorn
+  ]);
+in {
   home.username = "ubuntu";
   home.homeDirectory = "/home/ubuntu";
 
@@ -32,7 +37,7 @@
     };
     Service = {
       Type = "simple";
-      ExecStart = "${pkgs.python3Packages.uvicorn}/bin/uvicorn main:app --host 127.0.0.1 --port 8585";
+      ExecStart = "${sessionLauncherPython}/bin/uvicorn main:app --host 127.0.0.1 --port 8585";
       WorkingDirectory = "${config.home.homeDirectory}/homelab/session-launcher";
       Restart = "on-failure";
       RestartSec = 5;

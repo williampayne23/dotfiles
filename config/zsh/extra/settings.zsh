@@ -1,3 +1,6 @@
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 #Zsh vim mode
 bindkey -v
 

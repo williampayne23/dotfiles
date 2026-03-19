@@ -1,5 +1,9 @@
 # Personal macOS additions: Homebrew casks and machine-specific settings
 { ... }: {
+  homebrew.brews = [
+    "colima"
+  ];
+
   homebrew.casks = [
     "steam"
     "cleanmymac"
