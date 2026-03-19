@@ -44,6 +44,11 @@
         modules = [./nix/home/common ./nix/home/work.nix];
         extraSpecialArgs = homeArgs "x86_64-linux";
       };
+      "personal-ubuntu" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [./nix/home/common ./nix/home/personal-ubuntu.nix];
+        extraSpecialArgs = homeArgs "x86_64-linux";
+      };
       "willpayne" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [./nix/home/common ./nix/home/personal.nix];
