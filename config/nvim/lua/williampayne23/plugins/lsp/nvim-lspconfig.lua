@@ -33,6 +33,7 @@ return {
 			yamlls = {},
 			terraformls = {},
 			rust_analyzer = {},
+			roslyn = {},
 		},
 	},
 	config = function(_, opts)

@@ -57,10 +57,11 @@
     "deny": [],
     "ask": []
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "effortLevel": "medium"
 }

@@ -52,14 +52,14 @@ vim.keymap.set("v", "|", ":%!", { desc = "Pipe" })
 vim.keymap.set("v", ">>", ">gv", { desc = "Indent Right" })
 vim.keymap.set("v", "<<", "<gv", { desc = "Indent Left" })
 
--- Toggle markdown todos with leader leader
-vim.keymap.set("n", "<leader><leader>", function()
-	local line = vim.api.nvim_get_current_line()
-	if line:match("^%s*%- %[ %]") then
-		local new_line = line:gsub("%- %[ %]", "- [x]", 1)
-		vim.api.nvim_set_current_line(new_line)
-	elseif line:match("^%s*%- %[x%]") then
-		local new_line = line:gsub("%- %[x%]", "- [ ]", 1)
-		vim.api.nvim_set_current_line(new_line)
+-- Toggle markdown todos with t
+Toggle_markdown_task = function()
+	local line = vim.fn.getline(".")
+	if string.match(line, "%[ %]") then
+		line = string.gsub(line, "%[ %]", "[x]")
+	elseif string.match(line, "%[x%]") then
+		line = string.gsub(line, "%[x%]", "[ ]")
 	end
-end, { desc = "Toggle Todo" })
+	vim.fn.setline(".", line)
+end
+vim.keymap.set("n", "t", Toggle_markdown_task, { desc = "Toggle Markdown Tasks" })

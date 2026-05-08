@@ -23,7 +23,12 @@
     pkgs.k9s
     pkgs.terraform
     pkgs.ffmpeg
-    pkgs.dotnetCorePackages.sdk_9_0_1xx-bin
+    pkgs.ldtk
+    (pkgs.dotnetCorePackages.combinePackages [
+      pkgs.dotnetCorePackages.sdk_9_0_1xx-bin
+      pkgs.dotnet-sdk_10
+    ])
+    pkgs.just
     pkgs.ansible
     pkgs.raycast
     pkgs.alacritty
@@ -52,13 +57,13 @@
         };
         size = 19;
       };
-      keyboard.bindings = [
-        {
-          mods = "Control";
-          key = "Space";
-          chars = "\\u0000";
-        }
-      ];
+      # keyboard.bindings = [
+      #   {
+      #     mods = "Control";
+      #     key = "Space";
+      #     chars = "\\u0000";
+      #   }
+      # ];
     };
   };
 

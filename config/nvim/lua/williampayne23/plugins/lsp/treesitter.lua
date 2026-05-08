@@ -11,63 +11,62 @@ return {
 			{ "nvim-treesitter/nvim-treesitter-textobjects", lazy = true, branch = "main" },
 			{ "Wansmer/sibling-swap.nvim", lazy = true },
 		},
+		branch = "main",
 		lazy = true,
 		build = ":TSUpdate",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function(_, _)
-			local treesitter = require("nvim-treesitter")
+		opts = {
 
-			treesitter.setup({
-				-- A list of parser names, or "all" (the five listed parsers should always be installed)
-				ensure_installed = {
-					"json",
-					"javascript",
-					"typescript",
-					"tsx",
-					"yaml",
-					"html",
-					"css",
-					"prisma",
-					"markdown",
-					"markdown_inline",
-					"svelte",
-					"graphql",
-					"bash",
-					"lua",
-					"vim",
-					"dockerfile",
-					"gitignore",
-					"query",
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
 				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<C-space>",
-						node_incremental = "<C-space>",
-						scope_incremental = false,
-						node_decremental = "<bs>",
-					},
-				},
+			},
 
-				-- Install parsers synchronously (only applied to `ensure_installed`)
-				sync_install = false,
+			-- Install parsers synchronously (only applied to `ensure_installed`)
+			sync_install = false,
 
-				-- Automatically install missing parsers when entering buffer
-				-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-				auto_install = true,
-
-				highlight = {
-					enable = true,
-
-					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-					-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-					-- Using this option may slow down your editor, and you may see some duplicate highlights.
-					-- Instead of true it can also be a list of languages
-					additional_vim_regex_highlighting = false,
-				},
-				indent = {
-					enable = true,
-				},
+			-- Automatically install missing parsers when entering buffer
+			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+			auto_install = true,
+		},
+		init = function(_, _)
+			require("nvim-treesitter").setup({
+				install_dir = vim.fn.stdpath("data") .. "/site",
+			})
+			local ensureInstalled = {
+				"json",
+				"javascript",
+				"typescript",
+				"tsx",
+				"yaml",
+				"html",
+				"css",
+				"prisma",
+				"markdown",
+				"markdown_inline",
+				"svelte",
+				"graphql",
+				"bash",
+				"lua",
+				"vim",
+				"dockerfile",
+				"gitignore",
+				"query",
+				-- ... your parsers
+			}
+			require("nvim-treesitter").install(ensureInstalled)
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					-- Enable treesitter highlighting and disable regex syntax
+					pcall(vim.treesitter.start)
+					-- Enable treesitter-based indentation
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
 			})
 			vim.g.skip_ts_context_commentstring_module = true
 			require("ts_context_commentstring").setup({})
@@ -94,102 +93,19 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		branch = "main",
-		lazy = true,
-		event = { "BufReadPre", "BufNewFile" },
+		init = function()
+			-- Disable entire built-in ftplugin mappings to avoid conflicts.
+			-- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+			vim.g.no_plugin_maps = true
+
+			-- Or, disable per filetype (add as you like)
+			-- vim.g.no_python_maps = true
+			-- vim.g.no_ruby_maps = true
+			-- vim.g.no_rust_maps = true
+			-- vim.g.no_go_maps = true
+		end,
 		config = function()
-			require("nvim-treesitter").setup({
-				textobjects = {
-					select = {
-						enable = true,
-
-						-- Automatically jump forward to textobj, similar to targets.vim
-						lookahead = true,
-
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							["a="] = { query = "@assignment.outer", desc = "an assignment" },
-							["i="] = { query = "@assignment.inner", desc = "an assignment" },
-							["=l"] = { query = "@assignment.lhs", desc = "left hand side of an assignment" },
-							["=r"] = { query = "@assignment.rhs", desc = "right hand side of an assignment" },
-
-							["aS"] = { query = "@statement.outer", desc = "a statement" },
-
-							["aa"] = { query = "@parameter.outer", desc = "a parameter/argument" },
-							["ia"] = { query = "@parameter.inner", desc = "a parameter/argument" },
-
-							["ai"] = { query = "@conditional.outer", desc = "a conditional" },
-							["ii"] = { query = "@conditional.inner", desc = "a conditional" },
-
-							["al"] = { query = "@loop.outer", desc = "a loop" },
-							["il"] = { query = "@loop.inner", desc = "a loop" },
-
-							["af"] = { query = "@call.outer", desc = "a function call" },
-							["if"] = { query = "@call.inner", desc = "a function call" },
-
-							["aF"] = { query = "@function.outer", desc = "a method/function definition" },
-							["iF"] = { query = "@function.inner", desc = "a method/function definition" },
-
-							["ac"] = { query = "@class.outer", desc = "a class" },
-							["ic"] = { query = "@class.inner", desc = "a class" },
-						},
-					},
-					swap = {
-						enable = true,
-						swap_next = {
-							["<leader>na"] = { query = "@parameter.inner", desc = "a parameter/argument" },
-							["<leader>ni"] = { query = "@conditional.inner", desc = "a conditional" },
-							["<leader>nf"] = { query = "@call.outer", desc = "a function call" },
-							["<leader>nF"] = { query = "@function.outer", desc = "a method/function definition" },
-							["<leader>nc"] = { query = "@class.outer", desc = "a class" },
-						},
-						swap_previous = {
-							["<leader>Na"] = { query = "@parameter.inner", desc = "a parameter/argument" },
-							["<leader>Ni"] = { query = "@conditional.inner", desc = "a conditional" },
-							["<leader>Nf"] = { query = "@call.outer", desc = "a function call" },
-							["<leader>NF"] = { query = "@function.outer", desc = "a method/function definition" },
-							["<leader>Nc"] = { query = "@class.outer", desc = "a class" },
-						},
-					},
-					move = {
-						enable = true,
-						set_jumps = true, -- whether to set jumps in the jumplist
-						goto_next_start = {
-							["]F"] = { query = "@function.outer", desc = "Next function start" },
-							["]="] = { query = "@assignment.lhs", desc = "Next assignment" },
-							["]c"] = { query = "@class.outer", desc = "Next class start" },
-							["]l"] = { query = "@loop.*", desc = "Next loop start" },
-							["]s"] = { query = "@scope", desc = "Next scope" },
-							["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-							["]i"] = { "@conditional.outer", desc = "Next conditional start" },
-						},
-						goto_previous_start = {
-							["[F"] = { query = "@function.outer", desc = "Previous function start" },
-							["[="] = { query = "@assignment.lhs", desc = "Previous assignment" },
-							["[c"] = { query = "@class.outer", desc = "Previous class start" },
-							["[l"] = { query = "@loop.*", desc = "Previous loop start" },
-							["[s"] = { query = "@scope", desc = "Previous scope" },
-							["[z"] = { query = "@fold", query_group = "folds", desc = "Previous fold" },
-							["[i"] = { "@conditional.outer", desc = "Previous conditional start" },
-						},
-					},
-				},
-			})
-			local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
-
-			-- Repeat movement with ; and ,
-			-- ensure ; goes forward and , goes backward regardless of the last direction
-			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-			vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
-
-			-- vim way: ; goes to the direction you were moving.
-			-- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-			-- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-
-			-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-			vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr)
-			vim.keymap.set({ "x", "n", "o" }, "F", ts_repeat_move.builtin_F_expr)
-			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr)
-			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr)
+			-- put your config here
 		end,
 	},
 	{

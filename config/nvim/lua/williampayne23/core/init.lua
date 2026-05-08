@@ -17,3 +17,4 @@ end
 require("williampayne23.core.functions")
 require("williampayne23.core.set")
 require("williampayne23.core.remap")
+require("williampayne23.core.make_picker").setup()
