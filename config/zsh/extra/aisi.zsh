@@ -85,7 +85,7 @@ oaikey() {
     export OPENAI_RAW_API_KEY=$(get_key openai)
 }
 
-# claudekey
-# oaikey
-
-# export ANTHROPIC_MODEL=claude-opus-4-20250514
+pbcopy() {
+    local input=$(cat)
+    printf '\033]52;c;%s\a' "$(echo -n "$input" | base64)" >/dev/tty
+}

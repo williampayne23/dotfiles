@@ -15,32 +15,6 @@
     "/snap/bin"
   ];
 
-  # Run claudeup every 8 hours
-  systemd.user.services.claudeup = {
-    Unit = {
-      Description = "Update Claude Code Credentials";
-    };
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${config.home.homeDirectory}/.local/bin/claudeup";
-      Environment = "PATH=${config.home.homeDirectory}/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin";
-    };
-  };
-
-  systemd.user.timers.claudeup = {
-    Unit = {
-      Description = "Run claudeup every 8 hours";
-    };
-    Timer = {
-      OnActiveSec = "0";
-      OnUnitActiveSec = "8h";
-      Persistent = true;
-    };
-    Install = {
-      WantedBy = ["timers.target"];
-    };
-  };
-
   home.activation.pull_claude_creds = config.lib.dag.entryAfter ["writeBoundary"] ''
     export PATH="${lib.makeBinPath [
       pkgs.tmux
