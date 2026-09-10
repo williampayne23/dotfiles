@@ -1,19 +1,246 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "share": "disabled",
   "provider": {
-    "openai": {
-      "options": {
-        "baseURL": "{env:OPENAI_BASE_URL}",
-        "apiKey": "{env:OPENAI_RAW_API_KEY}"
-      }
-    },
     "anthropic": {
       "options": {
-        "baseURL": "{env:ANTHROPIC_BASE_URL}",
-        "apiKey": "{env:ANTHROPIC_RAW_API_KEY}"
+        "baseURL": "https://anthropic.apps.aisi.org.uk/v1",
+        "apiKey": "eyJjcmVkZW50aWFscyI6IHsiYWNjZXNzX2tleV9pZCI6ICJBU0lBVU1ZQ0lQQklZQ0wySlVMSSIsICJzZWNyZXRfYWNjZXNzX2tleSI6ICI2Umw1NGFrRURxUUo4ZGNDVTJOM0xRcEhmaDlWZ2ZUZzVRelZPVldQIiwgInNlc3Npb25fdG9rZW4iOiAiSVFvSmIzSnBaMmx1WDJWakVLYi8vLy8vLy8vLy93RWFDV1YxTFhkbGMzUXRNaUpHTUVRQ0lIdk1sV1daZmllOGh2Sis3OGRyTTVQNEJZMlczSDV2V2xubzFvdGNmTnU4QWlCeWxyeEduY0lZbGlnQ3Y3OENjb2ljZEYzTytxKzd2Y3ZjaUMzMTRTSjBsaXIvQXdodUVBQWFERE13TWpJMk16QTNNamcwT1NJTThPTmFNcDVDeEg5WHBBWFRLdHdEcmdFUThpZ2tCam9FNnZ6Q2NrUldNTWp0NjZyNnYwc0JuZVozKzZwbTcrTW50SHpjTGJ5MGdtMG5TQ3dmR1U4VTI0NlAxZ3JELzJyR25sUGd4b25iTHRJWkFNUkZRSmdFRzExL3I4MDZwQS9ZZmhoT3NhSTBXWjlwQnZlUjVSUHdOZktGc2hvNHhIL1AvN1pYRElZYXdFeHIyVGhnYmVzSk1OSElzcS96bW03OUxKaHFNSUtBZTN0T3JpNHoxOUE3OWdxVVNQVm1GLzUzUWlBdmhJdURwNVJGN0NTUnFHdWNJTGNud1N3Yi9icW10UTQzZk45MUs0UTQ4OXBGdFY2UHhvTkVLTUJhVFZVYm1taTVyZm9Vak9yckNkWGs4ZWdMZFkySThIc1ZxakI2bzVEMWh0NDV4VnZzenpzWkNXQkhFcDJ1cHdraVFOTk5scTBoNlR4L2lFejBiSVBXQTRBM3JSNy9URThVMUJjR1hnLzhuKytTRDRraVVtb1E4UzVJZTJhODREZDc1eGJyZi80YTJhVEp2ajgwaVMwcEE3YXFIeWxjRnFjYmhOWVJEVTJyalYvTDJKYjkzWmVDVkJrczNRUFpLY3owUkNvUXhhTnNlS2lSSy9ncWlkNnVEZVhvc3pGTGJGYUxEVmR4VG1MeFAxTFcyTllEVGZ2ZDRKRXFkZnMyVGIvVnp6TU1UME5zZTkxRGpzdXB6QWRFTWcyZGJmZEgzSkNEa0RnUmcybUlRR2FXSExZbjRBV2dhMnJ4dXA0SkZZNkZQeFk4UkM5NzlGVUg4ZG80YlRTYkZzeDU2YXlpUFRSOTgrNnQyOVRWZTZrN0FoY1gybll3aThXRjFRWTZuZ0doR2VvOGtRVEFRaEgrUFlpTFpUTmhVdUpwTzJUK1k5d0dERGJ1alVib1pqQzNSUFVKZG9vZDNHMG9mYm9YaXBXZHFSQlMzQklkdnpmSWEyT1Vqd0hDV2RIWm1XcTBpYnhBcTBMWERVRU5mbzhaekxYZENML1hDaUFEUThLS1F4N2FMOEUxaFVSVUVBcnZWaDZEdEYveWhGcmszdjBOVzdBZVNtUDU1Y0I5MUJ3RklYOWtGdkRkNng3SGxpVHMvZW9YNzF6eFB6QTMwR1RaVTB6bFJ3PT0ifSwgImV4cGlyYXRpb24iOiAiMjAyNi0wOS0wOSAxNDo0MzozOSswMDowMCIsICJzZWNyZXRfYXJuIjogImFybjphd3M6c2VjcmV0c21hbmFnZXI6ZXUtd2VzdC0yOjMwMjI2MzA3Mjg0OTpzZWNyZXQ6dGVhbXMvcnUvYW50aHJvcGljLWFwaS1rZXktWk1iRThVIn0="
+      }
+    },
+    "openai": {
+      "options": {
+        "baseURL": "https://openai.apps.aisi.org.uk/v1",
+        "apiKey": "eyJjcmVkZW50aWFscyI6IHsiYWNjZXNzX2tleV9pZCI6ICJBU0lBVU1ZQ0lQQklRUVhQWk5aNCIsICJzZWNyZXRfYWNjZXNzX2tleSI6ICJOVHgrb2h6NGo3MkhQbVBNb1FjZUx3NUc5VExiOGlDZW9CZEg5a0p3IiwgInNlc3Npb25fdG9rZW4iOiAiSVFvSmIzSnBaMmx1WDJWakVLYi8vLy8vLy8vLy93RWFDV1YxTFhkbGMzUXRNaUpITUVVQ0lRREpkL2VraHRQVFVkQVlGcmlFYVpzYjJ6TFl2UWplSENBS3l4QXk1WUQ5WXdJZ0RyR3V0ajYzWU1LS3hYYjEzUnJKT1NpQ3o0dGVOd0p5VHE2dnRsaitHQW9xK3dNSWJoQUFHZ3d6TURJeU5qTXdOekk0TkRraURPRlJ0aFFOaEw5eXA3b1ZYeXJZQXhRelgyZlZ0a2dzNCtoaEhYN05peGhxeSsxK1ZGWEg3WHQ0MXJHZmZBNFVqbjhtSnBGNGphT2swWnBxRXFFcktrWSs1TW5Fc1dIaUtjbjlCVEYwOHoxQlI3V1JERGhOTWhodmNydnhYcFRzOXNJRVQ4TmtDSXR3azg3M3hhY0E1QWt5T1ZrbXVQQnQvc2ZOSkxXM3M3SnNrclE3dXZ5Ty9oMWNsbmZTaDFGdVN1cmE4VzZRTG1XcDc5a3ZTNTV6NGo3MFJGSmNyZ2F3UUFyTWtUbFozTWx4QUJ6OWdNL3hCbW4rcVpEWTU5RldocFREZFBZVGV4Tk9TZTNNWEdjWHM0ZzVxdGQxS3lwR0FLaWxZT2k4enVPTHo1M1B5ZWNCM1Q3UWUyN0VyeGw5TFM3SFhZYVZzZWZsUWNzaW1zWm4ySS90cmo2TzFKM21GWFgwQk05d1JYVi9iY3V2OTkwMzA5MHlTbS9HcTY1aHBIQkNzWkxRcVNjWHJIRzJTMXg2YVBiMFA2UmxueTg0L1Q3Unk1UE1LWDFxZUpSVC9wRGFRT0JXYkRDMDJBaGZ4Nm1jenRORjlwUGdHZjlNR0N4SEZXUUpvUnRSVUwzUmpwT1J5ek02N3pFL3FOR2ErNlpCZld0MlFKWEszTGhiL3g2bFZ6NWdKMGFZZkE1dnBHMUg2V2t6UTBBUCtDZGk1REQ2OEhPNHdEMFdjWURtUElmZ0RxM3lxRkh1d2k5SllZaElVaksvaTlwY3YwWVNUVFZQK1Q4R1VaV2NDNlY5di9RZjRzci9ERng3SWlrMjZHcFRRa1FqVDQ1KzRKMnNSS3dzTC9INVMwOHdpOFdGMVFZNm5RRm1IeC9rakNkc1Q1T0tjdnpIVzIzYTE1UXdocFZFc01laThOV3ZZclVNTEdYNThRNzF4d1BjWGdQL3Z1Y0lrK0c4amt5ZW05QU4vc0I0Z21DemJjRHVOSmdHSWgrQVZlTmdHS3ZtRm5mbWdwclRTOGZoRStpQ3NnVE9qM0R2VUwwV3hhUHpvWkRQc0YxU3UrZWNSbW81RnpYZzFjYVVONFVycU9mTlFpYkQzbDlxa1JaQjZVVk96UEJTcFVJMWlkd0Nkb09wMDRaUVlWOWhRV05hIn0sICJleHBpcmF0aW9uIjogIjIwMjYtMDktMDkgMTQ6NDM6MzkrMDA6MDAiLCAic2VjcmV0X2FybiI6ICJhcm46YXdzOnNlY3JldHNtYW5hZ2VyOmV1LXdlc3QtMjozMDIyNjMwNzI4NDk6c2VjcmV0OnRlYW1zL3J1L29wZW5haS1hcGkta2V5LVBrek9rRiJ9"
+      },
+      "models": {
+        "gpt-5-chat-latest": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-2025-08-07": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-mini-2025-08-07": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-mini": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-nano-2025-08-07": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-nano": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-codex": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-pro-2025-10-06": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-pro": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-search-api": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5-search-api-2025-10-14": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.1-chat-latest": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.1-2025-11-13": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.1": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.1-codex": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.1-codex-mini": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.1-codex-max": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.2-2025-12-11": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.2": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.2-pro-2025-12-11": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.2-pro": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.2-chat-latest": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.2-codex": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.3-codex": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.3-chat-latest": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-2026-03-05": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-pro": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-pro-2026-03-05": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-nano-2026-03-17": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-nano": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-mini-2026-03-17": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.4-mini": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.5": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.5-2026-04-23": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.5-pro": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.5-pro-2026-04-23": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.6-sol": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.6-terra": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.6-luna": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.5-rosalind-260602": {
+          "options": {
+            "store": false
+          }
+        },
+        "gpt-5.5-rosalind": {
+          "options": {
+            "store": false
+          }
+        }
+      }
+    },
+    "openrouter": {
+      "options": {
+        "baseURL": "https://openrouter.apps.aisi.org.uk/api/v1",
+        "apiKey": "eyJjcmVkZW50aWFscyI6IHsiYWNjZXNzX2tleV9pZCI6ICJBU0lBVU1ZQ0lQQklYRVZBSFBHUiIsICJzZWNyZXRfYWNjZXNzX2tleSI6ICJuZ29wUG41bE10a3I4b2owS1F5Slc0WGtKMTIrTTdFRkRuNjN6VlI2IiwgInNlc3Npb25fdG9rZW4iOiAiSVFvSmIzSnBaMmx1WDJWakVLYi8vLy8vLy8vLy93RWFDV1YxTFhkbGMzUXRNaUpITUVVQ0lRQ0VGNmdFWHlxOFBPY3FhUHlwZVdqd3hITGdCcnZBUVp0c25GQmxvK0ZQcFFJZ2E2c0FPcVNNZFRsekpGVGp2UzlpMERZNHp3YTNlM3ZJd3kwSzQxdy92WWtxL2dNSWJoQUFHZ3d6TURJeU5qTXdOekk0TkRraURGWldtbnRMZzc2a3dIWnRSeXJiQXhxd05RdkFDNUxQSFZwTlNIQkYrRHQ5d3VWa3IwYVNwMEJrQmVOdUhoNi9vODZnbUR6WjZQL0gzNXA0bWhJR3RldnNQcGN0MXo1NkZsNEpqNFJMS2ZpVXR3RDl3VHE2d0ZSeE1GNmcyMlhiZTdYZ2VCRk9pUzhSNEFzTzU2VTg5NlV5UW9LWW5CSmhFa0M5bGlVVGV0UXpITXpYNEVpbklDTG5mN1ZsODhORWhBZGFCdEcxRW14OVlYbklzQ1RRNndqYzEwQjdkMHhPcU16SHNhOVlpRlRndTF0NmN4VEYzMEhLazFBc29SeGxEeGtqV0NwWHllSGdOc00vYnhNditiZ2ladExrUXBsY253dmQrczFOTGw4Zmgvd1BaMTByMUh3WldMOXFWMHdxbG5QZkg0bjB3NlFuVVFLQk5qR0VQYWw1c0ZvN0prbVhMU1crZVdFMDU1dzdzZWVDcnZ5QVNqSEdLZy9GcW9iZ0pUSTRLS3dhcTdvdldTbkUwR2R5dmVlVUNrcy9CU0Z2WjV1RGVHRnZwT2N0dTA1QXp1YThnditra1hwVkg2VktDb0h3Sk42Kzg5ZEN5NkNadnJkekYvL2dobm5qTkttWFlVM0M0cU5rZCtoUXhEUVBIemt3VXdqRUZ4QlgweGtVQmZYNjFSY1BrQWZiTFhweTRDdlkwMlgvM0xZWDVFVWlZRGVOYWZKVGQvMkQ5dFdkMlhVNDl0TFpsZG96R0JWZGZuRVJGbWFwL2grc1F3MVNESUtDUlNDVXg0dTlzWDUwREpwQTZ1RUFHTGxPQUhiM1hEQzViQVFONFhualRVdXVXaUtrWFZJUE5rWlFjdHd3anNXRjFRWTZuUUh4ZjNQT2s1R2FvREhDN0RkMmJ2bG1vaG0ycEpQNTBhcXFzRU9MZnVrZ2FrSkUvbEF4MlZ2Tko0ako5R3A2dUpzVWJTWFZhVTdtRm82WFJ3NldpMHROdTdqczdDZDVqcjZHeXZkWUt1cXFzN213RUovUnIydlpEUkViang0aVB1QURlcWVSVzlQaHRRYldpQ1RndXhpUlVGSVlSd3MycFhab04rVjVUdnJvbUtvYTEyNWRtaDBFNm1vSlZJbmdmS2xPa1ZRQlZjNGZLTk14bUdDTCJ9LCAiZXhwaXJhdGlvbiI6ICIyMDI2LTA5LTA5IDE0OjQzOjQyKzAwOjAwIiwgInNlY3JldF9hcm4iOiAiYXJuOmF3czpzZWNyZXRzbWFuYWdlcjpldS13ZXN0LTI6MzAyMjYzMDcyODQ5OnNlY3JldDp0ZWFtcy9ydS9vcGVucm91dGVyLWFwaS1rZXktYkdZQ0Y1In0="
       }
     }
   },
-  "theme": "catpuccin-frappe"
+  "disabled_providers": [
+    "opencode"
+  ],
+  "permission": {
+    "*": "ask"
+  }
 }

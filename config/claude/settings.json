@@ -63,5 +63,6 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "tui": "fullscreen"
 }

@@ -29,6 +29,7 @@ in {
     pkgs.docker-client
     pkgs.docker-compose
     pkgs.claude-code
+    pkgs.codex
     pkgs.opencode
     pkgs.ripgrep
     pkgs.uv
