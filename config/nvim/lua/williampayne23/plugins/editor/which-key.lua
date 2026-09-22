@@ -39,7 +39,6 @@ return {
 					{ pattern = "replace*", icon = "󰛔" },
 					{ pattern = "undo*", icon = "" },
 					{ pattern = "yank*", icon = "" },
-					{ pattern = "avante", icon = "󱙺" },
 					{ pattern = "pickers", icon = "" },
 					{ pattern = "swap", icon = "󰓡" },
 					{ pattern = "lsp", icon = "" },
