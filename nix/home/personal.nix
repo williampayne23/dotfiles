@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  skillLinks,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "willpayne";
@@ -67,7 +72,9 @@
     };
   };
 
-  home.file = {
+  home.file =
+    skillLinks config "home"
+    // {
     # ".config/aerospace" = {
     #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace";
     #   recursive = true;

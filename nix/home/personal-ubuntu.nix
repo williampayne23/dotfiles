@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  skillLinks,
   ...
 }: {
   home.username = "ubuntu";
@@ -18,6 +19,8 @@
   home.sessionPath = [
     "/snap/bin"
   ];
+
+  home.file = skillLinks config "home";
 
   # Source ~/.claude-env if it exists (credentials pushed by Terraform SCP)
   programs.zsh.initExtra = ''

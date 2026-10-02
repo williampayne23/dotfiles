@@ -2,6 +2,8 @@
   config,
   lib,
   pkgs,
+  liveLink,
+  skillLinks,
   ...
 }: let
   # Bump this commit to update Gaggle on the next Home Manager switch.
@@ -40,6 +42,14 @@ in {
   home.homeDirectory = "/home/ubuntu";
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
+
+  # Extra global Claude instructions for AISI machines; ~/.claude/rules/*.md is
+  # loaded alongside ~/.claude/CLAUDE.md.
+  home.file =
+    {
+      ".claude/rules/aisi.md" = liveLink config {path = "claude/rules/aisi.md";};
+    }
+    // skillLinks config "aisi";
 
   home.sessionPath = [
     "/snap/bin"

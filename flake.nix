@@ -24,10 +24,22 @@
       { source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/${path}"; }
       // (if onChange != null then { inherit onChange; } else {});
 
+    # Links each skill directory in config/claude/skills/<set>/ into ~/.claude/skills/
+    # so several sets (common + home, common + aisi) can share one skills folder.
+    # Skill contents are live; adding or removing a skill needs a home-manager switch.
+    skillLinks = config: set: let
+      lib = nixpkgs.lib;
+      dir = ./config/claude/skills + "/${set}";
+      entries = if builtins.pathExists dir then builtins.readDir dir else {};
+    in
+      lib.mapAttrs'
+      (name: _: lib.nameValuePair ".claude/skills/${name}" (liveLink config {path = "claude/skills/${set}/${name}";}))
+      (lib.filterAttrs (_: type: type == "directory") entries);
+
     homeArgs = system: {
       mcp-hub = mcp-hub.packages.${system};
       colorSchemes = color-schemes;
-      inherit liveLink;
+      inherit liveLink skillLinks;
     };
   in {
     apps = import ./nix/apps.nix { inherit nixpkgs; };

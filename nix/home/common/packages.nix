@@ -4,6 +4,7 @@
   pkgs,
   mcp-hub,
   liveLink,
+  skillLinks,
   ...
 }: let
   # Python packages are sometimes pre-built against C libraries not available
@@ -46,5 +47,6 @@ in {
     ".claude/CLAUDE.md" = liveLink config {path = "claude/CLAUDE.md";};
     ".claude/settings.json" = liveLink config {path = "claude/settings.json";};
     ".claude/agents" = liveLink config {path = "claude/agents";};
-  };
+  }
+  // skillLinks config "common";
 }
