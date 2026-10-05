@@ -57,12 +57,12 @@
     "deny": [],
     "ask": []
   },
-  "model": "opus[1m]",
+  "model": "claude-fable-5-1",
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
-  "editorMode": "vim",
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "editorMode": "vim"
 }
