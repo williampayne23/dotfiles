@@ -1,0 +1,5 @@
+# Named routes for the caddy-ports proxy: <name> <port>, one per line.
+# http://<name>.localhost:8000 -> localhost:<port> on this machine.
+# Imported into the map block in Caddyfile; restart with
+# `systemctl --user restart caddy-ports` after editing.
+canopy 7777

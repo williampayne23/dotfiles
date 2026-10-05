@@ -48,6 +48,8 @@ in {
   home.file =
     {
       ".claude/rules/aisi.md" = liveLink config {path = "claude/rules/aisi.md";};
+      ".config/caddy/Caddyfile" = liveLink config {path = "caddy/Caddyfile";};
+      ".config/caddy/aliases" = liveLink config {path = "caddy/aliases";};
     }
     // skillLinks config "aisi";
 
@@ -60,6 +62,52 @@ in {
   home.activation.install_gaggle = config.lib.dag.entryAfter ["pull_claude_creds"] ''
     run ${installGaggle}/bin/install-gaggle
   '';
+
+  # The provisioned ~/.ssh/config is group-writable, which Nix's openssh
+  # rejects ("Bad owner or permissions"). Ubuntu's ssh tolerates it.
+  home.activation.fix_ssh_config_perms = config.lib.dag.entryAfter ["writeBoundary"] ''
+    [ -f ~/.ssh/config ] && run chmod go-w ~/.ssh/config || true
+  '';
+
+  # Canopy: live GitHub-style diff viewer over every repo under $HOME.
+  # Fetched from the private AISI repo over ssh, so git/ssh must be on PATH.
+  systemd.user.services.canopy = {
+    Unit = {
+      Description = "Canopy diff viewer";
+      After = ["network-online.target"];
+    };
+    Service = {
+      Type = "simple";
+      WorkingDirectory = config.home.homeDirectory;
+      Environment = [
+        "PATH=${lib.makeBinPath [pkgs.uv pkgs.git pkgs.openssh pkgs.coreutils]}:${config.home.homeDirectory}/.local/bin"
+      ];
+      ExecStart = "${pkgs.uv}/bin/uvx --from git+ssh://git@github.com/AI-Safety-Institute/canopy@latest canopy --port 7777 ${config.home.homeDirectory}";
+      Restart = "on-failure";
+      RestartSec = 10;
+    };
+    Install.WantedBy = ["default.target"];
+  };
+
+  # Caddy: reach any local port from the laptop through one ssh forward
+  # (http://<port>.localhost:8000). See config/caddy/Caddyfile.
+  systemd.user.services.caddy-ports = {
+    Unit = {
+      Description = "Port-in-subdomain reverse proxy";
+      After = ["network.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.caddy}/bin/caddy run --config %h/.config/caddy/Caddyfile --adapter caddyfile";
+      # The Caddyfile is a live symlink into the dotfiles checkout; a switch
+      # won't see edits to it, so reload with: systemctl --user restart caddy-ports
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install.WantedBy = ["default.target"];
+  };
+
+  # Start/restart changed user services on `home-manager switch`.
+  systemd.user.startServices = "sd-switch";
 
   home.activation.pull_claude_creds = config.lib.dag.entryAfter ["writeBoundary"] ''
     export PATH="${lib.makeBinPath [

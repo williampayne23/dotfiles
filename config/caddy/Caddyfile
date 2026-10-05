@@ -1,0 +1,49 @@
+# Port-in-subdomain reverse proxy for AISI dev boxes only (linked from
+# nix/home/work.nix; not used on the personal laptop).
+#
+# Forward one port from the laptop (ssh -L 8000:127.0.0.1:8000, or a
+# LocalForward line in ~/.ssh/config), then:
+#   http://<port>.localhost:8000  -> localhost:<port>        (any port)
+#   http://<name>.localhost:8000  -> localhost:<port>        (names in ./aliases)
+#   http://<other>.localhost:8000 -> gaggle on 127.0.0.1:4444 (gaggle add <name> <port>)
+{
+    admin off
+    auto_https off
+}
+
+http://:8000 {
+    bind 127.0.0.1
+
+    # Numeric subdomain: the port itself.
+    @port header_regexp port Host ^(\d+)\.localhost(:\d+)?$
+    handle @port {
+        reverse_proxy localhost:{re.port.1} {
+            # Apps like Jupyter and Canopy reject unfamiliar Host headers.
+            header_up Host localhost:{re.port.1}
+            # Keep redirects to localhost:<port> inside the proxy.
+            header_down Location ^http://(?:localhost|127\.0\.0\.1):(\d+)(.*)$ http://$1.localhost:8000$2
+        }
+    }
+
+    # Named subdomain from the aliases file. {labels.1} is the label left of
+    # "localhost" (labels count from the right).
+    map {labels.1} {alias_port} {
+        import aliases
+        default ""
+    }
+    @alias expression `{alias_port} != ""`
+    handle @alias {
+        reverse_proxy localhost:{alias_port} {
+            header_up Host localhost:{alias_port}
+            header_down Location ^http://(?:localhost|127\.0\.0\.1):(\d+)(.*)$ http://$1.localhost:8000$2
+        }
+    }
+
+    # Anything else: hand to gaggle, which routes by name and keeps the Host header.
+    @named header_regexp Host ^[a-z0-9-]+\.localhost(:\d+)?$
+    handle @named {
+        reverse_proxy 127.0.0.1:4444
+    }
+
+    respond "Use http://<port>.localhost:8000 or http://<name>.localhost:8000" 404
+}
